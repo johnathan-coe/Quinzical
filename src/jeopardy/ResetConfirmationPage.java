@@ -11,6 +11,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The screen users see to confirm a game reset
+ */
 public class ResetConfirmationPage {
 	private Scene scene;
 	private Stage stage;

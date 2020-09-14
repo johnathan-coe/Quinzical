@@ -1,5 +1,8 @@
 package jeopardy;
 
+/**
+ * A data class that represents a question
+ */
 public class Question {
 	private int value;
 	private String question;

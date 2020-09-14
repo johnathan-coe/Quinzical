@@ -4,6 +4,9 @@ import java.io.BufferedWriter;
 import java.io.IOException;
 import java.io.OutputStreamWriter;
 
+/**
+ * An object that keeps a Festival process open and pipes in different text to say
+ */
 public class Festival {
 	private Process process;
 	private BufferedWriter writer;

@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * A card on the select screen that lets users choose a question from their category
+ */
 public class CategoryCard {
 	private final Category category;
 	private final Pane pane;

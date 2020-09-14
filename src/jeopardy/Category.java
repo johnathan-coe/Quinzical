@@ -5,6 +5,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+/**
+ * A data class that holds all the questions in their category
+ */
 public class Category {
 	private String name;
 	private Map<Integer, Question> questions = new HashMap<>();

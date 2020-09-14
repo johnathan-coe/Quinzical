@@ -11,6 +11,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * The screen that users use to select a category and question
+ */
 public class SelectPage implements GameDataListener {
 	private final Game game;
 	private final Scene scene;

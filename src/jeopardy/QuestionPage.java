@@ -10,6 +10,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The page that asks the user the question
+ *
+ * Is also in charge of handling what happens if they get it right or wrong.
+ */
 public class QuestionPage {
 	private Question question;
 	private Game game;

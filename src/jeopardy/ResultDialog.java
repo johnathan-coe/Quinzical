@@ -9,6 +9,11 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The screen that users see once they've answered a question
+ *
+ * This screen can represent a correct or incorrect answer
+ */
 public class ResultDialog {
 	private Scene scene;
 	private Stage stage;

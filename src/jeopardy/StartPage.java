@@ -10,6 +10,9 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
+/**
+ * The start screen that is the first screen users see
+ */
 public class StartPage implements GameDataListener {
 	private final Game game;
 	private final Stage stage;

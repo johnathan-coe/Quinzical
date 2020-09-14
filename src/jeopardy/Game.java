@@ -3,6 +3,11 @@ package jeopardy;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * The main application class that will be run
+ *
+ * Handles the loading and saving of the game data file.
+ */
 public class Game extends Application {
 	private GameData data;
 	private StartPage startPage;

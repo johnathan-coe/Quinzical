@@ -27,8 +27,11 @@ hs_err_pid*
 .idea/
 out/
 
+# Eclipse
+.project
+
 # Save file
 save.json
 
-# Categories folder
-categories/
+
+/bin/

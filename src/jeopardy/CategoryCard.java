@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -34,20 +35,29 @@ public class CategoryCard {
 		for (Question q: category.questions()) {
 			valueList.add(q.value());
 		}
+		boolean lowestScore = false;
 		valueList.sort(Integer::compareTo);
 		for (Integer val: valueList) {
 			Question q = category.getQuestion(val);
-			Button button = new Button(Integer.toString(q.value()));
-			button.setDisable(q.isCompleted());
-			button.setStyle("-fx-font-size: 15");
-			button.setOnAction(new EventHandler<>() {
-				@Override
-				public void handle(ActionEvent actionEvent) {
-					Question question = category.getQuestion(val);
-					game.questionPage().show(question);
-				}
-			});
-			questions.getChildren().add(button);
+			if (!q.isCompleted()) {
+				Button button = new Button(Integer.toString(q.value()));
+				button.setDisable(lowestScore);
+				button.setStyle("-fx-font-size: 15");
+				button.setOnAction(new EventHandler<>() {
+					@Override
+					public void handle(ActionEvent actionEvent) {
+						Question question = category.getQuestion(val);
+						game.questionPage().show(question);
+					}
+				});
+				questions.getChildren().add(button);
+				lowestScore = true;
+			} else {
+				Label label = new Label(Integer.toString(q.value()));
+				label.setTextFill((q.state() == Question.QuestionState.CORRECT)? Color.GREEN: Color.RED);
+				label.setStyle("-fx-font-size: 15");
+				questions.getChildren().add(label);
+			}
 		}
 	}
 

@@ -111,7 +111,7 @@ public class GameData {
 				int index = (int) (Math.random() * questionSet.size());
 				String question = questions.get(index);
 				String answer = questionSet.get(question);
-				category.addQuestion(new Question(i, question, answer, false));
+				category.addQuestion(new Question(i, question, answer, Question.QuestionState.UNATTEMPTED));
 				questionSet.remove(question);
 				questions.remove(question);
 			}
@@ -256,13 +256,27 @@ public class GameData {
 				"--arg", "VALUE", value
 			});
 
-			String completedLine = lines.get(2);
+			Question.QuestionState state = Question.QuestionState.UNATTEMPTED;
+			switch (lines.get(2)) {
+				case "UNATTEMPTED":
+					state = Question.QuestionState.UNATTEMPTED;
+					break;
+				case "CORRECT":
+					state = Question.QuestionState.CORRECT;
+					break;
+				case "INCORRECT":
+					state = Question.QuestionState.INCORRECT;
+					break;
+				default:
+					System.err.printf("Could not parse question state `%s`%n", lines.get(2));
+					System.exit(1);
+			}
 
 			return new Question(
 				Integer.parseInt(value),
 				lines.get(0),
 				lines.get(1),
-				completedLine.equals("true")
+				state
 			);
 		}
 
@@ -344,7 +358,7 @@ public class GameData {
 					"--arg", "VALUE", Integer.toString(question.value()),
 					"--arg", "QUESTION", question.question(),
 					"--arg", "ANSWER", question.answer(),
-					"--argjson", "COMPLETED", Boolean.toString(question.isCompleted()),
+					"--arg", "COMPLETED", question.state().toString(),
 			});
 		}
 

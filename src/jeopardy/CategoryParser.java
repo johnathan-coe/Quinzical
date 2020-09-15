@@ -62,9 +62,9 @@ public class CategoryParser {
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				String[] lineSplit = line.split("\\(");
-				String question = lineSplit[0];
+				String question = lineSplit[0].strip();
 				lineSplit = lineSplit[1].split("\\)");
-				String answer = lineSplit[1];
+				String answer = lineSplit[1].strip();
 				category.put(question, answer);
 			}
 			parser.categories.put(categoryName, category);

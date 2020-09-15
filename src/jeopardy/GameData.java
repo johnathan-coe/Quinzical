@@ -4,10 +4,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 /**
  * Represents the data of a current game
@@ -88,7 +85,7 @@ public class GameData {
 	 * @return A task that will eventually return a GameData object
 	 */
 	public static Task<GameData> freshLoad() {
-		Task<GameData> task = new Task<GameData>() {
+		Task<GameData> task = new Task<>() {
 			@Override
 			protected GameData call() throws Exception {
 				return freshLoadBlocking();
@@ -105,24 +102,18 @@ public class GameData {
 	 */
 	private static GameData freshLoadBlocking() throws IOException {
 		GameData newData = new GameData();
-		File directory = new File("categories/");
-		if (!directory.isDirectory()) {
-			System.err.println("Error: The `categories` folder does not exit!");
-			newData.loaded = true;
-			return newData;
-		}
-		for (File file: directory.listFiles()) {
-			String categoryName = file.getName().split("\\.")[0];
+		CategoryParser parser = CategoryParser.loadBlocking();
+		for (String categoryName: parser.categories()) {
 			Category category = new Category(categoryName);
-			Scanner scanner = new Scanner(file);
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				String[] data = line.split(",");
-				int score = Integer.parseInt(data[0]);
-				String question = data[1];
-				String answer = data[2];
-				Question q = new Question(score, question, answer, false);
-				category.addQuestion(q);
+			Map<String, String> questionSet = parser.getCategory(categoryName);
+			List<String> questions = new ArrayList<>(questionSet.keySet());
+			for (int i = 100; i <= 500; i += 100) {
+				int index = (int) (Math.random() * questionSet.size());
+				String question = questions.get(index);
+				String answer = questionSet.get(question);
+				category.addQuestion(new Question(i, question, answer, false));
+				questionSet.remove(question);
+				questions.remove(question);
 			}
 			newData.categories().add(category);
 		}

@@ -35,15 +35,8 @@ public class ResetConfirmationPage {
 	}
 
 	@FXML public void onConfirm() {
-		game.data().setLoaded(false);
+		game.data().reset();
 		startScene.show();
-		Task<GameData> task = GameData.freshLoad();
-		task.setOnSucceeded(new EventHandler<>() {
-			@Override
-			public void handle(WorkerStateEvent workerStateEvent) {
-				game.data().set(task.getValue());
-			}
-		});
 	}
 
 	@FXML public void onCancel() {

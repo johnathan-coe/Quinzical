@@ -35,6 +35,10 @@ public class SelectPage implements GameDataListener {
 	}
 
 	public void show() {
+		if (game.data().isAllDone()) {
+			game.rewardsPage().show();
+			return;
+		}
 		refresh();
 		stage.setScene(scene);
 	}

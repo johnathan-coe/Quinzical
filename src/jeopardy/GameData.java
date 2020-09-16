@@ -2,6 +2,8 @@ package jeopardy;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 
 import java.io.*;
 import java.util.*;
@@ -140,6 +142,31 @@ public class GameData {
 		}
 		writer.saveToFile();
 		System.out.println("Saved to `save.json`!");
+	}
+
+	public boolean isAllDone() {
+		for (Category category: categories) {
+			for (Question question: category.questions()) {
+				if (!question.isCompleted()) {
+					return false;
+				}
+			}
+		}
+		return true;
+	}
+
+	/**
+	 * Resets the GameData object _in another thread_
+	 */
+	public void reset() {
+		this.setLoaded(false);
+		Task<GameData> task = freshLoad();
+		task.setOnSucceeded(new EventHandler<>() {
+			@Override
+			public void handle(WorkerStateEvent workerStateEvent) {
+				set(task.getValue());
+			}
+		});
 	}
 
 	/**

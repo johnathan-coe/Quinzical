@@ -13,6 +13,7 @@ public class Game extends Application {
 	private StartPage startPage;
 	private SelectPage selectPage;
 	private QuestionPage questionPage;
+	private RewardsPage rewardsPage;
 	private Festival festival;
 
 	public static void main(String[] args) {
@@ -27,6 +28,7 @@ public class Game extends Application {
 		startPage = new StartPage(this, stage);
 		selectPage = new SelectPage(this, stage);
 		questionPage = new QuestionPage(this, stage, festival);
+		rewardsPage = new RewardsPage(this, stage);
 
 		startPage.show();
 		stage.show();
@@ -45,4 +47,6 @@ public class Game extends Application {
 	public SelectPage selectPage() { return selectPage; }
 
 	public QuestionPage questionPage() { return questionPage; }
+
+	public RewardsPage rewardsPage() { return rewardsPage; }
 }

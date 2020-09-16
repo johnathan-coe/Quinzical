@@ -55,4 +55,9 @@ public class QuestionPage {
 		game.data().setScore(score);
 		dialog.show(correct, question.value(), question.answer());
 	}
+
+	@FXML public void dontKnowPressed() {
+		question.setState(Question.QuestionState.INCORRECT);
+		dialog.show(false, question.value(), question.answer());
+	}
 }

@@ -51,7 +51,7 @@ public class QuestionPage {
 		String guessedVal = guess.getText().strip().toLowerCase();
 		boolean correct = guessedVal.equals(question.answer());
 		question.setState((correct)? Question.QuestionState.CORRECT: Question.QuestionState.INCORRECT);
-		int score = game.data().score() + (question.value() * ((correct)? 1: -1));
+		int score = game.data().score() + (question.value() * ((correct)? 1: 0));
 		game.data().setScore(score);
 		dialog.show(correct, question.value(), question.answer());
 	}

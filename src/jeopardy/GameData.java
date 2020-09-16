@@ -103,7 +103,10 @@ public class GameData {
 	private static GameData freshLoadBlocking() throws IOException {
 		GameData newData = new GameData();
 		CategoryParser parser = CategoryParser.loadBlocking();
-		for (String categoryName: parser.categories()) {
+		List<String> categories = new ArrayList<>(parser.categories());
+		for (int j = 0; j < 5; j++) {
+			int categoryIndex = (int)(categories.size() * Math.random());
+			String categoryName = categories.get(categoryIndex);
 			Category category = new Category(categoryName);
 			Map<String, String> questionSet = parser.getCategory(categoryName);
 			List<String> questions = new ArrayList<>(questionSet.keySet());
@@ -116,6 +119,8 @@ public class GameData {
 				questions.remove(question);
 			}
 			newData.categories().add(category);
+			categories.remove(categoryIndex);
+			parser.categories().remove(categoryName);
 		}
 		newData.loaded = true;
 		return newData;

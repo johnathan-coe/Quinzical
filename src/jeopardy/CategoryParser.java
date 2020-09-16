@@ -72,6 +72,8 @@ public class CategoryParser {
 		return parser;
 	}
 
+	public void removeCategory(String categoryName) { categories.remove(categoryName); }
+
 	/**
 	 * Gets the categories that have been loaded
 	 */

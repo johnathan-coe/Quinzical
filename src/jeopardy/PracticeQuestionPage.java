@@ -15,13 +15,12 @@ import java.io.IOException;
 public class PracticeQuestionPage extends QuestionPage {
 	private int guesses;
 	@FXML Button dontKnowButton;
-	@FXML HBox controlBox;
 	
 	public PracticeQuestionPage(Game game, Stage stage, Festival festival) throws IOException {		
 		super(game, stage, festival);
 		
 		// Hide the "don't know" button in practice mode
-		controlBox.getChildren().remove(dontKnowButton);
+		((HBox) dontKnowButton.getParent()).getChildren().remove(dontKnowButton);
 		
 		// Replace the result dialog with one that returns to the practice page
 		dialog = new ResultDialog(stage, game.practiceSelectPage(), festival);

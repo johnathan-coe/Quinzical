@@ -21,7 +21,7 @@
                   <Insets left="10.0" right="10.0" top="20.0" />
                </VBox.margin>
             </Label>
-            <HBox fx:id="controlBox" alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+            <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
                   <TextField fx:id="guess" onAction="#answerSubmitted" />
                   <Button mnemonicParsing="false" onAction="#answerSubmitted" text="Answer" />

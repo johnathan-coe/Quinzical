@@ -24,8 +24,8 @@ public class QuestionPage {
 	protected Question question;
 	protected ResultDialog dialog;
 
-	@FXML protected Label questionText;
-	@FXML protected TextField guess;
+	@FXML Label questionText;
+	@FXML TextField guess;
 
 	public QuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		this.game = game;

@@ -16,15 +16,15 @@ import java.io.IOException;
  * Is also in charge of handling what happens if they get it right or wrong.
  */
 public class QuestionPage {
-	private Question question;
+	protected Question question;
 	private Game game;
 	private Stage stage;
 	private Scene scene;
-	private ResultDialog dialog;
+	protected ResultDialog dialog;
 	private Festival festival;
 
-	@FXML private Label questionText;
-	@FXML private TextField guess;
+	@FXML protected Label questionText;
+	@FXML protected TextField guess;
 
 	public QuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		this.game = game;

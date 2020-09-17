@@ -15,10 +15,11 @@ import java.util.List;
  * The screen that users use to select a category and question
  */
 public class SelectPage implements GameDataListener {
-	private final Game game;
-	private final Scene scene;
-	private final Stage stage;
-
+	protected final Game game;
+	protected final Scene scene;
+	protected final Stage stage;
+	
+	@FXML protected Label header;
 	@FXML Pane container;
 
 	public SelectPage(Game game, Stage stage) throws IOException {
@@ -34,7 +35,7 @@ public class SelectPage implements GameDataListener {
 		refresh();
 	}
 
-	public void show() {
+	protected void show() {
 		if (game.data().isAllDone()) {
 			game.rewardsPage().show();
 			return;
@@ -43,7 +44,7 @@ public class SelectPage implements GameDataListener {
 		stage.setScene(scene);
 	}
 
-	private void refresh() {
+	protected void refresh() {
 		List<Pane> cards = new ArrayList<>();
 		for (Category category: game.data().categories()) {
 			try {

@@ -35,7 +35,7 @@ public class QuestionPage {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/question-page.fxml"));
 		loader.setController(this);
 		Pane pane = loader.load();
-
+ 
 		scene = new Scene(pane);
 		dialog = new ResultDialog(stage, game.selectPage(), festival);
 	}

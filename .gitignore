@@ -29,6 +29,8 @@ out/
 
 # Eclipse
 .project
+.classpath
+.settings/
 
 # Save file
 save.json

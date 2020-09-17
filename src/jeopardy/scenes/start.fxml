@@ -37,6 +37,11 @@
                         <Font size="20.0" />
                      </font>
                   </Button>
+                  <Button fx:id="practiceButton" mnemonicParsing="false" onAction="#practicePressed" text="Practice">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                  </Button>
                   <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPressed" text="Reset">
                      <font>
                         <Font size="20.0" />

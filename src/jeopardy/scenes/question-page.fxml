@@ -25,7 +25,7 @@
                <children>
                   <TextField fx:id="guess" onAction="#answerSubmitted" />
                   <Button mnemonicParsing="false" onAction="#answerSubmitted" text="Answer" />
-                  <Button mnemonicParsing="false" onAction="#dontKnowPressed" text="Don't Know" />
+                  <Button fx:id="dontKnowButton" mnemonicParsing="false" onAction="#dontKnowPressed" text="Don't Know" />
                </children>
             </HBox>
          </children>

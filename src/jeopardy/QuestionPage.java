@@ -16,15 +16,16 @@ import java.io.IOException;
  * Is also in charge of handling what happens if they get it right or wrong.
  */
 public class QuestionPage {
-	private Question question;
 	private Game game;
 	private Stage stage;
 	private Scene scene;
-	private ResultDialog dialog;
 	private Festival festival;
+	
+	protected Question question;
+	protected ResultDialog dialog;
 
-	@FXML private Label questionText;
-	@FXML private TextField guess;
+	@FXML Label questionText;
+	@FXML TextField guess;
 
 	public QuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		this.game = game;
@@ -34,7 +35,7 @@ public class QuestionPage {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/question-page.fxml"));
 		loader.setController(this);
 		Pane pane = loader.load();
-
+ 
 		scene = new Scene(pane);
 		dialog = new ResultDialog(stage, game.selectPage(), festival);
 	}

@@ -21,6 +21,7 @@ public class StartPage implements GameDataListener {
 
 	@FXML private Label currentScoreLabel;
 	@FXML private Button playButton;
+	@FXML private Button practiceButton;
 	@FXML private Button resetButton;
 
 	public StartPage(Game game, Stage stage) throws IOException {
@@ -42,6 +43,11 @@ public class StartPage implements GameDataListener {
 		game.selectPage().show();
 	}
 
+	@FXML
+	public void practicePressed() {
+		game.practiceSelectPage().show();
+	}
+	
 	@FXML
 	public void resetPressed() {
 		resetConfirmation.show();

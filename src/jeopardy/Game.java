@@ -12,7 +12,9 @@ public class Game extends Application {
 	private GameData data;
 	private StartPage startPage;
 	private SelectPage selectPage;
+	private PracticeSelectPage practiceSelectPage;
 	private QuestionPage questionPage;
+	private PracticeQuestionPage practiceQuestionPage;
 	private RewardsPage rewardsPage;
 	private Festival festival;
 
@@ -27,7 +29,9 @@ public class Game extends Application {
 		festival = new Festival();
 		startPage = new StartPage(this, stage);
 		selectPage = new SelectPage(this, stage);
+		practiceSelectPage = new PracticeSelectPage(this, stage);
 		questionPage = new QuestionPage(this, stage, festival);
+		practiceQuestionPage = new PracticeQuestionPage(this, stage, festival);
 		rewardsPage = new RewardsPage(this, stage);
 
 		startPage.show();
@@ -45,8 +49,12 @@ public class Game extends Application {
 	public StartPage startPage() { return startPage; }
 
 	public SelectPage selectPage() { return selectPage; }
+	
+	public PracticeSelectPage practiceSelectPage() { return practiceSelectPage; }
 
 	public QuestionPage questionPage() { return questionPage; }
 
+	public PracticeQuestionPage practiceQuestionPage() { return practiceQuestionPage; }
+	
 	public RewardsPage rewardsPage() { return rewardsPage; }
 }

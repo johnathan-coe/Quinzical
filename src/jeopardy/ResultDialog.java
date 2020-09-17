@@ -37,7 +37,15 @@ public class ResultDialog {
 		String message = (correct)? "Correct!": "Incorrect!";
 		outcome.setText(message);
 		outcome.setStyle(String.format("-fx-text-fill: %s", (correct)? "#35f523": "#ee2121"));
-		consequence.setText((correct)? String.format("You've earned $%d!", value): String.format("The correct answer was '%s'.", actualAnswer));
+		
+		if (value == 0 && correct) { // Practice questions have a value of 0
+			consequence.setText("");
+		} else {
+			consequence.setText((correct) ? 
+					String.format("You've earned $%d!", value)
+					: String.format("The correct answer was '%s'.", actualAnswer));
+		}
+		
 		stage.setScene(scene);
 		festival.say(message);
 	}

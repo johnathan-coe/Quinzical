@@ -6,10 +6,14 @@ import java.util.Random;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class PracticeSelectPage extends SelectPage {
+	@FXML Label header;
+	
 	public PracticeSelectPage(Game game, Stage stage) throws IOException {
 		super(game, stage);
 		
@@ -17,6 +21,9 @@ public class PracticeSelectPage extends SelectPage {
 		header.setText("Select a category");
 	}
 	
+	/**
+	 * Clear and populate the page with category buttons
+	 */
 	@Override
 	protected void refresh() {
 		// Delete old buttons
@@ -58,7 +65,9 @@ public class PracticeSelectPage extends SelectPage {
 		game.practiceQuestionPage().show(q);
 	}
 
-	// Display this page
+	/**
+	 * Display the practice category selection page
+	 */
 	@Override
 	protected void show() {
 		refresh();

@@ -15,8 +15,8 @@ import java.io.IOException;
  *
  * Is also in charge of handling what happens if they get it right or wrong.
  */
-public class QuestionPage {
-	private Game game;
+public abstract class QuestionPage {
+	protected Game game;
 	private Stage stage;
 	private Scene scene;
 	private Festival festival;
@@ -48,17 +48,7 @@ public class QuestionPage {
 		festival.say(question.question());
 	}
 
-	@FXML public void answerSubmitted() {
-		String guessedVal = guess.getText().strip().toLowerCase();
-		boolean correct = guessedVal.equals(question.answer());
-		question.setState((correct)? Question.QuestionState.CORRECT: Question.QuestionState.INCORRECT);
-		int score = game.data().score() + (question.value() * ((correct)? 1: 0));
-		game.data().setScore(score);
-		dialog.show(correct, question.value(), question.answer());
-	}
+	@FXML public abstract void answerSubmitted();
 
-	@FXML public void dontKnowPressed() {
-		question.setState(Question.QuestionState.INCORRECT);
-		dialog.show(false, question.value(), question.answer());
-	}
+	@FXML public abstract void dontKnowPressed();
 }

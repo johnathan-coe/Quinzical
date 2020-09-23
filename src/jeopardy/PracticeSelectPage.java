@@ -64,13 +64,4 @@ public class PracticeSelectPage extends SelectPage {
 		// Display
 		game.practiceQuestionPage().show(q);
 	}
-
-	/**
-	 * Display the practice category selection page
-	 */
-	@Override
-	protected void show() {
-		refresh();
-		stage.setScene(scene);
-	}
 }

@@ -28,9 +28,9 @@ public class Game extends Application {
 
 		festival = new Festival();
 		startPage = new StartPage(this, stage);
-		selectPage = new SelectPage(this, stage);
+		selectPage = new MainSelectPage(this, stage);
 		practiceSelectPage = new PracticeSelectPage(this, stage);
-		questionPage = new QuestionPage(this, stage, festival);
+		questionPage = new MainQuestionPage(this, stage, festival);
 		practiceQuestionPage = new PracticeQuestionPage(this, stage, festival);
 		rewardsPage = new RewardsPage(this, stage);
 

@@ -1,5 +1,6 @@
 package jeopardy;
 
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 import java.io.IOException;
@@ -7,6 +8,9 @@ import java.io.IOException;
 public class MainQuestionPage extends QuestionPage {
 	public MainQuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		super(game, stage, festival);
+
+		// Remove the question text
+		((Pane) super.questionText.getParent()).getChildren().remove(super.questionText);
 	}
 
 	@Override

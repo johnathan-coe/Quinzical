@@ -2,6 +2,7 @@ package jeopardy;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 
 import javafx.event.ActionEvent;
@@ -28,16 +29,26 @@ public class PracticeSelectPage extends SelectPage {
 	protected void refresh() {
 		// Delete old buttons
 		container.getChildren().clear();
-		
-		for (Category cat : game.data().categories()) {
+
+		if (game.data().parser() == null) {
+			return;
+		}
+
+		for (String cat : game.data().parser().categories()) {
 			// Button for the category
-			Button b = new Button(cat.name());
+			Button b = new Button(cat);
 			
 			// When the button is pressed, show a question from the category
 			b.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
-					showQuestion(cat);
+					Category category = new Category(cat);
+					int i = 0; // The value doesn't matter in the practise module
+					for (Map.Entry<String, String> entry: game.data().parser().getCategory(cat).entrySet()) {
+						category.addQuestion(new Question(i, entry.getKey(), entry.getValue(), Question.QuestionState.UNATTEMPTED));
+						i++;
+					}
+					showQuestion(category);
 				}
 			});
 			
@@ -48,8 +59,8 @@ public class PracticeSelectPage extends SelectPage {
 	}
 	
 	/**
-	 * Display a randomly selected question from the chosen category 
-	 * 
+	 * Display a randomly selected question from the chosen category
+	 *
 	 * @param c Category object
 	 */
 	void showQuestion(Category c) {
@@ -57,7 +68,7 @@ public class PracticeSelectPage extends SelectPage {
 		
 		// Get all questions in the category
 		List<Question> questions = c.questions();
-		
+
 		// Choose a random question
 		Question q = questions.get(rand.nextInt(questions.size()));
 		

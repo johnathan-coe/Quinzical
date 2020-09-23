@@ -28,6 +28,10 @@ public class GameData {
 	 * The categories that can be chosen in the game
 	 */
 	private List<Category> categories = new ArrayList<>();
+	/**
+	 * The {@link CategoryParser} used by the GameData
+	 */
+	private CategoryParser categoryParser;
 
 	/**
 	 * You should be using {@link #load()} to create your GameData objects
@@ -44,14 +48,25 @@ public class GameData {
 			protected Void call() throws Exception {
 				File file = new File("save.json");
 
-				GameData newData = null;
+				GameData newData;
 				if (!file.isFile()) { // If the file doesn't exist, keep the default values
 					System.out.println("No `save.json` file found, assuming fresh game...");
 					newData = freshLoadBlocking();
 				} else {
+					final GameData newDataTemp = new GameData();
+					Thread categoryThread = new Thread(new Runnable() {
+						@Override
+						public void run() {
+							try {
+								newDataTemp.categoryParser = CategoryParser.loadBlocking();
+							} catch (FileNotFoundException e) {
+								e.printStackTrace();
+							}
+						}
+					}); // We still need to learn the CategoryParser
+					categoryThread.start();
 					JsonReader reader = new JsonReader(file);
-					newData = new GameData();
-					newData.score = reader.score();
+					newDataTemp.score = reader.score();
 					List<String> categories = reader.categories();
 					for (String c: categories) {
 						Category category = new Category(c);
@@ -59,18 +74,18 @@ public class GameData {
 							Question q = reader.getQuestion(c, question);
 							category.addQuestion(q);
 						}
-						newData.categories.add(category);
+						newDataTemp.categories.add(category);
 					}
+					categoryThread.join();
+					newData = newDataTemp;
 				}
 
 				final GameData newData2 = newData;
 				Platform.runLater(new Task<Void>() {
 					@Override
 					protected Void call() {
-						if (newData2 != null) {
-							newData2.loaded = true;
-							data.set(newData2);
-						}
+						newData2.loaded = true;
+						data.set(newData2);
 						return null;
 					}
 				});
@@ -124,6 +139,7 @@ public class GameData {
 			categories.remove(categoryIndex);
 			parser.categories().remove(categoryName);
 		}
+		newData.categoryParser = parser;
 		newData.loaded = true;
 		return newData;
 	}
@@ -196,9 +212,12 @@ public class GameData {
 	public void set(GameData data) {
 		this.score = data.score;
 		this.categories = data.categories;
+		this.categoryParser = data.categoryParser;
 		this.loaded = data.loaded;
 		publish(GameDataChangedEvent.LOADED);
 	}
+
+	public CategoryParser parser() { return categoryParser;	}
 
 	/**
 	 * Returns whether the GameData is being loaded or not

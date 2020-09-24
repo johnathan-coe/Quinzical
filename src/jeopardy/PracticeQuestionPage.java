@@ -17,13 +17,10 @@ public class PracticeQuestionPage extends QuestionPage {
 	@FXML Button dontKnowButton;
 	
 	public PracticeQuestionPage(Game game, Stage stage, Festival festival) throws IOException {		
-		super(game, stage, festival);
+		super(game, stage, festival, game.practiceSelectPage());
 		
 		// Hide the "don't know" button in practice mode
 		((HBox) dontKnowButton.getParent()).getChildren().remove(dontKnowButton);
-		
-		// Replace the result dialog with one that returns to the practice page
-		dialog = new ResultDialog(stage, game.practiceSelectPage(), festival);
 	}
 
 	/**

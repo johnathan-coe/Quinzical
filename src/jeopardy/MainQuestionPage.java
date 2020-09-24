@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class MainQuestionPage extends QuestionPage {
 	public MainQuestionPage(Game game, Stage stage, Festival festival) throws IOException {
-		super(game, stage, festival);
+		super(game, stage, festival, game.selectPage());
 
 		// Remove the question text
 		((Pane) super.questionText.getParent()).getChildren().remove(super.questionText);

@@ -17,13 +17,10 @@ public class PracticeQuestionPage extends QuestionPage {
 	@FXML Button dontKnowButton;
 	
 	public PracticeQuestionPage(Game game, Stage stage, Festival festival) throws IOException {		
-		super(game, stage, festival);
+		super(game, stage, festival, game.practiceSelectPage());
 		
 		// Hide the "don't know" button in practice mode
 		((HBox) dontKnowButton.getParent()).getChildren().remove(dontKnowButton);
-		
-		// Replace the result dialog with one that returns to the practice page
-		dialog = new ResultDialog(stage, game.practiceSelectPage(), festival);
 	}
 
 	/**
@@ -46,13 +43,16 @@ public class PracticeQuestionPage extends QuestionPage {
 		
 		// Check answer
 		boolean correct = question.check(guess.getText());
+		// Set question state, the question is not a part of the
+		// GameData object so this won't be saved
+		question.setState((correct) ? Question.QuestionState.CORRECT : Question.QuestionState.INCORRECT);
 		
 		if (correct) {
 			// Show correct dialog
-			dialog.show(correct, 0, question.answer());
+			dialog.show(question);
 		} else if (guesses == 0) {
 			// Show incorrect dialog
-			dialog.show(correct, 0, question.answer());
+			dialog.show(question);
 		} else if (guesses == 1){
 			// Give first letter as hint
 			guess.setText(question.answer().substring(0, 1));

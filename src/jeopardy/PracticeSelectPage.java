@@ -1,7 +1,6 @@
 package jeopardy;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
@@ -13,6 +12,7 @@ import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
 public class PracticeSelectPage extends SelectPage {
+	private CategoryParser parser;
 	@FXML Label header;
 	
 	public PracticeSelectPage(Game game, Stage stage) throws IOException {
@@ -30,11 +30,11 @@ public class PracticeSelectPage extends SelectPage {
 		// Delete old buttons
 		container.getChildren().clear();
 
-		if (game.data().parser() == null) {
-			return;
-		}
-
-		for (String cat : game.data().parser().categories()) {
+		// Grab the parser
+	    parser = game.data().parser();
+		if (parser == null) { return; }
+		
+		for (String cat : parser.categories()) {
 			// Button for the category
 			Button b = new Button(cat);
 			
@@ -42,13 +42,7 @@ public class PracticeSelectPage extends SelectPage {
 			b.setOnAction(new EventHandler<ActionEvent>() {
 				@Override
 				public void handle(ActionEvent e) {
-					Category category = new Category(cat);
-					int i = 0; // The value doesn't matter in the practise module
-					for (Map.Entry<String, String> entry: game.data().parser().getCategory(cat).entrySet()) {
-						category.addQuestion(new Question(i, entry.getKey(), entry.getValue(), Question.QuestionState.UNATTEMPTED));
-						i++;
-					}
-					showQuestion(category);
+					showQuestion(cat);
 				}
 			});
 			
@@ -63,14 +57,17 @@ public class PracticeSelectPage extends SelectPage {
 	 *
 	 * @param c Category object
 	 */
-	void showQuestion(Category c) {
+	private void showQuestion(String c) {
 		Random rand = new Random();
-		
+	
 		// Get all questions in the category
-		List<Question> questions = c.questions();
-
-		// Choose a random question
-		Question q = questions.get(rand.nextInt(questions.size()));
+		Map<String, String> questions = parser.getCategory(c);
+		// Select a random question
+		Object[] qArray = questions.keySet().toArray();
+		String randomQ = (String) qArray[rand.nextInt(qArray.length)];
+		
+		// Create a question object
+		Question q = new Question(0, randomQ, questions.get(randomQ), Question.QuestionState.UNATTEMPTED);
 		
 		// Display
 		game.practiceQuestionPage().show(q);

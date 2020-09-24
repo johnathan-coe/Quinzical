@@ -27,7 +27,7 @@ public abstract class QuestionPage {
 	@FXML protected Label questionText;
 	@FXML protected TextField guess;
 
-	public QuestionPage(Game game, Stage stage, Festival festival) throws IOException {
+	public QuestionPage(Game game, Stage stage, Festival festival, SelectPage selectPage) throws IOException {
 		this.game = game;
 		this.stage = stage;
 		this.festival = festival;
@@ -37,7 +37,7 @@ public abstract class QuestionPage {
 		Pane pane = loader.load();
  
 		scene = new Scene(pane);
-		dialog = new ResultDialog(stage, game.selectPage(), festival);
+		dialog = new ResultDialog(stage, selectPage, festival);
 	}
 
 	public void show(Question question) {

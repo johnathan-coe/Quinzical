@@ -7,7 +7,7 @@ import java.io.IOException;
 
 public class MainQuestionPage extends QuestionPage {
 	public MainQuestionPage(Game game, Stage stage, Festival festival) throws IOException {
-		super(game, stage, festival);
+		super(game, stage, festival, game.selectPage());
 
 		// Remove the question text
 		((Pane) super.questionText.getParent()).getChildren().remove(super.questionText);
@@ -20,13 +20,13 @@ public class MainQuestionPage extends QuestionPage {
 		question.setState((correct)? Question.QuestionState.CORRECT: Question.QuestionState.INCORRECT);
 		int score = game.data().score() + (question.value() * ((correct)? 1: 0));
 		game.data().setScore(score);
-		dialog.show(correct, question.value(), question.answer());
+		dialog.show(question);
 	}
 
 
 	@Override
 	public void dontKnowPressed() {
 		question.setState(Question.QuestionState.INCORRECT);
-		dialog.show(false, question.value(), question.answer());
+		dialog.show(question);
 	}
 }

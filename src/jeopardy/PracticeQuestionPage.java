@@ -41,13 +41,11 @@ public class PracticeQuestionPage extends QuestionPage {
 	 */
 	@Override
 	@FXML public void answerSubmitted() {
-		// Get user guess
-		String guessedVal = guess.getText().strip().toLowerCase();
 		// Record guess
 		guesses--;
 		
 		// Check answer
-		boolean correct = guessedVal.equals(question.answer());
+		boolean correct = question.check(guess.getText());
 		
 		if (correct) {
 			// Show correct dialog

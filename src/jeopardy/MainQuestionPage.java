@@ -15,8 +15,8 @@ public class MainQuestionPage extends QuestionPage {
 
 	@Override
 	public void answerSubmitted() {
-		String guessedVal = guess.getText().strip().toLowerCase();
-		boolean correct = guessedVal.equals(question.answer());
+		boolean correct = question.check(guess.getText());
+		
 		question.setState((correct)? Question.QuestionState.CORRECT: Question.QuestionState.INCORRECT);
 		int score = game.data().score() + (question.value() * ((correct)? 1: 0));
 		game.data().setScore(score);

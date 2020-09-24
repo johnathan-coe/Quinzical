@@ -19,7 +19,7 @@ public abstract class QuestionPage {
 	protected Game game;
 	private Stage stage;
 	private Scene scene;
-	private Festival festival;
+	protected Festival festival;
 	
 	protected Question question;
 	protected ResultDialog dialog;

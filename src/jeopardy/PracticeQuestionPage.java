@@ -65,6 +65,9 @@ public class PracticeQuestionPage extends QuestionPage {
 		} else if (guesses == 1){
 			// Give first letter as hint
 			guess.setText(question.answer().substring(0, 1));
+			festival.say("Incorrect");
+		} else {
+			festival.say("Incorrect");
 		}
 		
 		// Update guess counter

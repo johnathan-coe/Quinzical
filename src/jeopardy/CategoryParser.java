@@ -57,14 +57,18 @@ public class CategoryParser {
 		}
 		for (File file: directory.listFiles()) {
 			Scanner scanner = new Scanner(file);
+			// Category name from filename
 			String categoryName = file.getName().split("\\.")[0];
 			Map<String, String> category = new HashMap<>();
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
-				String[] lineSplit = line.split("\\(");
+				String[] lineSplit = line.split("\\|");
+				
+				// First string prior to | is the question
 				String question = lineSplit[0].strip();
-				lineSplit = lineSplit[1].split("\\)");
-				String answer = lineSplit[1].strip();
+				// Last string is the answer
+				String answer = lineSplit[2].strip();
+				
 				category.put(question, answer);
 			}
 			parser.categories.put(categoryName, category);

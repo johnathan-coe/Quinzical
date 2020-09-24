@@ -137,7 +137,6 @@ public class GameData {
 			}
 			newData.categories().add(category);
 			categories.remove(categoryIndex);
-			parser.categories().remove(categoryName);
 		}
 		newData.categoryParser = parser;
 		newData.loaded = true;

@@ -33,17 +33,18 @@ public class ResultDialog {
 		scene = new Scene(pane);
 	}
 
-	public void show(boolean correct, int value, String actualAnswer) {
-		String message = (correct)? "Correct!": "Incorrect!";
+	public void show(Question q) {
+		boolean correct = (q.state() == Question.QuestionState.CORRECT);
+		String message = (correct) ? "Correct!": "Incorrect!";
 		outcome.setText(message);
 		outcome.setStyle(String.format("-fx-text-fill: %s", (correct)? "#35f523": "#ee2121"));
 		
-		if (value == 0 && correct) { // Practice questions have a value of 0
+		if (q.value() == 0 && correct) { // Practice questions have a value of 0
 			consequence.setText("");
 		} else {
 			consequence.setText((correct) ? 
-					String.format("You've earned $%d!", value)
-					: String.format("The correct answer was '%s'.", actualAnswer));
+					String.format("You've earned $%d!", q.value())
+					: String.format("The correct answer was '%s'.", q.answer()));
 		}
 		
 		stage.setScene(scene);

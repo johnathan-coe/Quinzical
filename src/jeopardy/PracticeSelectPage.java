@@ -43,10 +43,8 @@ public class PracticeSelectPage extends SelectPage {
 				@Override
 				public void handle(ActionEvent e) {
 					Category category = new Category(cat);
-					int i = 0; // The value doesn't matter in the practise module
 					for (Map.Entry<String, String> entry: game.data().parser().getCategory(cat).entrySet()) {
-						category.addQuestion(new Question(i, entry.getKey(), entry.getValue(), Question.QuestionState.UNATTEMPTED));
-						i++;
+						category.addQuestion(new Question(0, entry.getKey(), entry.getValue(), Question.QuestionState.UNATTEMPTED));
 					}
 					showQuestion(category);
 				}

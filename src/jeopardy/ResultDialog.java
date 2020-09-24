@@ -42,13 +42,13 @@ public class ResultDialog {
 		if (q.value() == 0) { // Practice questions have a value of 0
 			if (correct) { consequence.setText(""); }
 			else {
-				consequence.setText(q.question() + "\n\n" +
-									"The correct answer was: " + q.answer());
+				consequence.setText(capitalise(q.question()) + "\n\n" +
+									"The correct answer was: " + capitalise(q.answer()));
 			}
 		} else {
 			consequence.setText((correct) ? 
 					String.format("You've earned $%d!", q.value())
-					: String.format("The correct answer was '%s'.", q.answer()));
+					: String.format("The correct answer was '%s'.", capitalise(q.answer())));
 		}
 		
 		stage.setScene(scene);
@@ -57,5 +57,13 @@ public class ResultDialog {
 
 	@FXML public void okPressed() {
 		selectPage.show();
+	}
+	
+	/**
+	 * Capitalise the first letter in a string
+	 */
+	protected String capitalise(String input) {
+		return input.substring(0, 1).toUpperCase() +
+				input.substring(1);
 	}
 }

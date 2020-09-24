@@ -42,6 +42,7 @@ public class SettingsPage {
 
 	@FXML private void backButtonPressed() {
 		game.startPage().show();
+		game.festival().setDuration(1/(float)speedSlider.getValue());
 	}
 
 	@FXML private void speedSelected() {

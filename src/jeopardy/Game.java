@@ -61,4 +61,6 @@ public class Game extends Application {
 	public RewardsPage rewardsPage() { return rewardsPage; }
 
 	public SettingsPage settingsPage() { return settingsPage; }
+
+	public Festival festival() { return festival; }
 }

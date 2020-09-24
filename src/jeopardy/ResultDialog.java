@@ -37,10 +37,14 @@ public class ResultDialog {
 		boolean correct = (q.state() == Question.QuestionState.CORRECT);
 		String message = (correct) ? "Correct!": "Incorrect!";
 		outcome.setText(message);
-		outcome.setStyle(String.format("-fx-text-fill: %s", (correct)? "#35f523": "#ee2121"));
+		outcome.setStyle(String.format("-fx-text-fill: %s", (correct) ? "#35f523": "#ee2121"));
 		
-		if (q.value() == 0 && correct) { // Practice questions have a value of 0
-			consequence.setText("");
+		if (q.value() == 0) { // Practice questions have a value of 0
+			if (correct) { consequence.setText(""); }
+			else {
+				consequence.setText(q.question() + "\n\n" +
+									"The correct answer was: " + q.answer());
+			}
 		} else {
 			consequence.setText((correct) ? 
 					String.format("You've earned $%d!", q.value())

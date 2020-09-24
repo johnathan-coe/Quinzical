@@ -38,19 +38,20 @@ public class StartPage implements GameDataListener {
 		resetConfirmation = new ResetConfirmationPage(stage, game, this);
 	}
 
-	@FXML
-	public void playPressed() {
+	@FXML public void playPressed() {
 		game.selectPage().show();
 	}
 
-	@FXML
-	public void practicePressed() {
+	@FXML public void practicePressed() {
 		game.practiceSelectPage().show();
 	}
 	
-	@FXML
-	public void resetPressed() {
+	@FXML public void resetPressed() {
 		resetConfirmation.show();
+	}
+
+	@FXML public void settingsPressed() {
+		game.settingsPage().show();
 	}
 
 	public void refresh() {

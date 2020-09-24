@@ -1,9 +1,10 @@
 package jeopardy;
+import java.lang.Integer;
 
 /**
  * A data class that represents a question
  */
-public class Question {
+public class Question implements Comparable<Question> {
 	private final int value;
 	private final String question;
 	private final String answer;
@@ -80,5 +81,12 @@ public class Question {
 					return null;
 			}
 		}
+	}
+	
+	@Override
+	public int compareTo(Question q) {
+		if (value() == q.value()) { return 0; } 
+		else if (value() < q.value()) { return -1; }
+		else { return 1; }
 	}
 }

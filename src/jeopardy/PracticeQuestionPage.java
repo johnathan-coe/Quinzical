@@ -2,6 +2,7 @@ package jeopardy;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -13,14 +14,19 @@ import java.io.IOException;
  * Is also in charge of handling what happens if they get it right or wrong.
  */
 public class PracticeQuestionPage extends QuestionPage {
+	static final int maxGuesses = 3;
 	private int guesses;
 	@FXML Button dontKnowButton;
+	@FXML Label attemptCounter;
 	
 	public PracticeQuestionPage(Game game, Stage stage, Festival festival) throws IOException {		
 		super(game, stage, festival, game.practiceSelectPage());
 		
 		// Hide the "don't know" button in practice mode
 		((HBox) dontKnowButton.getParent()).getChildren().remove(dontKnowButton);
+		
+		// Counter is visible in practice mode
+		attemptCounter.setVisible(true);
 	}
 
 	/**
@@ -29,7 +35,10 @@ public class PracticeQuestionPage extends QuestionPage {
 	public void show(Question question) {
 		super.show(question);
 		
-		// Reset number of guesses remaining
+		// Display guess counter
+		attemptCounter.setText(String.format("Attempt 1/%d", maxGuesses));
+		
+		// Reset guesses remaining
 		guesses = 3;
 	}
 
@@ -58,7 +67,8 @@ public class PracticeQuestionPage extends QuestionPage {
 			guess.setText(question.answer().substring(0, 1));
 		}
 		
-		questionText.setText(capitalise(question.question()) + "\n\n" + Integer.toString(guesses) + " Guesses Left");
+		// Update guess counter
+		attemptCounter.setText(String.format("Attempt %d/3", maxGuesses-guesses+1));
 	}
 	
 	/**

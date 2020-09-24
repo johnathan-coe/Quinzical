@@ -51,7 +51,7 @@ public abstract class QuestionPage {
 	/**
 	 * Capitalise the first letter in a string
 	 */
-	protected String capitalise(String input) {
+	private String capitalise(String input) {
 		return input.substring(0, 1).toUpperCase() +
 				input.substring(1);
 	}

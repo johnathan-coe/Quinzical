@@ -42,12 +42,20 @@ public abstract class QuestionPage {
 
 	public void show(Question question) {
 		this.question = question;
-		questionText.setText(question.question());
+		questionText.setText(capitalise(question.question()));
 		guess.setText("");
 		stage.setScene(scene);
 		festival.say(question.question());
 	}
 
+	/**
+	 * Capitalise the first letter in a string
+	 */
+	protected String capitalise(String input) {
+		return input.substring(0, 1).toUpperCase() +
+				input.substring(1);
+	}
+	
 	@FXML public abstract void answerSubmitted();
 
 	@FXML public abstract void dontKnowPressed();

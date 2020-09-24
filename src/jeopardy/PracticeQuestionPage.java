@@ -58,7 +58,7 @@ public class PracticeQuestionPage extends QuestionPage {
 			guess.setText(question.answer().substring(0, 1));
 		}
 		
-		questionText.setText(question.question() + "\n\n" + Integer.toString(guesses) + " Guesses Left");
+		questionText.setText(capitalise(question.question()) + "\n\n" + Integer.toString(guesses) + " Guesses Left");
 	}
 	
 	/**

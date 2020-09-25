@@ -27,7 +27,7 @@ public class PracticeSelectPage extends SelectPage {
 	 */
 	@Override
 	protected void refresh() {
-		// Delete old buttons
+		// Delete old cards
 		container.getChildren().clear();
 
 		// Grab the parser
@@ -36,7 +36,7 @@ public class PracticeSelectPage extends SelectPage {
 		
 		for (String cat : parser.categories()) {
 			try {
-				Pane p = new PracticeCategoryCard(cat).pane();
+				Pane p = new Card(cat).pane();
 				p.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent e) {

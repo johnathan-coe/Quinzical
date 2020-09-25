@@ -7,7 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-public abstract class Card {
+public class Card {
 	private final Pane pane;
 	@FXML private Label category_name;
 	
@@ -18,11 +18,10 @@ public abstract class Card {
 		pane = loader.load();
 
 		category_name.setText(title);
+		
+		// Set pane background to an image
 		pane().setStyle(String.format("-fx-background-image: url('res/images/%s.jpg');", title.replace(" ", "_"))+
 				  					  "-fx-background-size: cover;");
-		category_name.setStyle("-fx-background-color: #38383daa;"
-							 + "-fx-text-fill: white;"
-							 + "-fx-padding: 5;");
 	}
 	
 	public Pane pane() {

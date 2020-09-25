@@ -10,7 +10,7 @@
    <children>
       <VBox alignment="TOP_CENTER" prefHeight="275.0" prefWidth="200.0">
          <children>
-            <Label fx:id="category_name" text="QUESTION">
+            <Label fx:id="category_name" style="-fx-background-color: #38383daa; -fx-text-fill: white; -fx-padding: 5;" text="QUESTION">
                <font>
                   <Font size="20.0" />
                </font>

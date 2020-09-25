@@ -4,11 +4,11 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.Random;
 
-import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 
 public class PracticeSelectPage extends SelectPage {
@@ -35,20 +35,18 @@ public class PracticeSelectPage extends SelectPage {
 		if (parser == null) { return; }
 		
 		for (String cat : parser.categories()) {
-			// Button for the category
-			Button b = new Button(cat);
-			
-			// When the button is pressed, show a question from the category
-			b.setOnAction(new EventHandler<ActionEvent>() {
-				@Override
-				public void handle(ActionEvent e) {
-					showQuestion(cat);
-				}
-			});
-			
-			// Fill width
-			b.setPrefWidth(200.0);
-			container.getChildren().add(b);
+			try {
+				Pane p = new PracticeCategoryCard(cat).pane();
+				p.setOnMouseClicked(new EventHandler<MouseEvent>() {
+					@Override
+					public void handle(MouseEvent e) {
+							showQuestion(cat);
+					}
+				});
+				container.getChildren().add(p);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 	

@@ -18,6 +18,11 @@ public abstract class Card {
 		pane = loader.load();
 
 		category_name.setText(title);
+		pane().setStyle(String.format("-fx-background-image: url('res/images/%s.jpg');", title.replace(" ", "_"))+
+				  					  "-fx-background-size: cover;");
+		category_name.setStyle("-fx-background-color: #38383daa;"
+							 + "-fx-text-fill: white;"
+							 + "-fx-padding: 5;");
 	}
 	
 	public Pane pane() {

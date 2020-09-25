@@ -1,6 +1,7 @@
 package jeopardy;
 
 import java.io.IOException;
+import java.net.URL;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -20,7 +21,7 @@ public class Card {
 		category_name.setText(title);
 		
 		// Set pane background to an image
-		pane().setStyle(String.format("-fx-background-image: url('res/images/%s.jpg');", title.replace(" ", "_"))+
+		pane().setStyle(String.format("-fx-background-image: url('file:./res/images/%s.jpg');", title.replace(" ", "_"))+
 				  					  "-fx-background-size: cover;");
 	}
 	

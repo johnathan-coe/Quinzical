@@ -29,4 +29,10 @@ public class MainQuestionPage extends QuestionPage {
 		question.setState(Question.QuestionState.INCORRECT);
 		dialog.show(question);
 	}
+
+	@Override
+	public void show(Question question) {
+		super.show(question);
+		question.setState(Question.QuestionState.INCORRECT);
+	}
 }

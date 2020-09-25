@@ -46,8 +46,10 @@ public class CategoryCard extends Card {
 				// Attempted questions get a label
 				Label label = new Label(Integer.toString(q.value()));
 				
-				label.setTextFill((q.state() == Question.QuestionState.CORRECT)? Color.GREEN: Color.RED);
-				label.setStyle("-fx-font-size: 15");
+				label.setTextFill(Color.web((q.state() == Question.QuestionState.CORRECT)? "#30e60b" : "#ff0039"));
+				label.setStyle("-fx-font-size: 15;" +
+							   "-fx-background-color:  #38383daa;" +
+							   "-fx-padding: 5;");
 				questions.getChildren().add(label);
 			}
 		}

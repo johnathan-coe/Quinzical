@@ -10,7 +10,7 @@ import java.io.OutputStreamWriter;
 public class Festival {
 	private Process process;
 	private BufferedWriter writer;
-	private float currentDuration = 1.0f;
+	private float currentSpeed = 1.0f;
 
 	/**
 	 * Auckland New Zealand Female Voice
@@ -33,15 +33,16 @@ public class Festival {
 	}
 
 	/**
-	 * Set the duration of the speech (inverse speed).
+	 * Set the speed of the speech.
 	 *
 	 * 1.0 = Normal Speed.
-	 * 2.0 = 2x as Slow.
-	 * 0.5 = 2x as Fast.
+	 * 2.0 = 2x as Fast.
+	 * 0.5 = 2x as Slow.
 	 */
-	public void setDuration(float duration) {
-		if (duration == currentDuration) { return; }
-		command(String.format("(Parameter.set 'Duration_Stretch %f)", duration));
+	public void setSpeed(float speed) {
+		if (speed == currentSpeed) { return; }
+		currentSpeed = speed;
+		command(String.format("(Parameter.set 'Duration_Stretch (/ 1 %f))", speed));
 	}
 
 	/**

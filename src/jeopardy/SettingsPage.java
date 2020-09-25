@@ -15,6 +15,8 @@ public class SettingsPage {
 	private final Stage stage;
 	private final Scene scene;
 
+	private float currentSpeed = 1;
+
 	@FXML private Slider speedSlider;
 	@FXML private Label speedValueLabel;
 	@FXML private Label speedLabel;
@@ -37,20 +39,22 @@ public class SettingsPage {
 	}
 
 	private void refresh() {
-		speedValueLabel.setText(String.format("%.2fx", speedSlider.getValue()));
+		speedValueLabel.setText(String.format("%.2fx", currentSpeed));
+		speedSlider.setValue(currentSpeed);
 	}
 
 	@FXML private void backButtonPressed() {
 		game.startPage().show();
-		game.festival().setDuration(1/(float)speedSlider.getValue());
+		game.festival().setSpeed(currentSpeed);
 	}
 
 	@FXML private void speedSelected() {
+		currentSpeed = (float)speedSlider.getValue();
 		refresh();
 	}
 
 	@FXML private void speedDefaultPressed() {
-		speedSlider.setValue(1.0);
+		currentSpeed = 1;
 		refresh();
 	}
 }

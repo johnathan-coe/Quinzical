@@ -3,10 +3,8 @@ package jeopardy;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 
@@ -17,19 +15,11 @@ import java.util.List;
 /**
  * A card on the select screen that lets users choose a question from their category
  */
-public class CategoryCard {
-	private final Pane pane;
-
-	@FXML private Label category_name;
+public class CategoryCard extends Card {
 	@FXML private VBox questions;
 
 	public CategoryCard(Category category, Game game) throws IOException {
-		// Pull layout from file
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/question-card.fxml"));
-		loader.setController(this);
-		pane = loader.load();
-
-		category_name.setText(category.name());
+		super(category.name());
 		
 		// Sort questions by value
 		List<Question> qs = category.questions();
@@ -56,12 +46,12 @@ public class CategoryCard {
 				// Attempted questions get a label
 				Label label = new Label(Integer.toString(q.value()));
 				
-				label.setTextFill((q.state() == Question.QuestionState.CORRECT)? Color.GREEN: Color.RED);
-				label.setStyle("-fx-font-size: 15");
+				label.setTextFill(Color.web((q.state() == Question.QuestionState.CORRECT)? "#30e60b" : "#ff0039"));
+				label.setStyle("-fx-font-size: 15;" +
+							   "-fx-background-color:  #38383daa;" +
+							   "-fx-padding: 5;");
 				questions.getChildren().add(label);
 			}
 		}
 	}
-
-	public Pane pane() { return pane; }
 }

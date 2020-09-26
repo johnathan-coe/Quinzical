@@ -13,24 +13,22 @@
          <children>
             <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" text="Welcome to" textAlignment="CENTER" wrapText="true">
-                     <font>
-                        <Font size="50.0" />
-                     </font>
-                  </Label>
-                  <Label alignment="CENTER" text="Jeopardy!" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" style="-fx-background-color: #38383daa; -fx-text-fill: white; -fx-padding: 10;" text="Quinzical" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="80.0" />
                      </font>
                   </Label>
+                  <Label fx:id="currentScoreLabel" text="You currently have $???" textFill="#e3b50e" VBox.vgrow="NEVER">
+                     <font>
+                        <Font size="20.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets top="15.0" />
+                     </VBox.margin>
+                  </Label>
                </children>
             </VBox>
-            <Label fx:id="currentScoreLabel" text="You currently have $???" textFill="#e3b50e" VBox.vgrow="NEVER">
-               <font>
-                  <Font size="20.0" />
-               </font>
-            </Label>
-            <VBox alignment="CENTER" maxHeight="400.0" prefHeight="226.0" prefWidth="600.0" spacing="10.0" VBox.vgrow="NEVER">
+            <VBox alignment="CENTER" maxHeight="400.0" prefHeight="200.0" prefWidth="600.0" spacing="10.0" VBox.vgrow="NEVER">
                <children>
                   <Button fx:id="playButton" mnemonicParsing="false" onAction="#playPressed" text="Play">
                      <font>
@@ -54,7 +52,7 @@
                   </Button>
                </children>
                <VBox.margin>
-                  <Insets />
+                  <Insets bottom="15.0" />
                </VBox.margin>
             </VBox>
          </children>

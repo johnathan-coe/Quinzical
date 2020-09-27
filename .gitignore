@@ -34,6 +34,8 @@ out/
 
 # Save file
 save.json
+# Settings file
+settings.json
 
 # Johnathan's testing file
 test.sh

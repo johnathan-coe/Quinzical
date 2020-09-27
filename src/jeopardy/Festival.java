@@ -7,10 +7,10 @@ import java.io.OutputStreamWriter;
 /**
  * An object that keeps a Festival process open and pipes in different text to say
  */
-public class Festival {
+public class Festival implements GameDataListener {
 	private Process process;
 	private BufferedWriter writer;
-	private float currentSpeed = 1.0f;
+	private Game game;
 
 	/**
 	 * Auckland New Zealand Female Voice
@@ -21,9 +21,11 @@ public class Festival {
 	 */
 	public static String AKL_NZ_JDT_DIPHONE = "akl_nz_jdt_diphone";
 
-	public Festival() throws IOException {
+	public Festival(Game game) throws IOException {
 		process = new ProcessBuilder("festival", "--pipe").start();
 		writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
+		this.game = game;
+		game.data().addListener(this);
 
 		setVoice(AKL_NZ_JDT_DIPHONE);
 	}
@@ -40,8 +42,9 @@ public class Festival {
 	 * 0.5 = 2x as Slow.
 	 */
 	public void setSpeed(float speed) {
-		if (speed == currentSpeed) { return; }
-		currentSpeed = speed;
+		Settings settings = game.data().settings();
+		if (speed == settings.speed()) { return; }
+		settings.setSpeed(speed);
 		command(String.format("(Parameter.set 'Duration_Stretch (/ 1 %f))", speed));
 	}
 
@@ -68,5 +71,15 @@ public class Festival {
 	public void destroy() throws IOException {
 		writer.close();
 		process.destroy();
+	}
+
+	@Override
+	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
+		if (event == GameData.GameDataChangedEvent.LOADED) {
+			Settings settings = game.data().settings();
+			if (settings.speed() != 1) {
+				command(String.format("(Parameter.set 'Duration_Stretch (/ 1 %f))", settings.speed()));
+			}
+		}
 	}
 }

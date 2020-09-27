@@ -27,7 +27,7 @@ public class Game extends Application {
 	public void start(Stage stage) throws Exception {
 		data = GameData.load();
 
-		festival = new Festival();
+		festival = new Festival(this);
 		startPage = new StartPage(this, stage);
 		selectPage = new MainSelectPage(this, stage);
 		practiceSelectPage = new PracticeSelectPage(this, stage);

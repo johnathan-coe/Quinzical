@@ -10,7 +10,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 
-public class SettingsPage {
+public class SettingsPage implements GameDataListener {
 	private final Game game;
 	private final Stage stage;
 	private final Scene scene;
@@ -30,6 +30,7 @@ public class SettingsPage {
 		Pane pane = loader.load();
 		scene = new Scene(pane);
 
+		game.data().addListener(this);
 		refresh();
 		speedLabel.setText(String.format("Set Speed (Default %.2fx)", 1.0));
 	}
@@ -56,5 +57,13 @@ public class SettingsPage {
 	@FXML private void speedDefaultPressed() {
 		currentSpeed = 1;
 		refresh();
+	}
+
+	@Override
+	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
+		if (event == GameData.GameDataChangedEvent.LOADED) {
+			currentSpeed = game.data().settings().speed();
+			refresh();
+		}
 	}
 }

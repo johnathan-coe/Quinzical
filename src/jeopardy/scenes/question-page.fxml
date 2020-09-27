@@ -28,6 +28,7 @@
             </Label>
             <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
+                  <Button mnemonicParsing="false" onAction="#playCue" text="🔉" />
                   <TextField fx:id="guess" onAction="#answerSubmitted" />
                   <Button mnemonicParsing="false" onAction="#answerSubmitted" text="Answer" />
                   <Button fx:id="dontKnowButton" mnemonicParsing="false" onAction="#dontKnowPressed" text="Don't Know" />

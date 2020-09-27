@@ -59,4 +59,8 @@ public abstract class QuestionPage {
 	@FXML public abstract void answerSubmitted();
 
 	@FXML public abstract void dontKnowPressed();
+
+	@FXML public void playCue() {
+		game.festival().say(question.question());
+	}
 }

@@ -32,6 +32,10 @@ public class GameData {
 	 * The {@link CategoryParser} used by the GameData
 	 */
 	private CategoryParser categoryParser;
+	/**
+	 * The settings for the game.
+	 */
+	private Settings settings;
 
 	/**
 	 * You should be using {@link #load()} to create your GameData objects
@@ -47,6 +51,19 @@ public class GameData {
 			@Override
 			protected Void call() throws Exception {
 				File file = new File("save.json");
+
+				final Settings[] settings = new Settings[1]; // An array so that the compiler is satisfied that there will be a place to assign the object to
+				Thread settingsThread = new Thread(new Runnable() {
+					@Override
+					public void run() {
+						try {
+							settings[0] = Settings.loadBlocking();
+						} catch (IOException e) {
+							e.printStackTrace();
+						}
+					}
+				});
+				settingsThread.start();
 
 				GameData newData;
 				if (!file.isFile()) { // If the file doesn't exist, keep the default values
@@ -79,12 +96,14 @@ public class GameData {
 					categoryThread.join();
 					newData = newDataTemp;
 				}
+				settingsThread.join();
 
 				final GameData newData2 = newData;
 				Platform.runLater(new Task<Void>() {
 					@Override
 					protected Void call() {
 						newData2.loaded = true;
+						newData2.settings = settings[0];
 						data.set(newData2);
 						return null;
 					}
@@ -145,9 +164,24 @@ public class GameData {
 
 	/**
 	 * Save the GameData object into a `save.json` file
+	 * and save the settings into a `settings.json` file
 	 */
 	public void save() throws IOException {
 		System.out.println("Saving...");
+
+		new Thread(new Runnable() { // Save the settings in another file - do this concurrently
+			@Override
+			public void run() {
+				System.out.println("Saving to `settings.json`");
+				try {
+					settings.save();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+				System.out.println("Saved to `settings.json`!");
+			}
+		}).start();
+
 		JsonWriter writer = new JsonWriter(score);
 		for (Category category: categories) {
 			writer.writeCategory(category.name());
@@ -155,7 +189,7 @@ public class GameData {
 				writer.writeQuestion(category.name(), q);
 			}
 		}
-		writer.saveToFile();
+		writer.saveToFile("save.json");
 		System.out.println("Saved to `save.json`!");
 	}
 
@@ -213,10 +247,13 @@ public class GameData {
 		this.categories = data.categories;
 		this.categoryParser = data.categoryParser;
 		this.loaded = data.loaded;
+		this.settings = data.settings;
 		publish(GameDataChangedEvent.LOADED);
 	}
 
 	public CategoryParser parser() { return categoryParser;	}
+
+	public Settings settings() { return settings;	}
 
 	/**
 	 * Returns whether the GameData is being loaded or not
@@ -253,20 +290,13 @@ public class GameData {
 	/**
 	 * A utility class to read the save file
 	 */
-	private static class JsonReader {
-		private String jsonString;
+	private static class JsonReader extends jeopardy.json.JsonReader {
 
 		/**
 		 * Create a new JsonReader that reads the given file
 		 */
 		public JsonReader(File file) throws IOException {
-			StringBuilder stringBuilder = new StringBuilder();
-			Scanner scanner = new Scanner(file);
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				stringBuilder.append("\n").append(line);
-			}
-			jsonString = new String(stringBuilder);
+			super(file);
 		}
 
 		/**
@@ -329,73 +359,30 @@ public class GameData {
 				state
 			);
 		}
-
-		/**
-		 * Executes a `jq` process with the provided filter and extra arguments
-		 */
-		private List<String> executeFilter(String filter, String[] extra) throws IOException {
-			List<String> command = new ArrayList<>();
-			command.add("jq");
-			if (extra != null) {
-				command.addAll(Arrays.asList(extra));
-			}
-			command.add(filter);
-
-			Process proc = new ProcessBuilder(command).start();
-			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(proc.getOutputStream()));
-			BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-			writer.write(jsonString+"\n");
-			writer.flush();
-			writer.close();
-
-			List<String> lines = new ArrayList<>();
-			String line = reader.readLine();
-			while (line != null) {
-				lines.add(line);
-				line = reader.readLine();
-			}
-
-			proc.destroy();
-			return lines;
-		}
 	}
 
 	/**
 	 * A utility class for writing the JSON file
 	 */
-	private static class JsonWriter {
-		private String jsonString;
-
+	private static class JsonWriter extends jeopardy.json.JsonWriter {
 		/**
 		 * Create a new JsonWriter with the provided score
-		 *
-		 * The file is not yet written to the disck (See {@link #saveToFile()}).
+		 * <p>
+		 * The file is not yet written to the disk (See {@link #saveToFile(String)}).
 		 */
 		public JsonWriter(int score) throws IOException {
-			jsonString = "{}";
+			super();
 			write("{\"score\": $SCORE}", new String[]{
-				"--argjson", "SCORE", Integer.toString(score),
+					"--argjson", "SCORE", Integer.toString(score),
 			});
-		}
-
-		/**
-		 * Save the string we've been creating to disk
-		 *
-		 * Use this _after_ you've written everything.
-		 */
-		public void saveToFile() throws IOException {
-			FileWriter file = new FileWriter("save.json");
-			file.write(jsonString);
-			file.flush();
-			file.close();
 		}
 
 		/**
 		 * Write an empty category into the save file
 		 */
 		public void writeCategory(String categoryName) throws IOException {
-			write(".categories += {($CATEGORY_NAME): {}}", new String[] {
-				"--arg", "CATEGORY_NAME", categoryName
+			write(".categories += {($CATEGORY_NAME): {}}", new String[]{
+					"--arg", "CATEGORY_NAME", categoryName
 			});
 		}
 
@@ -403,37 +390,13 @@ public class GameData {
 		 * Write a question into the category provided
 		 */
 		public void writeQuestion(String categoryName, Question question) throws IOException {
-			write(".categories[$CATEGORY_NAME] += { ($VALUE): { \"question\": $QUESTION, \"answer\": $ANSWER, \"completed\": $COMPLETED }}", new String[] {
+			write(".categories[$CATEGORY_NAME] += { ($VALUE): { \"question\": $QUESTION, \"answer\": $ANSWER, \"completed\": $COMPLETED }}", new String[]{
 					"--arg", "CATEGORY_NAME", categoryName,
 					"--arg", "VALUE", Integer.toString(question.value()),
 					"--arg", "QUESTION", question.question(),
 					"--arg", "ANSWER", question.answer(),
 					"--arg", "COMPLETED", question.state().toString(),
 			});
-		}
-
-		/**
-		 * Execute a `jq` folder to replace our current internal JSON string with a new one
-		 */
-		private void write(String filter, String[] extra) throws IOException {
-			List<String> command = new ArrayList<>();
-			command.add("jq");
-			command.add("-c");
-			if (extra != null) {
-				command.addAll(Arrays.asList(extra));
-			}
-			command.add(filter);
-
-			Process proc = new ProcessBuilder(command).start();
-			BufferedWriter writer = new BufferedWriter(new OutputStreamWriter(proc.getOutputStream()));
-			BufferedReader reader = new BufferedReader(new InputStreamReader(proc.getInputStream()));
-			writer.write(jsonString+"\n");
-			writer.flush();
-			writer.close();
-
-			List<String> lines = new ArrayList<>();
-			jsonString = reader.readLine();
-			proc.destroy();
 		}
 	}
 

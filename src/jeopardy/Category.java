@@ -25,4 +25,13 @@ public class Category {
 	public List<Question> questions() { return new ArrayList<>(questions.values()); }
 
 	public Question getQuestion(int value) { return questions.get(value); }
+
+	public boolean isCompleted() {
+		for (Question question: questions()) {
+			if (!question.isCompleted()) {
+				return false;
+			}
+		}
+		return true;
+	}
 }

@@ -16,14 +16,21 @@ public class MainSelectPage extends SelectPage {
 
 	protected void refresh() {
 		List<Pane> cards = new ArrayList<>();
+		List<Pane> completed = new ArrayList<>(); // Put the completed panes at the end
 		for (Category category: game.data().categories()) {
 			try {
 				CategoryCard card = new CategoryCard(category, game);
-				cards.add(card.pane());
+				if (category.isCompleted()) {
+					completed.add(card.pane());
+				} else {
+					cards.add(card.pane());
+				}
 			} catch (IOException e) {
 				System.err.println(e.toString());
 			}
 		}
+		cards.addAll(completed);
+
 		container.getChildren().clear();
 		if (cards.size() == 0) {
 			Label label = new Label(

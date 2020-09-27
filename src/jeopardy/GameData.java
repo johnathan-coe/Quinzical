@@ -35,7 +35,7 @@ public class GameData {
 	/**
 	 * The settings for the game.
 	 */
-	private Settings settings;
+	private static Settings settings;
 
 	/**
 	 * You should be using {@link #load()} to create your GameData objects
@@ -52,12 +52,11 @@ public class GameData {
 			protected Void call() throws Exception {
 				File file = new File("save.json");
 
-				final Settings[] settings = new Settings[1]; // An array so that the compiler is satisfied that there will be a place to assign the object to
 				Thread settingsThread = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
-							settings[0] = Settings.loadBlocking();
+							settings = Settings.loadBlocking();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -103,7 +102,6 @@ public class GameData {
 					@Override
 					protected Void call() {
 						newData2.loaded = true;
-						newData2.settings = settings[0];
 						data.set(newData2);
 						return null;
 					}
@@ -247,7 +245,6 @@ public class GameData {
 		this.categories = data.categories;
 		this.categoryParser = data.categoryParser;
 		this.loaded = data.loaded;
-		this.settings = data.settings;
 		publish(GameDataChangedEvent.LOADED);
 	}
 

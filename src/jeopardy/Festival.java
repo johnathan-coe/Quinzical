@@ -31,7 +31,7 @@ public class Festival implements GameDataListener {
 	}
 
 	public void say(String text) {
-		command(String.format("(SayText \"%s\")", text));
+		command(String.format("(SayText \"%s\")", text.replace("\"", "")));
 	}
 
 	/**

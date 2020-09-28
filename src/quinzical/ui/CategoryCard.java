@@ -39,7 +39,7 @@ public class CategoryCard extends Card {
 				button.setOnAction(new EventHandler<>() {
 					@Override
 					public void handle(ActionEvent actionEvent) {
-						game.questionPage().show(q);
+						game.questionPage().show(q, category.name());
 					}
 				});
 				

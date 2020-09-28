@@ -1,6 +1,8 @@
 package quinzical.ui;
 
 import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Map;
 import java.util.Random;
 
@@ -71,6 +73,6 @@ public class PracticeSelectPage extends SelectPage {
 		Question q = new Question(0, randomQ, questions.get(randomQ), Question.QuestionState.UNATTEMPTED);
 		
 		// Display
-		game.practiceQuestionPage().show(q);
+		game.practiceQuestionPage().show(q, c);
 	}
 }

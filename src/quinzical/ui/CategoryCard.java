@@ -43,7 +43,7 @@ public class CategoryCard extends Card {
 					}
 				});
 				
-				button.setStyle("-fx-font-size: 15");
+				button.setStyle("-fx-font-size: 15; -fx-background-color: white;");
 				questions.getChildren().add(button);
 			} else {
 				// Attempted questions get a label
@@ -54,8 +54,8 @@ public class CategoryCard extends Card {
 				
 				label.setTextFill(Color.web(fg));
 				label.setStyle("-fx-font-size: 15;" +
-							   "-fx-background-color: " + bg + "bb;" +
-						   "-fx-padding: 5;");
+							   "-fx-background-color: " + bg + "ff;" +
+						   	"-fx-padding: 5 10; -fx-background-radius: 5;");
 		
 				questions.getChildren().add(label);
 			}

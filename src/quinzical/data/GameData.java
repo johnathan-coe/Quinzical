@@ -1,4 +1,4 @@
-package quinzical;
+package quinzical.data;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;

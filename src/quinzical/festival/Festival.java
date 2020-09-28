@@ -1,4 +1,9 @@
-package quinzical;
+package quinzical.festival;
+
+import quinzical.Game;
+import quinzical.data.GameData;
+import quinzical.data.GameDataListener;
+import quinzical.data.Settings;
 
 import java.io.BufferedWriter;
 import java.io.IOException;

@@ -1,4 +1,4 @@
-package quinzical;
+package quinzical.data;
 
 /**
  * A data class that represents a question

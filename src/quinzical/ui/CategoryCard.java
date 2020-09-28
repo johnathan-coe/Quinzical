@@ -1,4 +1,4 @@
-package quinzical;
+package quinzical.ui;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -7,6 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import quinzical.Game;
+import quinzical.data.Category;
+import quinzical.data.Question;
 
 import java.io.IOException;
 import java.util.Collections;

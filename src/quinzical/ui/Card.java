@@ -1,4 +1,4 @@
-package quinzical;
+package quinzical.ui;
 
 import java.io.IOException;
 import java.nio.file.Files;

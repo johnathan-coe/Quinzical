@@ -1,10 +1,13 @@
-package quinzical;
+package quinzical.ui;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import quinzical.Game;
+import quinzical.data.Question;
+import quinzical.festival.Festival;
 
 import java.io.IOException;
 
@@ -19,7 +22,7 @@ public class PracticeQuestionPage extends QuestionPage {
 	@FXML Button dontKnowButton;
 	@FXML Label attemptCounter;
 	
-	public PracticeQuestionPage(Game game, Stage stage, Festival festival) throws IOException {		
+	public PracticeQuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		super(game, stage, festival, game.practiceSelectPage());
 		
 		// Hide the "don't know" button in practice mode

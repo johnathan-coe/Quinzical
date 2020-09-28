@@ -1,4 +1,4 @@
-package quinzical;
+package quinzical.data;
 
 import java.io.*;
 

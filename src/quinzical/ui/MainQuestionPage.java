@@ -1,7 +1,10 @@
-package quinzical;
+package quinzical.ui;
 
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import quinzical.Game;
+import quinzical.data.Question;
+import quinzical.festival.Festival;
 
 import java.io.IOException;
 

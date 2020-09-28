@@ -1,4 +1,4 @@
-package quinzical;
+package quinzical.ui;
 
 import java.io.IOException;
 import java.util.Map;
@@ -10,6 +10,9 @@ import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import quinzical.Game;
+import quinzical.data.CategoryParser;
+import quinzical.data.Question;
 
 public class PracticeSelectPage extends SelectPage {
 	private CategoryParser parser;

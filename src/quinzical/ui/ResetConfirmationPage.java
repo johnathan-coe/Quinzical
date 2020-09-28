@@ -1,10 +1,11 @@
-package quinzical;
+package quinzical.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import quinzical.Game;
 
 import java.io.IOException;
 

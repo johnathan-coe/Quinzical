@@ -1,4 +1,4 @@
-package quinzical;
+package quinzical.data;
 
 /**
  * Implemented by Controllers that wish to act on changes to the game data.

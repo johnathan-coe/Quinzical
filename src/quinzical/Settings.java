@@ -1,4 +1,4 @@
-package jeopardy;
+package quinzical;
 
 import java.io.*;
 
@@ -32,7 +32,7 @@ public class Settings {
 
 	public void setSpeed(float speed) { festivalSpeed = speed; }
 
-	private static class JsonReader extends jeopardy.json.JsonReader {
+	private static class JsonReader extends quinzical.json.JsonReader {
 		/**
 		 * Create a new JsonReader that reads the given file
 		 */
@@ -49,7 +49,7 @@ public class Settings {
 		}
 	}
 
-	private static class JsonWriter extends jeopardy.json.JsonWriter {
+	private static class JsonWriter extends quinzical.json.JsonWriter {
 		/**
 		 * Create a new writer
 		 */

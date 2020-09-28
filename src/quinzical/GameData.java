@@ -1,4 +1,4 @@
-package jeopardy;
+package quinzical;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -287,7 +287,7 @@ public class GameData {
 	/**
 	 * A utility class to read the save file
 	 */
-	private static class JsonReader extends jeopardy.json.JsonReader {
+	private static class JsonReader extends quinzical.json.JsonReader {
 
 		/**
 		 * Create a new JsonReader that reads the given file
@@ -361,7 +361,7 @@ public class GameData {
 	/**
 	 * A utility class for writing the JSON file
 	 */
-	private static class JsonWriter extends jeopardy.json.JsonWriter {
+	private static class JsonWriter extends quinzical.json.JsonWriter {
 		/**
 		 * Create a new JsonWriter with the provided score
 		 * <p>

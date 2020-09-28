@@ -1,4 +1,4 @@
-package jeopardy;
+package quinzical;
 
 import java.util.ArrayList;
 import java.util.HashMap;

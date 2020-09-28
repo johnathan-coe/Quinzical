@@ -1,4 +1,4 @@
-package jeopardy;
+package quinzical;
 
 import javafx.application.Application;
 import javafx.stage.Stage;

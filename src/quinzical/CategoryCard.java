@@ -1,4 +1,4 @@
-package jeopardy;
+package quinzical;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

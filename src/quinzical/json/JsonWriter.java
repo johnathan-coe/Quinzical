@@ -1,4 +1,4 @@
-package jeopardy.json;
+package quinzical.json;
 
 import java.io.*;
 import java.util.ArrayList;

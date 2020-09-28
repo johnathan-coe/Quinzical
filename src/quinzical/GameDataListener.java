@@ -1,4 +1,4 @@
-package jeopardy;
+package quinzical;
 
 /**
  * Implemented by Controllers that wish to act on changes to the game data.

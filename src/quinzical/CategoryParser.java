@@ -1,4 +1,4 @@
-package jeopardy;
+package quinzical;
 
 import javafx.concurrent.Task;
 

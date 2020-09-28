@@ -1,5 +1,4 @@
-package jeopardy;
-import java.lang.Integer;
+package quinzical;
 
 /**
  * A data class that represents a question

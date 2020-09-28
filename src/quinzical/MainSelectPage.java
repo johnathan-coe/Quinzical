@@ -1,4 +1,4 @@
-package jeopardy;
+package quinzical;
 
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;

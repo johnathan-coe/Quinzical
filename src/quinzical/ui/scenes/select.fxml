@@ -14,13 +14,16 @@
    <children>
       <VBox prefWidth="100.0" style="-fx-background-color: #38383d;">
          <children>
-            <Label fx:id="header" style="-fx-text-fill: white; -fx-padding: 5;" text="Select a Question from a Category">
+            <Label fx:id="header" style="-fx-text-fill: white;" text="Select a Question from a Category">
                <font>
                   <Font size="20.0" />
                </font>
                <VBox.margin>
                   <Insets bottom="10.0" left="10.0" top="10.0" />
                </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </padding>
             </Label>
             <ScrollPane fitToHeight="true" pannable="true" prefHeight="300.0" prefWidth="600.0" styleClass="edge-to-edge" VBox.vgrow="ALWAYS">
                <content>

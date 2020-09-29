@@ -18,7 +18,7 @@
                         <Font size="30.0" />
                      </font>
                   </Label>
-                  <Label fx:id="consequence" style="-fx-text-fill: white;" text="You've earned $???!" textAlignment="CENTER">
+                  <Label fx:id="consequence" style="-fx-text-fill: white;" text="You've earned $???!">
                      <font>
                         <Font size="20.0" />
                      </font>

@@ -11,21 +11,21 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+      <VBox prefWidth="100.0" style="-fx-background-color: #38383d;">
          <children>
-            <Label text="Settings">
+            <Label style="-fx-text-fill: white;" text="Settings">
                <font>
-                  <Font size="30.0" />
+                  <Font size="20.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="10.0" top="10.0" />
+                  <Insets bottom="10.0" left="10.0" top="10.0" />
                </VBox.margin>
             </Label>
-            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+            <VBox alignment="TOP_RIGHT" prefWidth="100.0" style="-fx-background-color: #0c0c0d;" VBox.vgrow="ALWAYS">
                <children>
-                  <VBox alignment="TOP_CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+                  <VBox prefWidth="100.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
                      <children>
                         <GridPane maxWidth="350.0">
                           <columnConstraints>
@@ -37,33 +37,54 @@
                             <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
                           </rowConstraints>
                            <children>
-                              <Label fx:id="speedLabel" text="Set Speed">
+                              <Label fx:id="speedLabel" style="-fx-text-fill: white;" text="Set Speed">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" />
+                                 </GridPane.margin>
                               </Label>
                               <Slider fx:id="speedSlider" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="0.5" onMouseDragReleased="#speedSelected" onMouseReleased="#speedSelected" showTickLabels="true" value="1.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
-                              <Label fx:id="speedValueLabel" text="?x" GridPane.columnIndex="1" GridPane.vgrow="NEVER">
+                              <Label fx:id="speedValueLabel" style="-fx-text-fill: white;" text="?x" GridPane.columnIndex="1" GridPane.vgrow="NEVER">
                                  <font>
                                     <Font size="20.0" />
                                  </font>
+                                 <GridPane.margin>
+                                    <Insets bottom="10.0" left="10.0" />
+                                 </GridPane.margin>
                               </Label>
-                              <Button mnemonicParsing="false" onAction="#speedDefaultPressed" text="Default" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                              <Button mnemonicParsing="false" onAction="#speedDefaultPressed" style="-fx-background-color: white;" text="Default" GridPane.columnIndex="1" GridPane.rowIndex="1">
                                  <font>
                                     <Font size="14.0" />
                                  </font>
+                                 <GridPane.margin>
+                                    <Insets left="10.0" />
+                                 </GridPane.margin>
                               </Button>
                            </children>
                         </GridPane>
                      </children>
-                  </VBox>
-                  <Button mnemonicParsing="false" onAction="#backButtonPressed" text="Save">
                      <VBox.margin>
-                        <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                        <Insets bottom="30.0" left="20.0" right="20.0" top="30.0" />
                      </VBox.margin>
-                  </Button>
+                     <padding>
+                        <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+                     </padding>
+                  </VBox>
                </children>
             </VBox>
+            <Button mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="30.0" prefWidth="74.0" style="-fx-background-color: white;" text="Save">
+               <VBox.margin>
+                  <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+               </VBox.margin>
+               <padding>
+                  <Insets bottom="5.0" left="10.0" right="10.0" top="5.0" />
+               </padding>
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
          </children>
          <StackPane.margin>
             <Insets />

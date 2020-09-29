@@ -7,11 +7,11 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="453.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefWidth="600.0" style="-fx-background-color: #0c0c0d;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" spacing="10.0">
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;">
          <children>
-            <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
+            <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
                   <Label alignment="CENTER" style="-fx-background-color: #38383daa; -fx-text-fill: white; -fx-padding: 10;" text="Quinzical" textAlignment="CENTER" wrapText="true">
                      <font>
@@ -23,29 +23,29 @@
                         <Font size="20.0" />
                      </font>
                      <VBox.margin>
-                        <Insets top="15.0" />
+                        <Insets bottom="10.0" left="15.0" />
                      </VBox.margin>
                   </Label>
                </children>
             </VBox>
-            <VBox alignment="CENTER" maxHeight="400.0" prefHeight="200.0" prefWidth="600.0" spacing="10.0" VBox.vgrow="NEVER">
+            <VBox maxHeight="400.0" prefHeight="200.0" prefWidth="600.0" spacing="10.0" VBox.vgrow="NEVER">
                <children>
-                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#playPressed" text="Play">
+                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#playPressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Play">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="practiceButton" mnemonicParsing="false" onAction="#practicePressed" text="Practice">
+                  <Button fx:id="practiceButton" mnemonicParsing="false" onAction="#practicePressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Practice">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPressed" text="Reset">
+                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Reset">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#settingsPressed" text="Settings">
+                  <Button mnemonicParsing="false" onAction="#settingsPressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Settings">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -56,6 +56,12 @@
                </VBox.margin>
             </VBox>
          </children>
+         <StackPane.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </StackPane.margin>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
       </VBox>
    </children>
 </StackPane>

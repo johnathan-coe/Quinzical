@@ -27,7 +27,7 @@
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                </padding>
             </Label>
-            <VBox alignment="TOP_RIGHT" prefWidth="100.0" style="-fx-background-color: #0c0c0d;" VBox.vgrow="ALWAYS">
+            <VBox alignment="TOP_RIGHT" prefWidth="100.0" style="-fx-background-color: linear-gradient(to bottom right, #6E6AEA, #B93423);;" VBox.vgrow="ALWAYS">
                <children>
                   <VBox prefWidth="100.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;" VBox.vgrow="ALWAYS">
                      <children>

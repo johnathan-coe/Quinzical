@@ -1,6 +1,6 @@
 package quinzical.ui;
 
-import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.Question;
@@ -13,7 +13,7 @@ public class MainQuestionPage extends QuestionPage {
 		super(game, stage, festival, game.selectPage());
 
 		// Remove the question text
-		((Pane) super.questionText.getParent()).getChildren().remove(super.questionText);
+		((VBox) super.practiceContainer.getParent()).getChildren().remove(super.practiceContainer);
 	}
 
 	@Override
@@ -34,8 +34,8 @@ public class MainQuestionPage extends QuestionPage {
 	}
 
 	@Override
-	public void show(Question question) {
-		super.show(question);
+	public void show(Question question, String cat) {
+		super.show(question, cat);
 		question.setState(Question.QuestionState.INCORRECT);
 	}
 }

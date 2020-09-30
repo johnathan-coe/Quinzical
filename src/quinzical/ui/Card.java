@@ -8,10 +8,12 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 
 public class Card {
 	private final Pane pane;
 	@FXML private Label category_name;
+	@FXML private VBox questions;
 	
 	Card(String title) throws IOException {
 		// Pull layout from file
@@ -27,7 +29,7 @@ public class Card {
 		if (!Files.exists(Path.of(imageUrl))) {
 			styleString = "-fx-background-color: grey;";
 		}
-		pane().setStyle(styleString + "-fx-background-size: cover;");
+		questions.setStyle(styleString + "-fx-background-size: cover;");
 	}
 	
 	public Pane pane() {

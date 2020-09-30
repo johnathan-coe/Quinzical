@@ -35,8 +35,8 @@ public class PracticeQuestionPage extends QuestionPage {
 	/**
 	 * Change the question displayed
 	 */
-	public void show(Question question) {
-		super.show(question);
+	public void show(Question question, String cat) {
+		super.show(question, cat);
 		
 		// Display guess counter
 		attemptCounter.setText(String.format("Attempt 1/%d", maxGuesses));

@@ -15,10 +15,10 @@ They have been transcribed from our notion workspace.
 - Introduced ourselves
 - Looked over and discussed the specification PDF
 - Asked Nasser for clarification
-- Created the Team agreement
+- Created the Team agreement:
 
-    [https://docs.google.com/document/d/1iHnqkUxXZ5nwGrZt8v9a7rf-1rupNNpR/edit#](https://docs.google.com/document/d/1iHnqkUxXZ5nwGrZt8v9a7rf-1rupNNpR/edit#)
-
+    [SE206 Team Agreement Assignment Three.docx](https://drive.google.com/file/d/1iHnqkUxXZ5nwGrZt8v9a7rf-1rupNNpR/view?usp=drivesdk)
+    
 - Created the github repository
 - Showed each other our implementations of assignment 2 and discussed certain implementation points like:
     - Using Scenebuilder and FXML for the GUI

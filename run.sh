@@ -1,5 +1,7 @@
+#!/bin/bash
+
 if [[ -z $JAR ]]; then
-  JAR=jeopardy.jar
+  JAR=quinzical.jar
 fi
 
 if [[ -z $JAVAFX_PATH ]]; then

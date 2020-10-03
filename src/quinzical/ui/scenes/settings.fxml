@@ -7,10 +7,10 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
-
 
 <VBox alignment="CENTER_LEFT" prefHeight="389.0" prefWidth="700.0" style="-fx-background-color: linear-gradient(to bottom right, #6E6AEA, #B93423);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
@@ -21,7 +21,7 @@
                   <Font size="25.0" />
                </font>
                <VBox.margin>
-                  <Insets bottom="5.0" />
+                  <Insets bottom="10.0" />
                </VBox.margin>
             </Label>
             <Separator opacity="0.45" prefWidth="200.0">
@@ -66,17 +66,27 @@
                   </Button>
                </children>
             </GridPane>
-            <Button mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: white;" text="Save">
+            <HBox alignment="TOP_RIGHT">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="34.0" prefWidth="87.0" style="-fx-background-color: #0060df; -fx-text-fill: white;" text="Save">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets />
+                     </HBox.margin>
+                     <padding>
+                        <Insets bottom="8.0" top="8.0" />
+                     </padding>
+                  </Button>
+               </children>
                <VBox.margin>
-                  <Insets top="15.0" />
+                  <Insets top="10.0" />
                </VBox.margin>
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </Button>
+            </HBox>
          </children>
          <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
    </children>

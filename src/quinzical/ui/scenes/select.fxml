@@ -20,13 +20,10 @@
                      <font>
                         <Font size="25.0" />
                      </font>
-                     <padding>
-                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
-                     </padding>
                   </Label>
                </children>
                <padding>
-                  <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                  <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </VBox>
             <ScrollPane fitToHeight="true" hbarPolicy="NEVER" pannable="true" prefHeight="270.0" prefWidth="600.0" style="-fx-background: transparent;" styleClass="edge-to-edge" VBox.vgrow="ALWAYS">
@@ -39,10 +36,13 @@
             </ScrollPane>
             <ButtonBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;">
               <buttons>
-                <Button mnemonicParsing="false" onAction="#backPressed" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Back">
+                <Button mnemonicParsing="false" onAction="#backPressed" style="-fx-background-color: #ff0039; -fx-text-fill: white;" text="Back">
                      <font>
                         <Font size="16.0" />
-                     </font></Button>
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" top="8.0" />
+                     </padding></Button>
               </buttons>
                <padding>
                   <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />

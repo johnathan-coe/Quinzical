@@ -28,42 +28,61 @@
                         <Font size="14.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="5.0" top="2.0" />
+                        <Insets bottom="10.0" top="2.0" />
                      </VBox.margin>
                   </Label>
                   <Separator opacity="0.45" prefWidth="200.0">
                      <VBox.margin>
-                        <Insets bottom="15.0" />
+                        <Insets bottom="10.0" />
                      </VBox.margin>
                   </Separator>
                </children>
             </VBox>
             <HBox prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Button mnemonicParsing="false" onAction="#playCue" style="-fx-background-color: white;" text="🔉">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Button>
                   <TextField fx:id="guess" maxWidth="Infinity" onAction="#answerSubmitted" promptText="Answer..." style="-fx-background-color: #4a4a4f; -fx-text-fill: white;" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font></TextField>
-                  <Button mnemonicParsing="false" onAction="#answerSubmitted" style="-fx-background-color: #0a84ff; -fx-text-fill: white;" text="Answer">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Button>
-                  <Button fx:id="dontKnowButton" mnemonicParsing="false" onAction="#dontKnowPressed" style="-fx-background-color: white;" text="Don't Know">
-                     <font>
-                        <Font size="16.0" />
-                     </font></Button>
                </children>
+            </HBox>
+            <HBox alignment="TOP_RIGHT" spacing="10.0">
+               <children>
+                  <Button mnemonicParsing="false" onAction="#playCue" prefHeight="31.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🔉">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                  </Button>
+                  <Button fx:id="dontKnowButton" mnemonicParsing="false" onAction="#dontKnowPressed" prefWidth="132.0" style="-fx-background-color: white;" text="Don't Know">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                  </Button>
+                  <Button mnemonicParsing="false" onAction="#answerSubmitted" prefWidth="100.0" style="-fx-background-color: #0a84ff; -fx-text-fill: white;" text="Answer">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
+                     </padding>
+                  </Button>
+               </children>
+               <VBox.margin>
+                  <Insets top="10.0" />
+               </VBox.margin>
             </HBox>
          </children>
          <VBox.margin>
             <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </VBox.margin>
          <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
          </padding>
       </VBox>
    </children>

@@ -64,10 +64,8 @@ Change the title to include the date.
 
 ## Meeting 4
 
-Created: Sep 28, 2020 3:35 PM
-Created By: Hiruna Jayamanne
-Last Edited Time: Oct 2, 2020 3:34 AM
-When: Sep 28, 2020 3:00 PM-4:00 PM
+**When**: Sep 28, 2020 3:00 PM-4:00 PM\
+**Where**: Zoom
 
 ### What did we do?
 

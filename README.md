@@ -1,6 +1,13 @@
-# project
+# Quinzical
 
-Use this repo for both Assignment 3 and also your final Project (as you will be in the same team). 
+Quinzical is a quiz game written in Java.
 
-Be sure to update this README file to provide an easy-to-follow set of instructions on how to run your program. 
+[Read the instructions here.](wiki/docs/README.md)
 
+## Screenshots
+
+![Main screen](wiki/docs/images/start.png)
+
+![Question select screen](wiki/docs/images/select.png)
+
+![Practise Question screen](wiki/docs/images/practice-question.png)

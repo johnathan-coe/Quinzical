@@ -48,7 +48,7 @@
             </HBox>
             <HBox alignment="TOP_RIGHT" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#playCue" prefHeight="31.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="🔉">
+                  <Button mnemonicParsing="false" onAction="#playCue" prefHeight="31.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Replay">
                      <font>
                         <Font size="15.0" />
                      </font>

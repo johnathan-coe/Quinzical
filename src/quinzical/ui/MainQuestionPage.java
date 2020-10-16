@@ -64,6 +64,14 @@ public class MainQuestionPage extends QuestionPage {
 							return null;
 						}
 					});
+				} else {
+					Platform.runLater(new Task<Void>() {
+						@Override
+						protected Void call() {
+							timerLabel.setText(String.format("⏱ %ds", n));
+							return null;
+						}
+					});
 				}
 				n--;
 			}

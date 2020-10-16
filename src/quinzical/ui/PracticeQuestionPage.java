@@ -25,9 +25,10 @@ public class PracticeQuestionPage extends QuestionPage {
 	public PracticeQuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		super(game, stage, festival, game.practiceSelectPage());
 		
-		// Hide the "don't know" button in practice mode
+		// Hide the "don't know" button and timer in practice mode
 		((HBox) dontKnowButton.getParent()).getChildren().remove(dontKnowButton);
-		
+		((HBox) timerLabel.getParent()).getChildren().remove(timerLabel);
+
 		// Counter is visible in practice mode
 		attemptCounter.setVisible(true);
 	}

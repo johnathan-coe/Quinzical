@@ -34,6 +34,7 @@ public abstract class QuestionPage {
 	@FXML protected Label questionText;
 	@FXML protected VBox practiceContainer;
 	@FXML protected TextField guess;
+	@FXML protected Label timerLabel;
 
 	public QuestionPage(Game game, Stage stage, Festival festival, SelectPage selectPage) throws IOException {
 		this.game = game;

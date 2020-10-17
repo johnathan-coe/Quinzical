@@ -23,7 +23,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 /**
- * The start screen that is the first screen users see
+ * Viewer for Markdown documentation from within the app
  */
 public class HelpViewer {
 	private final Stage stage;
@@ -46,42 +46,42 @@ public class HelpViewer {
 		stage.setScene(scene);
 	}
 
+	/**
+	 * Display help
+	 * 
+	 * @param file Markdown file
+	 * @param heading Heading in the markdown file to render
+	 */
 	public void show(String file, String heading) {
 		this.stage.show();
 				
 		File f = new File(file);
 		FileReader reader;
-		
-		try {
-			reader = new FileReader(f);
-		} catch (FileNotFoundException e) {
-			e.printStackTrace();
-			return;
-		}
-		
 		Node document;
 		try {
+			reader = new FileReader(f);
 			document = parser.parseReader(reader);
-		} catch (IOException e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			return;
 		}
 		
-		Document excerpt = new Document();
-		
-		Node n = document.getFirstChild();
 		// Go through nodes until we hit the desired heading
+		Node n = document.getFirstChild();
 		while (!((n instanceof Heading) && ((Text) n.getFirstChild()).getLiteral().equals(heading))
 					&& n != null) {
 			n = n.getNext();
 		}
 		
+		// Excerpt we're interested in
+		Document excerpt = new Document();
+		
 		// If we couldn't find a heading
 		if (n == null) {
 			// Insert an error message
-			excerpt.appendChild(new Text("Error! Help file not found."));
+			excerpt.appendChild(new Text("Error! Help not found."));
 		} else {
-			// Otherwise go through nodes until we reach another heading or end of document
+			// Otherwise add nodes to excerpt until we reach another heading or the end of the document
 			do {
 				Node curr = n;
 				n = n.getNext();
@@ -95,7 +95,9 @@ public class HelpViewer {
 		// Render the excerpt
 		String rendered = renderer.render(excerpt);
 
+		// Display help
 		view.getEngine().loadContent(rendered);
+		// Style content
 		view.getEngine().setUserStyleSheetLocation("file:res/css/markdown.css");
 	}
 	

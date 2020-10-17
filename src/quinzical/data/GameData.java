@@ -142,13 +142,15 @@ public class GameData {
 			int categoryIndex = (int)(categories.size() * Math.random());
 			String categoryName = categories.get(categoryIndex);
 			Category category = new Category(categoryName);
-			Map<String, String> questionSet = parser.getCategory(categoryName);
+			Map<String, String[]> questionSet = parser.getCategory(categoryName);
 			List<String> questions = new ArrayList<>(questionSet.keySet());
 			for (int i = 100; i <= 500; i += 100) {
 				int index = (int) (Math.random() * questionSet.size());
 				String question = questions.get(index);
-				String answer = questionSet.get(question);
-				category.addQuestion(new Question(i, question, answer, Question.QuestionState.UNATTEMPTED));
+				
+				String prompt = questionSet.get(question)[0];
+				String answer = questionSet.get(question)[1];
+				category.addQuestion(new Question(i, prompt, question, answer, Question.QuestionState.UNATTEMPTED));
 				questionSet.remove(question);
 				questions.remove(question);
 			}
@@ -327,14 +329,14 @@ public class GameData {
 		 * Get a question form the save file by providing the category it belongs to and how much it's worth
 		 */
 		public Question getQuestion(String category, String value) throws IOException {
-			List<String> lines = executeFilter(".categories[($CATEGORY)][$VALUE] | (.question, .answer, .completed)", new String[]{
+			List<String> lines = executeFilter(".categories[($CATEGORY)][$VALUE] | (.question, .prompt, .answer, .completed)", new String[]{
 				"-r",
 				"--arg", "CATEGORY", category,
 				"--arg", "VALUE", value
 			});
 
 			Question.QuestionState state = Question.QuestionState.UNATTEMPTED;
-			switch (lines.get(2)) {
+			switch (lines.get(3)) {
 				case "UNATTEMPTED":
 					state = Question.QuestionState.UNATTEMPTED;
 					break;
@@ -345,14 +347,15 @@ public class GameData {
 					state = Question.QuestionState.INCORRECT;
 					break;
 				default:
-					System.err.printf("Could not parse question state `%s`%n", lines.get(2));
+					System.err.printf("Could not parse question state `%s`%n", lines.get(3));
 					System.exit(1);
 			}
 
 			return new Question(
 				Integer.parseInt(value),
-				lines.get(0),
 				lines.get(1),
+				lines.get(0),
+				lines.get(2),
 				state
 			);
 		}
@@ -387,10 +390,11 @@ public class GameData {
 		 * Write a question into the category provided
 		 */
 		public void writeQuestion(String categoryName, Question question) throws IOException {
-			write(".categories[$CATEGORY_NAME] += { ($VALUE): { \"question\": $QUESTION, \"answer\": $ANSWER, \"completed\": $COMPLETED }}", new String[]{
+			write(".categories[$CATEGORY_NAME] += { ($VALUE): { \"question\": $QUESTION, \"prompt\": $PROMPT, \"answer\": $ANSWER, \"completed\": $COMPLETED }}", new String[]{
 					"--arg", "CATEGORY_NAME", categoryName,
 					"--arg", "VALUE", Integer.toString(question.value()),
 					"--arg", "QUESTION", question.question(),
+					"--arg", "PROMPT", question.prompt(),
 					"--arg", "ANSWER", question.answer(),
 					"--arg", "COMPLETED", question.state().toString(),
 			});

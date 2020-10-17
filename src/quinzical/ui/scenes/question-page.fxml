@@ -38,7 +38,18 @@
                   </Separator>
                </children>
             </VBox>
-            <HBox prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
+            <Label fx:id="prompt" text="What is" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
+            </Label>
+            <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
                   <TextField fx:id="guess" maxWidth="Infinity" onAction="#answerSubmitted" promptText="Answer..." style="-fx-background-color: #4a4a4f; -fx-text-fill: white;" HBox.hgrow="ALWAYS">
                      <font>

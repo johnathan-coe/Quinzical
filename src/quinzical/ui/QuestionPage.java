@@ -35,6 +35,7 @@ public abstract class QuestionPage {
 	@FXML protected VBox practiceContainer;
 	@FXML protected TextField guess;
 	@FXML protected Label timerLabel;
+	@FXML protected Label prompt;
 
 	public QuestionPage(Game game, Stage stage, Festival festival, SelectPage selectPage) throws IOException {
 		this.game = game;
@@ -62,6 +63,7 @@ public abstract class QuestionPage {
 		// Now deal with question
 		this.question = question;
 		questionText.setText(capitalise(question.question()));
+		prompt.setText(capitalise(question.prompt()));
 		guess.setText("");
 		stage.setScene(scene);
 		festival.say(question.question());

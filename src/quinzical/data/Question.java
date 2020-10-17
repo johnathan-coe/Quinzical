@@ -5,13 +5,15 @@ package quinzical.data;
  */
 public class Question implements Comparable<Question> {
 	private final int value;
+	private final String prompt;
 	private final String question;
 	private final String answer;
 	private final String[] answers;
 	private QuestionState completed;
 
-	public Question(int value, String question, String answer, QuestionState completed) {
+	public Question(int value, String prompt, String question, String answer, QuestionState completed) {
 		this.value = value;
+		this.prompt = prompt;
 		this.question = question.toLowerCase();
 		this.answer = answer.toLowerCase();
 		// List of acceptable answer strings
@@ -41,6 +43,8 @@ public class Question implements Comparable<Question> {
 
 	public int value() { return value; }
 
+	public String prompt() { return prompt; }
+	
 	public String question() { return question; }
 
 	public String answer() { return answer; }

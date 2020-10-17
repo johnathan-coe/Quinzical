@@ -13,7 +13,7 @@ import java.util.Set;
  * Parses all the category files in the categories folder
  */
 public class CategoryParser {
-	private final Map<String, Map<String, String>> categories = new HashMap<>();
+	private final Map<String, Map<String, String[]>> categories = new HashMap<>();
 
 	/**
 	 * This is a debug function to ensure that the files are being parsed correctly
@@ -22,10 +22,10 @@ public class CategoryParser {
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		CategoryParser parser = CategoryParser.loadBlocking();
-		for (Map.Entry<String, Map<String, String>> c: parser.categories.entrySet()) {
+		for (Map.Entry<String, Map<String, String[]>> c: parser.categories.entrySet()) {
 			System.out.println(c.getKey()+":");
-			for (Map.Entry<String, String> q: c.getValue().entrySet()) {
-				System.out.println("  "+q.getKey()+"=>"+q.getValue());
+			for (Map.Entry<String, String[]> q: c.getValue().entrySet()) {
+				System.out.println("  "+q.getKey()+"=>"+q.getValue()[1]);
 			}
 		}
 	}
@@ -59,17 +59,17 @@ public class CategoryParser {
 			Scanner scanner = new Scanner(file);
 			// Category name from filename
 			String categoryName = file.getName().split("\\.")[0];
-			Map<String, String> category = new HashMap<>();
+			Map<String, String[]> category = new HashMap<>();
 			while (scanner.hasNextLine()) {
 				String line = scanner.nextLine();
 				String[] lineSplit = line.split("\\|");
 				
-				// First string prior to | is the question
+				// question | prompt | answer
 				String question = lineSplit[0].strip();
-				// Last string is the answer
+				String prompt = lineSplit[1].strip();
 				String answer = lineSplit[2].strip();
 				
-				category.put(question, answer);
+				category.put(question, new String[] {prompt, answer});
 			}
 			parser.categories.put(categoryName, category);
 		}
@@ -88,7 +88,7 @@ public class CategoryParser {
 	/**
 	 * Get the questions and answers from a category
 	 */
-	public Map<String, String> getCategory(String category) {
+	public Map<String, String[]> getCategory(String category) {
 		return categories.get(category);
 	}
 }

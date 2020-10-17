@@ -64,13 +64,13 @@ public class PracticeSelectPage extends SelectPage {
 		Random rand = new Random();
 	
 		// Get all questions in the category
-		Map<String, String> questions = parser.getCategory(c);
+		Map<String, String[]> questions = parser.getCategory(c);
 		// Select a random question
 		Object[] qArray = questions.keySet().toArray();
 		String randomQ = (String) qArray[rand.nextInt(qArray.length)];
 		
 		// Create a question object
-		Question q = new Question(0, randomQ, questions.get(randomQ), Question.QuestionState.UNATTEMPTED);
+		Question q = new Question(0, questions.get(randomQ)[0], randomQ, questions.get(randomQ)[1], Question.QuestionState.UNATTEMPTED);
 		
 		// Display
 		game.practiceQuestionPage().show(q, c);

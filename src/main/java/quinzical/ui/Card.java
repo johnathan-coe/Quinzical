@@ -1,8 +1,7 @@
 package quinzical.ui;
 
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Path;
+import java.net.URL;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -24,11 +23,17 @@ public class Card {
 		category_name.setText(title);
 		
 		// Set pane background to an image
-		String imageUrl = String.format("./res/images/%s.jpg", title.replace(" ", "_"));
-		String styleString = String.format("-fx-background-image: url('file:%s');", imageUrl);
-		if (!Files.exists(Path.of(imageUrl))) {
+		String imageUrl = String.format("/images/%s.jpg", title.replace(" ", "_"));
+		URL url = getClass().getResource(imageUrl);
+		
+		String styleString;
+		if (url == null) {
+			// Grey background if an image is not found
 			styleString = "-fx-background-color: grey;";
+		} else {
+			styleString = String.format("-fx-background-image: url('%s');", url.toExternalForm());
 		}
+		
 		questions.setStyle(styleString + "-fx-background-size: cover;");
 	}
 	

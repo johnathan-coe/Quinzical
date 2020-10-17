@@ -17,7 +17,7 @@ public class Card {
 	
 	Card(String title) throws IOException {
 		// Pull layout from file
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/question-card.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question-card.fxml"));
 		loader.setController(this);
 		pane = loader.load();
 

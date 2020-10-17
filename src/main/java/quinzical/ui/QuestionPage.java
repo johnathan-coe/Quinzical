@@ -42,7 +42,7 @@ public abstract class QuestionPage {
 		this.stage = stage;
 		this.festival = festival;
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/question-page.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question-page.fxml"));
 		loader.setController(this);
 		pane = loader.load();
  

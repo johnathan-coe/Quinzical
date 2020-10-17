@@ -24,7 +24,7 @@ public class RewardsPage {
 		this.game = game;
 		this.stage = stage;
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/rewards.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rewards.fxml"));
 		loader.setController(this);
 		Pane pane = loader.load();
 		scene = new Scene(pane);

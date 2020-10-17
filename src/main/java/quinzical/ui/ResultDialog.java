@@ -29,7 +29,7 @@ public class ResultDialog {
 		this.stage = stage;
 		this.selectPage = selectPage;
 		this.festival = festival;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/result.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/result.fxml"));
 		loader.setController(this);
 		Pane pane = loader.load();
 		scene = new Scene(pane);

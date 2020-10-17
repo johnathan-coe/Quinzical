@@ -28,7 +28,7 @@ public class SettingsPage implements GameDataListener {
 		this.game = game;
 		this.stage = stage;
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/settings.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/settings.fxml"));
 		loader.setController(this);
 		Pane pane = loader.load();
 		scene = new Scene(pane);

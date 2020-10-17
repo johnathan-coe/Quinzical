@@ -5,8 +5,8 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Quinzical</name>
   <properties>
-   <maven.compiler.source>11</maven.compiler.source>
-   <maven.compiler.target>11</maven.compiler.target>
+   <maven.compiler.source>11.0.1</maven.compiler.source>
+   <maven.compiler.target>11.0.1</maven.compiler.target>
   </properties>
   <dependencies>
   	<dependency>
@@ -17,12 +17,12 @@
   	<dependency>
 	    <groupId>org.openjfx</groupId>
 	    <artifactId>javafx-controls</artifactId>
-	    <version>11</version>
+	    <version>11.0.1</version>
     </dependency>
     <dependency>
 	    <groupId>org.openjfx</groupId>
 	    <artifactId>javafx-fxml</artifactId>
-	    <version>11</version>
+	    <version>11.0.1</version>
     </dependency>
   </dependencies>
   <build>

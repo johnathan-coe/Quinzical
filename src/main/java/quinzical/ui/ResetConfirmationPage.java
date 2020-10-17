@@ -19,7 +19,7 @@ public class ResetConfirmationPage {
 	private Game game;
 
 	public ResetConfirmationPage(Stage stage, Game game, StartPage startScene) throws IOException {
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/reset-confirmation.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reset-confirmation.fxml"));
 		loader.setController(this);
 		Pane pane = loader.load();
 		scene = new Scene(pane);

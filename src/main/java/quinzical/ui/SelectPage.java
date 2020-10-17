@@ -25,7 +25,7 @@ public abstract class SelectPage implements GameDataListener {
 		this.stage = stage;
 		this.game = game;
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/select.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/select.fxml"));
 		loader.setController(this);
 		Pane pane = loader.load();
 		scene = new Scene(pane);

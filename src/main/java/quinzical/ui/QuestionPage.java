@@ -13,6 +13,7 @@ import quinzical.data.Question;
 import quinzical.festival.Festival;
 
 import java.io.IOException;
+import java.net.URL;
 import java.nio.file.Files;
 import java.nio.file.Path;
 
@@ -52,11 +53,17 @@ public abstract class QuestionPage {
 
 	public void show(Question question, String cat) {
 		// Set pane background to an image
-		String imageUrl = String.format("./res/images/%s.jpg", cat.replace(" ", "_"));
-		String styleString = String.format("-fx-background-image: url('file:%s');", imageUrl);
-		if (!Files.exists(Path.of(imageUrl))) {
+		String imageUrl = String.format("/images/%s.jpg", cat.replace(" ", "_"));
+		URL url = getClass().getResource(imageUrl);
+		
+		String styleString;
+		if (url == null) {
+			// Grey background if an image is not found
 			styleString = "-fx-background-color: grey;";
+		} else {
+			styleString = String.format("-fx-background-image: url('%s');", url.toExternalForm());
 		}
+		
 		pane.setStyle(styleString + "-fx-background-size: cover;");
 		
 		

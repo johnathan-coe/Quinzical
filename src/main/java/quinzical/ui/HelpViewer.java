@@ -21,6 +21,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * Viewer for Markdown documentation from within the app
@@ -97,8 +98,10 @@ public class HelpViewer {
 
 		// Display help
 		view.getEngine().loadContent(rendered);
+		
 		// Style content
-		view.getEngine().setUserStyleSheetLocation("file:res/css/markdown.css");
+		URL url = getClass().getResource("/css/markdown.css");
+		view.getEngine().setUserStyleSheetLocation(url.toExternalForm());
 	}
 	
 	// Visits all images and corrects their path

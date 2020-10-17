@@ -20,4 +20,4 @@ if [[ ! -d "$JAVAFX_PATH" ]]; then
   exit 1
 fi
 
-java --module-path $JAVAFX_PATH --add-modules javafx.controls,javafx.media,javafx.base,javafx.fxml -jar $JAR
+java --module-path $JAVAFX_PATH --add-modules javafx.controls,javafx.media,javafx.base,javafx.fxml,javafx.web -jar $JAR

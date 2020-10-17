@@ -54,7 +54,7 @@ public class StartPage implements GameDataListener {
 	}
 
 	@FXML public void helpPressed() {
-		game.helpViewer().show("wiki/docs/usage.md", "");
+		game.helpViewer().show("./wiki/docs/usage.md", "Start Screen");
 	}
 	
 	@FXML public void settingsPressed() {

@@ -31,7 +31,7 @@ public class StartPage implements GameDataListener {
 		this.game = game;
 		this.stage = stage;
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("scenes/start.fxml"));
+		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/start.fxml"));
 		loader.setController(this);
 		Pane pane = loader.load();
 		scene = new Scene(pane);

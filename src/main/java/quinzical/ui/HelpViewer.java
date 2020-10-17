@@ -3,8 +3,6 @@ package quinzical.ui;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.web.WebView;
 import javafx.stage.Stage;
@@ -13,7 +11,6 @@ import quinzical.Game;
 import org.commonmark.node.Node;
 import org.commonmark.node.Text;
 import org.commonmark.node.AbstractVisitor;
-import org.commonmark.node.Block;
 import org.commonmark.node.Document;
 import org.commonmark.node.Heading;
 import org.commonmark.node.Image;
@@ -24,15 +21,11 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
-import java.util.Scanner;
 
 /**
  * The start screen that is the first screen users see
  */
 public class HelpViewer {
-	private final Game game;
-	private final Stage root;
 	private final Stage stage;
 	private final Scene scene;
 	private Parser parser;
@@ -41,8 +34,6 @@ public class HelpViewer {
 	@FXML private WebView view;
 
 	public HelpViewer(Game game, Stage root) throws IOException {
-		this.game = game;
-		this.root = root;
 		this.stage = new Stage();
 		this.renderer = HtmlRenderer.builder().build();
 		this.parser = Parser.builder().build();

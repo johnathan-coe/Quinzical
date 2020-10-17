@@ -32,6 +32,11 @@ public class ResetConfirmationPage {
 		stage.setScene(scene);
 	}
 
+	@FXML
+	private void helpPressed() {
+		game.helpViewer().show("./wiki/docs/usage.md", "Reset");
+	}
+	
 	@FXML public void onConfirm() {
 		game.data().reset();
 		startScene.show();

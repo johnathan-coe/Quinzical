@@ -5,8 +5,8 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Quinzical</name>
   <properties>
-   <maven.compiler.source>11.0.1</maven.compiler.source>
-   <maven.compiler.target>11.0.1</maven.compiler.target>
+   <maven.compiler.source>11</maven.compiler.source>
+   <maven.compiler.target>11</maven.compiler.target>
    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
   </properties>
   <dependencies>
@@ -34,13 +34,13 @@
   <build>
      <plugins>
        <plugin>
-        <groupId>org.openjfx</groupId>
-        <artifactId>javafx-maven-plugin</artifactId>
-        <version>0.0.1</version>
-        <configuration>
-            <mainClass>quinzical.Game</mainClass>
-        </configuration>
-        </plugin>
+		    <groupId>org.openjfx</groupId>
+		    <artifactId>javafx-maven-plugin</artifactId>
+		    <version>0.0.5</version>
+		    <configuration>
+		        <mainClass>quinzical.Game</mainClass>
+		    </configuration>
+		</plugin>
      </plugins>
   </build>
 </project>

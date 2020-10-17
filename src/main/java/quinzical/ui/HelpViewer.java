@@ -12,9 +12,11 @@ import quinzical.Game;
 
 import org.commonmark.node.Node;
 import org.commonmark.node.Text;
+import org.commonmark.node.AbstractVisitor;
 import org.commonmark.node.Block;
 import org.commonmark.node.Document;
 import org.commonmark.node.Heading;
+import org.commonmark.node.Image;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
@@ -22,6 +24,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 import java.util.Scanner;
 
 /**
@@ -89,13 +92,32 @@ public class HelpViewer {
 		} else {
 			// Otherwise go through nodes until we reach another heading or end of document
 			do {
-				Node old = n;
+				Node curr = n;
 				n = n.getNext();
-				excerpt.appendChild(old);
+				excerpt.appendChild(curr);
 			} while (!(n instanceof Heading) && n != null);
 		}
-						
+		
+		// Update paths for images
+		excerpt.accept(new ImagePathVisitor());
+					
+		// Render the excerpt
 		String rendered = renderer.render(excerpt);
+
 		view.getEngine().loadContent(rendered);
+		view.getEngine().setUserStyleSheetLocation("file:res/css/markdown.css");
+	}
+	
+	// Visits all images and corrects their path
+	private class ImagePathVisitor extends AbstractVisitor {
+	    @Override
+	    public void visit(Image img) {
+	    	// Correct path
+	        File f = new File("wiki/docs/" + img.getDestination());
+	        img.setDestination(f.toURI().toString());
+	        
+	        // Descend into children (could be omitted in this case because Text nodes don't have children).
+	        visitChildren(img);
+	    }
 	}
 }

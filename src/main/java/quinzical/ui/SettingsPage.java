@@ -46,6 +46,11 @@ public class SettingsPage implements GameDataListener {
 		speedValueLabel.setText(String.format("%.2fx", currentSpeed));
 		speedSlider.setValue(currentSpeed);
 	}
+	
+	@FXML
+	private void helpPressed() {
+		game.helpViewer().show("./wiki/docs/usage.md", "Settings");
+	}
 
 	@FXML private void backButtonPressed() {
 		game.startPage().show();

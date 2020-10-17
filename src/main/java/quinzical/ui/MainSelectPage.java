@@ -1,5 +1,6 @@
 package quinzical.ui;
 
+import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -45,6 +46,11 @@ public class MainSelectPage extends SelectPage {
 		container.getChildren().addAll(cards);
 	}
 
+	@FXML
+	private void helpPressed() {
+		game.helpViewer().show("./wiki/docs/usage.md", "Main Game");
+	}
+	
 	@Override
 	public void show() {
 		if (game.data().isAllDone()) {

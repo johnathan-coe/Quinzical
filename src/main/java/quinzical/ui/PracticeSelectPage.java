@@ -55,6 +55,11 @@ public class PracticeSelectPage extends SelectPage {
 		}
 	}
 	
+	@FXML
+	private void helpPressed() {
+		game.helpViewer().show("./wiki/docs/usage.md", "Practice Mode");
+	}
+	
 	/**
 	 * Display a randomly selected question from the chosen category
 	 *

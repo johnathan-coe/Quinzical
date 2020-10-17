@@ -36,6 +36,14 @@
             </ScrollPane>
             <ButtonBar prefHeight="40.0" prefWidth="200.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;">
               <buttons>
+                  <Button mnemonicParsing="false" onAction="#helpPressed" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Help">
+                     <font>
+                        <Font size="16.0" />
+                     </font>
+                     <padding>
+                        <Insets bottom="8.0" top="8.0" />
+                     </padding>
+                  </Button>
                 <Button mnemonicParsing="false" onAction="#backPressed" style="-fx-background-color: #ff0039; -fx-text-fill: white;" text="Back">
                      <font>
                         <Font size="16.0" />

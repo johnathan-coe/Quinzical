@@ -19,6 +19,7 @@ public class Game extends Application {
 	private QuestionPage questionPage;
 	private PracticeQuestionPage practiceQuestionPage;
 	private RewardsPage rewardsPage;
+	private HelpViewer helpViewer;
 	private SettingsPage settingsPage;
 	private Festival festival;
 
@@ -36,6 +37,7 @@ public class Game extends Application {
 		practiceSelectPage = new PracticeSelectPage(this, stage);
 		questionPage = new MainQuestionPage(this, stage, festival);
 		practiceQuestionPage = new PracticeQuestionPage(this, stage, festival);
+		helpViewer = new HelpViewer(this, stage);
 		rewardsPage = new RewardsPage(this, stage);
 		settingsPage = new SettingsPage(this, stage);
 
@@ -60,6 +62,8 @@ public class Game extends Application {
 	public QuestionPage questionPage() { return questionPage; }
 
 	public PracticeQuestionPage practiceQuestionPage() { return practiceQuestionPage; }
+	
+	public HelpViewer helpViewer() { return helpViewer; }
 	
 	public RewardsPage rewardsPage() { return rewardsPage; }
 

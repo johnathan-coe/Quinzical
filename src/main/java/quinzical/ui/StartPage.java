@@ -53,6 +53,10 @@ public class StartPage implements GameDataListener {
 		resetConfirmation.show();
 	}
 
+	@FXML public void helpPressed() {
+		game.helpViewer().show("wiki/docs/usage.md", "");
+	}
+	
 	@FXML public void settingsPressed() {
 		game.settingsPage().show();
 	}

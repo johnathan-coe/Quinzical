@@ -24,6 +24,11 @@
 	    <artifactId>javafx-fxml</artifactId>
 	    <version>11.0.1</version>
     </dependency>
+    <dependency>
+	    <groupId>org.openjfx</groupId>
+	    <artifactId>javafx-web</artifactId>
+	    <version>11.0.1</version>
+    </dependency>
   </dependencies>
   <build>
      <plugins>
@@ -35,18 +40,6 @@
             <mainClass>quinzical.Game</mainClass>
         </configuration>
         </plugin>
-        <!-- 
-     	<plugin>
-           <groupId>org.codehaus.mojo</groupId>
-           <artifactId>exec-maven-plugin</artifactId>
-           <version>1.2.1</version>
-           <configuration>
-               <mainClass>quinzical.Game</mainClass>
-               <arguments>
-                   <argument>argument1</argument>
-               </arguments>
-           </configuration>
-        </plugin>-->
      </plugins>
   </build>
 </project>

@@ -12,9 +12,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class MainSelectPage extends SelectPage {
+	private final MainCategorySelectPage categorySelectPage;
 
 	public MainSelectPage(Game game, Stage stage) throws IOException {
 		super(game, stage);
+		categorySelectPage = new MainCategorySelectPage(game, stage, this);
 	}
 
 	protected void refresh() {
@@ -53,6 +55,10 @@ public class MainSelectPage extends SelectPage {
 	
 	@Override
 	public void show() {
+		if (game.data().categories().isEmpty()) {
+			categorySelectPage.show();
+			return;
+		}
 		if (game.data().isAllDone()) {
 			game.rewardsPage().show();
 			return;

@@ -13,8 +13,11 @@ public class Card {
 	private final Pane pane;
 	@FXML private Label category_name;
 	@FXML private VBox questions;
+	protected String title;
 	
-	Card(String title) throws IOException {
+	public Card(String title) throws IOException {
+		this.title = title;
+
 		// Pull layout from file
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question-card.fxml"));
 		loader.setController(this);

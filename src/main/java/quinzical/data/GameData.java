@@ -251,7 +251,6 @@ public class GameData {
 	public void set(GameData data) {
 		this.score = data.score;
 		this.categories = data.categories;
-		System.out.println(this.categoryParser + " - " + data.categoryParser);
 		this.categoryParser = data.categoryParser;
 		this.loaded = data.loaded;
 		publish(GameDataChangedEvent.LOADED);

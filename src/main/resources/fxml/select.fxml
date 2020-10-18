@@ -26,7 +26,7 @@
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                </padding>
             </VBox>
-            <ScrollPane fitToHeight="true" hbarPolicy="NEVER" pannable="true" prefHeight="270.0" prefWidth="600.0" style="-fx-background: transparent;" styleClass="edge-to-edge" VBox.vgrow="ALWAYS">
+            <ScrollPane fitToHeight="true" pannable="true" prefHeight="300.0" prefWidth="600.0" style="-fx-background: transparent;" styleClass="edge-to-edge" VBox.vgrow="ALWAYS">
                <content>
                   <TilePane fx:id="container" hgap="10.0" orientation="VERTICAL" prefWidth="200.0" style="-fx-background-color: transparent;" vgap="10.0" />
                </content>

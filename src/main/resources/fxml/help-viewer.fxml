@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
-<?import javafx.scene.layout.VBox?>
 <?import javafx.scene.web.WebView?>
 
 <StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: linear-gradient(to bottom right, #6E6AEA, #B93423);;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox spacing="10.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;">
-         <StackPane.margin>
-            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-         </StackPane.margin>
-         <padding>
-            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
-         </padding>
+      <HBox style="-fx-background-color: #38383d; -fx-background-radius: 10;">
          <children>
             <WebView fx:id="view" prefHeight="500.0" prefWidth="875.0" />
          </children>
-      </VBox>
+         <padding>
+            <Insets bottom="15.0" left="15.0" right="15.0" top="15.0" />
+         </padding>
+      </HBox>
    </children>
+   <padding>
+      <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+   </padding>
 </StackPane>

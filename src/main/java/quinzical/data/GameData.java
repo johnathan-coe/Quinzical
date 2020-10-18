@@ -142,26 +142,26 @@ public class GameData {
 	private static GameData freshLoadBlocking() throws IOException {
 		GameData newData = new GameData();
 		CategoryParser parser = CategoryParser.loadBlocking();
-		List<String> categories = new ArrayList<>(parser.categories());
-		for (int j = 0; j < 5; j++) {
-			int categoryIndex = (int)(categories.size() * Math.random());
-			String categoryName = categories.get(categoryIndex);
-			Category category = new Category(categoryName);
-			Map<String, String[]> questionSet = parser.getCategory(categoryName);
-			List<String> questions = new ArrayList<>(questionSet.keySet());
-			for (int i = 100; i <= 500; i += 100) {
-				int index = (int) (Math.random() * questionSet.size());
-				String question = questions.get(index);
-				
-				String prompt = questionSet.get(question)[0];
-				String answer = questionSet.get(question)[1];
-				category.addQuestion(new Question(i, prompt, question, answer, Question.QuestionState.UNATTEMPTED));
-				questionSet.remove(question);
-				questions.remove(question);
-			}
-			newData.categories().add(category);
-			categories.remove(categoryIndex);
-		}
+//		List<String> categories = new ArrayList<>(parser.categories());
+//		for (int j = 0; j < 5; j++) {
+//			int categoryIndex = (int)(categories.size() * Math.random());
+//			String categoryName = categories.get(categoryIndex);
+//			Category category = new Category(categoryName);
+//			Map<String, String[]> questionSet = parser.getCategory(categoryName);
+//			List<String> questions = new ArrayList<>(questionSet.keySet());
+//			for (int i = 100; i <= 500; i += 100) {
+//				int index = (int) (Math.random() * questionSet.size());
+//				String question = questions.get(index);
+//
+//				String prompt = questionSet.get(question)[0];
+//				String answer = questionSet.get(question)[1];
+//				category.addQuestion(new Question(i, prompt, question, answer, Question.QuestionState.UNATTEMPTED));
+//				questionSet.remove(question);
+//				questions.remove(question);
+//			}
+//			newData.categories().add(category);
+//			categories.remove(categoryIndex);
+//		}
 		newData.categoryParser = parser;
 		newData.loaded = true;
 		return newData;
@@ -251,6 +251,7 @@ public class GameData {
 	public void set(GameData data) {
 		this.score = data.score;
 		this.categories = data.categories;
+		System.out.println(this.categoryParser + " - " + data.categoryParser);
 		this.categoryParser = data.categoryParser;
 		this.loaded = data.loaded;
 		publish(GameDataChangedEvent.LOADED);

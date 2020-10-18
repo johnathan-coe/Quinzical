@@ -80,7 +80,21 @@ public class StartPage implements GameDataListener {
 	}
 
 	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
-		refresh();
+		switch (event) {
+			case LOADED -> {
+				playButton.setDisable(false);
+				practiceButton.setDisable(false);
+				resetButton.setDisable(false);
+				refresh();
+			}
+			case LOADING -> {
+				playButton.setDisable(true);
+				practiceButton.setDisable(true);
+				resetButton.setDisable(true);
+			}
+			default -> refresh();
+		}
+
 	}
 
 	public void show() {

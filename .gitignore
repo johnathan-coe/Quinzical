@@ -4,6 +4,7 @@
 # Gradle
 .gradle/
 target/
+dependency-reduced-pom.xml
 
 # Log file
 *.log

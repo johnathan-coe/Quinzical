@@ -1,2 +1,2 @@
-mvn clean compile assembly:single
-cp target/*.jar quinzical.jar
+mvn clean package
+cp target/quinzical-0.0.1.jar quinzical.jar

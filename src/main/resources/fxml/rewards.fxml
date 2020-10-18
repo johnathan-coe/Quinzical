@@ -20,7 +20,19 @@
                <font>
                   <Font size="16.0" />
                </font>
+               <VBox.margin>
+                  <Insets bottom="10.0" />
+               </VBox.margin>
             </Label>
+            <Label text="Top Scores:" textFill="WHITE">
+               <font>
+                  <Font size="16.0" />
+               </font>
+               <padding>
+                  <Insets bottom="5.0" />
+               </padding>
+            </Label>
+            <VBox fx:id="leaderList" prefWidth="100.0" />
             <HBox alignment="TOP_RIGHT">
                <children>
                   <Button mnemonicParsing="false" onAction="#onMainMenuPressed" prefHeight="34.0" prefWidth="132.0" style="-fx-background-color: #0060df; -fx-text-fill: white;" text="Main Menu">

@@ -5,6 +5,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import quinzical.Game;
 
@@ -19,6 +20,7 @@ public class RewardsPage {
 	private final Scene scene;
 
 	@FXML private Label winningsLabel;
+	@FXML private VBox leaderList;
 
 	public RewardsPage(Game game, Stage stage) throws IOException {
 		this.game = game;
@@ -32,7 +34,23 @@ public class RewardsPage {
 
 	public void show() {
 		winningsLabel.setText(String.format("You've earned $%d", game.data().score()));
+		
+		// Add score to the leaderboard
+		game.data().leaders().add(game.data().score());
+		
+		// Clear old scores
+		leaderList.getChildren().clear();
+		
+		// Populate with new ones
+		for (int i : game.data().leaders().leaders()) {
+			Label score = new Label("$" + Integer.toString(i));
+			score.setStyle("-fx-text-fill: white;");
+			leaderList.getChildren().add(score);
+		}
+		
+		// Reset the game
 		game.data().reset();
+		
 		stage.setScene(scene);
 	}
 

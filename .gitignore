@@ -41,6 +41,8 @@ out/
 save.json
 # Settings file
 settings.json
+# Leaderboard
+leaders.json
 
 # Johnathan's testing file
 test.sh

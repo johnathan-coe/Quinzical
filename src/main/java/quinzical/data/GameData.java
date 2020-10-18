@@ -36,6 +36,10 @@ public class GameData {
 	 * The settings for the game.
 	 */
 	private static Settings settings;
+	/**
+	 * Leaderboard
+	 */
+	private static Leaderboard leaders;
 
 	/**
 	 * You should be using {@link #load()} to create your GameData objects
@@ -57,6 +61,7 @@ public class GameData {
 					public void run() {
 						try {
 							settings = Settings.loadBlocking();
+							leaders = Leaderboard.loadBlocking();
 						} catch (IOException e) {
 							e.printStackTrace();
 						}
@@ -175,6 +180,7 @@ public class GameData {
 				System.out.println("Saving to `settings.json`");
 				try {
 					settings.save();
+					leaders.save();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
@@ -253,6 +259,7 @@ public class GameData {
 	public CategoryParser parser() { return categoryParser;	}
 
 	public Settings settings() { return settings;	}
+	public Leaderboard leaders() { return leaders;	}
 
 	/**
 	 * Returns whether the GameData is being loaded or not

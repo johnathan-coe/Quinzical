@@ -21,6 +21,7 @@ public class Game extends Application {
 	private RewardsPage rewardsPage;
 	private HelpViewer helpViewer;
 	private SettingsPage settingsPage;
+	private Leaderboard leaderboard;
 	private Festival festival;
 
 	public static void main(String[] args) {
@@ -40,6 +41,8 @@ public class Game extends Application {
 		helpViewer = new HelpViewer(this, stage);
 		rewardsPage = new RewardsPage(this, stage);
 		settingsPage = new SettingsPage(this, stage);
+		leaderboard = new Leaderboard(this, stage);
+		
 
 		startPage.show();
 		stage.show();
@@ -68,6 +71,8 @@ public class Game extends Application {
 	public RewardsPage rewardsPage() { return rewardsPage; }
 
 	public SettingsPage settingsPage() { return settingsPage; }
+	
+	public Leaderboard leaderboard() { return leaderboard; }
 
 	public Festival festival() { return festival; }
 }

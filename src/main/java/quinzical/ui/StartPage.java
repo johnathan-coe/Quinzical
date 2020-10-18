@@ -60,6 +60,10 @@ public class StartPage implements GameDataListener {
 	@FXML public void settingsPressed() {
 		game.settingsPage().show();
 	}
+	
+	@FXML public void leaderboardPressed() {
+		game.leaderboard().show();
+	}
 
 	public void refresh() {
 		String message;

@@ -11,7 +11,7 @@
    <children>
       <VBox prefWidth="100.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;">
          <children>
-            <Label style="-fx-text-fill: white;" text="Game Over!">
+            <Label fx:id="title" style="-fx-text-fill: white;" text="Leaderboard">
                <font>
                   <Font size="25.0" />
                </font>

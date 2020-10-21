@@ -2,7 +2,6 @@ package quinzical.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.layout.Pane;
@@ -14,18 +13,14 @@ import quinzical.festival.Festival;
 
 import java.io.IOException;
 import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
 
 /**
  * The page that asks the user the question
  *
  * Is also in charge of handling what happens if they get it right or wrong.
  */
-public abstract class QuestionPage {
+public abstract class QuestionPage extends Page {
 	protected Game game;
-	private Stage stage;
-	private Scene scene;
 	protected Festival festival;
 	private Pane pane;
 	
@@ -39,16 +34,13 @@ public abstract class QuestionPage {
 	@FXML protected Label prompt;
 
 	public QuestionPage(Game game, Stage stage, Festival festival, SelectPage selectPage) throws IOException {
-		this.game = game;
-		this.stage = stage;
-		this.festival = festival;
+		super(game, stage);
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question-page.fxml"));
 		loader.setController(this);
-		pane = loader.load();
+		root = loader.load();
  
-		scene = new Scene(pane);
-		dialog = new ResultDialog(stage, selectPage, festival);
+		dialog = new ResultDialog(game, stage, selectPage, festival);
 	}
 
 	public void show(Question question, String cat) {
@@ -72,8 +64,9 @@ public abstract class QuestionPage {
 		questionText.setText(capitalise(question.question()));
 		prompt.setText(capitalise(question.prompt()));
 		guess.setText("");
-		stage.setScene(scene);
 		festival.say(question.question());
+
+		super.show();
 	}
 
 	/**

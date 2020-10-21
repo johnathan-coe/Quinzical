@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import quinzical.Game;
 import quinzical.data.Question;
 import quinzical.festival.Festival;
 
@@ -16,23 +17,20 @@ import java.io.IOException;
  *
  * This screen can represent a correct or incorrect answer
  */
-public class ResultDialog {
-	private Scene scene;
-	private Stage stage;
+public class ResultDialog extends Page {
 	private SelectPage selectPage;
 	private Festival festival;
 
 	@FXML private Label outcome;
 	@FXML private Label consequence;
 
-	public ResultDialog(Stage stage, SelectPage selectPage, Festival festival) throws IOException {
-		this.stage = stage;
+	public ResultDialog(Game game, Stage stage, SelectPage selectPage, Festival festival) throws IOException {
+		super(game, stage);
 		this.selectPage = selectPage;
 		this.festival = festival;
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/result.fxml"));
 		loader.setController(this);
-		Pane pane = loader.load();
-		scene = new Scene(pane);
+		root = loader.load();
 	}
 
 	public void show(Question q) {
@@ -53,8 +51,9 @@ public class ResultDialog {
 					: String.format("The correct answer was '%s'.", capitalise(q.answer())));
 		}
 		
-		stage.setScene(scene);
 		festival.say(message);
+
+		show();
 	}
 
 	@FXML public void okPressed() {

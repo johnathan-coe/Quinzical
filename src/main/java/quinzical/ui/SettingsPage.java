@@ -13,11 +13,7 @@ import quinzical.data.GameDataListener;
 
 import java.io.IOException;
 
-public class SettingsPage implements GameDataListener {
-	private final Game game;
-	private final Stage stage;
-	private final Scene scene;
-
+public class SettingsPage extends Page implements GameDataListener {
 	private float currentSpeed = 1;
 
 	@FXML private Slider speedSlider;
@@ -25,21 +21,15 @@ public class SettingsPage implements GameDataListener {
 	@FXML private Label speedLabel;
 
 	public SettingsPage(Game game, Stage stage) throws IOException {
-		this.game = game;
-		this.stage = stage;
+		super(game, stage);
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/settings.fxml"));
 		loader.setController(this);
-		Pane pane = loader.load();
-		scene = new Scene(pane);
+		root = loader.load();
 
 		game.data().addListener(this);
 		refresh();
 		speedLabel.setText(String.format("Set Speed (Default %.2fx)", 1.0));
-	}
-
-	public void show() {
-		stage.setScene(scene);
 	}
 
 	private void refresh() {

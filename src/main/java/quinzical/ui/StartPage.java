@@ -5,7 +5,6 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.GameData;
@@ -16,10 +15,7 @@ import java.io.IOException;
 /**
  * The start screen that is the first screen users see
  */
-public class StartPage implements GameDataListener {
-	private final Game game;
-	private final Stage stage;
-	private final Scene scene;
+public class StartPage extends Page implements GameDataListener {
 	private final ResetConfirmationPage resetConfirmation;
 
 	@FXML private Label currentScoreLabel;
@@ -28,17 +24,17 @@ public class StartPage implements GameDataListener {
 	@FXML private Button resetButton;
 
 	public StartPage(Game game, Stage stage) throws IOException {
-		this.game = game;
-		this.stage = stage;
+		super(game, stage);
 
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/start.fxml"));
 		loader.setController(this);
-		Pane pane = loader.load();
-		scene = new Scene(pane);
+		root = loader.load();
 		game.data().addListener(this);
 		refresh();
 
 		resetConfirmation = new ResetConfirmationPage(stage, game, this);
+
+		stage.setScene(new Scene(root));
 	}
 
 	@FXML public void playPressed() {
@@ -95,9 +91,5 @@ public class StartPage implements GameDataListener {
 			default -> refresh();
 		}
 
-	}
-
-	public void show() {
-		stage.setScene(scene);
 	}
 }

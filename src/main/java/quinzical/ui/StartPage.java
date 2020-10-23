@@ -66,30 +66,18 @@ public class StartPage extends Page implements GameDataListener {
 		if (game.data().isLoading()) {
 			message = "Loading save file...";
 			playButton.setDisable(true);
+			practiceButton.setDisable(true);
 			resetButton.setDisable(true);
 		} else {
 			message = String.format("You currently have $%d", game.data().score());
 			playButton.setDisable(false);
+			practiceButton.setDisable(false);
 			resetButton.setDisable(false);
 		}
 		currentScoreLabel.setText(message);
 	}
 
 	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
-		switch (event) {
-			case LOADED -> {
-				playButton.setDisable(false);
-				practiceButton.setDisable(false);
-				resetButton.setDisable(false);
-				refresh();
-			}
-			case LOADING -> {
-				playButton.setDisable(true);
-				practiceButton.setDisable(true);
-				resetButton.setDisable(true);
-			}
-			default -> refresh();
-		}
-
+		refresh();
 	}
 }

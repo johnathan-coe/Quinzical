@@ -23,7 +23,6 @@ public class JService {
 	 * A function that accesses jservice.io to get 5 random questions for the international category.
 	 */
 	public static Category load() throws URISyntaxException, IOException, InterruptedException {
-		System.out.println("Loading");
 		// Create an http client
 		HttpClient client = HttpClient.newBuilder().build();
 		List<Question> questionList = new ArrayList<>();
@@ -34,7 +33,6 @@ public class JService {
 					.uri(new URI(String.format("http://jservice.io/api/random?count=%d", 5-questionList.size())))
 					.build();
 			HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
-			System.out.println(httpResponse.body());
 			ResponseReader response = new ResponseReader(httpResponse.body());
 			questionList.addAll(response.questions());
 		}

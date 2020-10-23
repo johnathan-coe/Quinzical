@@ -20,10 +20,8 @@ import java.net.URL;
  * Is also in charge of handling what happens if they get it right or wrong.
  */
 public abstract class QuestionPage extends Page {
-	protected Game game;
 	protected Festival festival;
-	private Pane pane;
-	
+
 	protected Question question;
 	protected ResultDialog dialog;
 
@@ -39,7 +37,8 @@ public abstract class QuestionPage extends Page {
 		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question-page.fxml"));
 		loader.setController(this);
 		root = loader.load();
- 
+		this.festival = festival;
+
 		dialog = new ResultDialog(game, stage, selectPage, festival);
 	}
 
@@ -56,7 +55,7 @@ public abstract class QuestionPage extends Page {
 			styleString = String.format("-fx-background-image: url('%s');", url.toExternalForm());
 		}
 		
-		pane.setStyle(styleString + "-fx-background-size: cover;");
+		root.setStyle(styleString + "-fx-background-size: cover;");
 		
 		
 		// Now deal with question
@@ -73,6 +72,9 @@ public abstract class QuestionPage extends Page {
 	 * Capitalise the first letter in a string
 	 */
 	private String capitalise(String input) {
+		if (input.isBlank()) { // No need to capitalise if the string is blank
+			return input;
+		}
 		return input.substring(0, 1).toUpperCase() +
 				input.substring(1);
 	}

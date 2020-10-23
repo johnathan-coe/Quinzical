@@ -23,6 +23,13 @@ public class JsonReader {
 	}
 
 	/**
+	 * Creates a new JsonReader that reads from a given string
+	 */
+	public JsonReader(String json) {
+		jsonString = json;
+	}
+
+	/**
 	 * Executes a `jq` process with the provided filter and extra arguments
 	 */
 	protected List<String> executeFilter(String filter, String[] extra) throws IOException {

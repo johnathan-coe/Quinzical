@@ -26,6 +26,12 @@ public class Category {
 
 	public Question getQuestion(int value) { return questions.get(value); }
 
+	public void addQuestions(List<Question> questions) {
+		for (Question q: questions) {
+			addQuestion(q);
+		}
+	}
+
 	public boolean isCompleted() {
 		for (Question question: questions()) {
 			if (!question.isCompleted()) {

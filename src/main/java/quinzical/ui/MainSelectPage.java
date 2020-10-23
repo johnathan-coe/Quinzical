@@ -34,7 +34,6 @@ public class MainSelectPage extends SelectPage {
 				System.err.println(e.toString());
 			}
 		}
-		cards.addAll(completed);
 
 		container.getChildren().clear();
 		if (cards.size() == 0) {
@@ -46,6 +45,19 @@ public class MainSelectPage extends SelectPage {
 			container.getChildren().add(label);
 		}
 		container.getChildren().addAll(cards);
+
+		Category internationalCategory = game.data().internationalCategory();
+		if (internationalCategory != null) {
+			try {
+				Card internationalCard = new CategoryCard(internationalCategory, game);
+				Pane pane = internationalCard.pane();
+				container.getChildren().add(pane);
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		container.getChildren().addAll(completed);
 	}
 
 	@FXML

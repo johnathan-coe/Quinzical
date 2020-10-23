@@ -4,6 +4,7 @@ import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.concurrent.WorkerStateEvent;
 import javafx.event.EventHandler;
+import quinzical.jservice.JService;
 
 import java.io.*;
 import java.util.*;
@@ -33,13 +34,17 @@ public class GameData {
 	 */
 	private CategoryParser categoryParser;
 	/**
-	 * The settings for the game.
+	 * The settings for the game
 	 */
 	private static Settings settings;
 	/**
 	 * Leaderboard
 	 */
 	private static Leaderboard leaders;
+	/**
+	 * The international category fetched from the internet
+	 */
+	private Category internationalCategory;
 
 	/**
 	 * You should be using {@link #load()} to create your GameData objects
@@ -84,16 +89,21 @@ public class GameData {
 								e.printStackTrace();
 							}
 						}
-					}); // We still need to learn the CategoryParser
+					}); // We still need to read the CategoryParser
 					categoryThread.start();
 					JsonReader reader = new JsonReader(file);
 					newDataTemp.score = reader.score();
 					List<String> categories = reader.categories();
+					Category internationalCategory = null;
 					for (String c: categories) {
 						Category category = new Category(c);
 						for (String question: reader.getAvailableQuestions(c)) {
 							Question q = reader.getQuestion(c, question);
 							category.addQuestion(q);
+						}
+						if (c.equals("International")) { // The international category doesn't go with the others
+							newDataTemp.internationalCategory = category;
+							continue;
 						}
 						newDataTemp.categories.add(category);
 					}
@@ -139,10 +149,25 @@ public class GameData {
 	 *
 	 * Note: This will _block_ the thread it is called in so you shouldn't run it in a UI thread.
 	 */
-	private static GameData freshLoadBlocking() throws IOException {
+	private static GameData freshLoadBlocking() throws IOException, InterruptedException {
 		GameData newData = new GameData();
-		CategoryParser parser = CategoryParser.loadBlocking();
-//		List<String> categories = new ArrayList<>(parser.categories());
+
+		// Load a category from the jservice api in another thread
+		final Category[] category = new Category[]{ null };
+		Thread jserviceThread = new Thread(new Runnable() {
+			@Override
+			public void run() {
+				try {
+					category[0] = JService.load();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+		jserviceThread.start();
+
+		// Load the categories
+		//		List<String> categories = new ArrayList<>(parser.categories());
 //		for (int j = 0; j < 5; j++) {
 //			int categoryIndex = (int)(categories.size() * Math.random());
 //			String categoryName = categories.get(categoryIndex);
@@ -162,7 +187,11 @@ public class GameData {
 //			newData.categories().add(category);
 //			categories.remove(categoryIndex);
 //		}
-		newData.categoryParser = parser;
+		newData.categoryParser = CategoryParser.loadBlocking();
+
+		jserviceThread.join();
+		newData.internationalCategory = category[0];
+
 		newData.loaded = true;
 		return newData;
 	}
@@ -189,7 +218,12 @@ public class GameData {
 		}).start();
 
 		JsonWriter writer = new JsonWriter(score);
-		for (Category category: categories) {
+		List<Category> categories_ = categories;
+		if (internationalCategory != null) { // Save the international category as well if it exists
+			categories_ = new ArrayList<>(categories_); // We need to make a new copy so that the original isn't edited
+			categories_.add(internationalCategory);
+		}
+		for (Category category: categories_) {
 			writer.writeCategory(category.name());
 			for (Question q: category.questions()) {
 				writer.writeQuestion(category.name(), q);
@@ -253,6 +287,7 @@ public class GameData {
 		this.categories = data.categories;
 		this.categoryParser = data.categoryParser;
 		this.loaded = data.loaded;
+		this.internationalCategory = data.internationalCategory;
 		publish(GameDataChangedEvent.LOADED);
 	}
 
@@ -292,6 +327,11 @@ public class GameData {
 	 * Gets a list of categories that have been loaded
 	 */
 	public List<Category> categories() { return categories; }
+
+	/**
+	 * Gets the international category
+	 */
+	public Category internationalCategory() { return internationalCategory; }
 
 	/**
 	 * A utility class to read the save file
@@ -344,18 +384,13 @@ public class GameData {
 
 			Question.QuestionState state = Question.QuestionState.UNATTEMPTED;
 			switch (lines.get(3)) {
-				case "UNATTEMPTED":
-					state = Question.QuestionState.UNATTEMPTED;
-					break;
-				case "CORRECT":
-					state = Question.QuestionState.CORRECT;
-					break;
-				case "INCORRECT":
-					state = Question.QuestionState.INCORRECT;
-					break;
-				default:
+				case "UNATTEMPTED" -> state = Question.QuestionState.UNATTEMPTED;
+				case "CORRECT" -> state = Question.QuestionState.CORRECT;
+				case "INCORRECT" -> state = Question.QuestionState.INCORRECT;
+				default -> {
 					System.err.printf("Could not parse question state `%s`%n", lines.get(3));
 					System.exit(1);
+				}
 			}
 
 			return new Question(

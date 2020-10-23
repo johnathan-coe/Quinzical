@@ -241,7 +241,7 @@ public class GameData {
 				}
 			}
 		}
-		return true;
+		return internationalCategory.isCompleted();
 	}
 
 	/**

@@ -39,6 +39,10 @@ public class JService {
 			questionList.addAll(response.questions());
 		}
 
+		for (int i = 0; i < questionList.size(); i++) { // Overwrite the values from JService with out own ones
+			questionList.get(i).setValue((i+1)*100);
+		}
+
 		Category category = new Category("International");
 		category.addQuestions(questionList);
 		return category;

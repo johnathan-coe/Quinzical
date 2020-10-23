@@ -4,7 +4,7 @@ package quinzical.data;
  * A data class that represents a question
  */
 public class Question implements Comparable<Question> {
-	private final int value;
+	private int value;
 	private final String prompt;
 	private final String question;
 	private final String answer;
@@ -43,6 +43,10 @@ public class Question implements Comparable<Question> {
 
 	public int value() { return value; }
 
+	public void setValue(int value) {
+		this.value = value;
+	}
+
 	public String prompt() { return prompt; }
 	
 	public String question() { return question; }
@@ -73,23 +77,16 @@ public class Question implements Comparable<Question> {
 
 		@Override
 		public String toString() {
-			switch (this) {
-				case UNATTEMPTED:
-					return "UNATTEMPTED";
-				case CORRECT:
-					return "CORRECT";
-				case INCORRECT:
-					return "INCORRECT";
-				default: // Impossible
-					return null;
-			}
+			return switch (this) {
+				case UNATTEMPTED -> "UNATTEMPTED";
+				case CORRECT -> "CORRECT";
+				case INCORRECT -> "INCORRECT";
+			};
 		}
 	}
 	
 	@Override
 	public int compareTo(Question q) {
-		if (value() == q.value()) { return 0; } 
-		else if (value() < q.value()) { return -1; }
-		else { return 1; }
+		return Integer.compare(value(), q.value());
 	}
 }

@@ -1,9 +1,10 @@
-package quinzical.ui.scenes;
+package quinzical.ui.scenes.main;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import quinzical.Game;
+import quinzical.ui.scenes.Leaderboard;
 
 import java.io.IOException;
 

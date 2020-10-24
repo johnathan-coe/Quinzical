@@ -1,10 +1,7 @@
 package quinzical.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.*;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.Question;
@@ -25,12 +22,9 @@ public class ResultDialog extends Page {
 	@FXML private Label consequence;
 
 	public ResultDialog(Game game, Stage stage, SelectPage selectPage, Festival festival) throws IOException {
-		super(game, stage);
+		super(game, stage, "/fxml/result.fxml");
 		this.selectPage = selectPage;
 		this.festival = festival;
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/result.fxml"));
-		loader.setController(this);
-		root = loader.load();
 	}
 
 	public void show(Question q) {

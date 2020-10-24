@@ -1,7 +1,6 @@
 package quinzical.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.stage.Stage;
 import quinzical.Game;
 
@@ -14,10 +13,7 @@ public class ResetConfirmationPage extends Page {
 	private StartPage startScene;
 
 	public ResetConfirmationPage(Stage stage, Game game, StartPage startScene) throws IOException {
-		super(game, stage);
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/reset-confirmation.fxml"));
-		loader.setController(this);
-		root = loader.load();
+		super(game, stage, "/fxml/reset-confirmation.fxml");
 		this.startScene = startScene;
 	}
 

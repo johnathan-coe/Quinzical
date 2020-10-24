@@ -1,7 +1,6 @@
 package quinzical.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -24,11 +23,8 @@ public class StartPage extends Page implements GameDataListener {
 	@FXML private Button resetButton;
 
 	public StartPage(Game game, Stage stage) throws IOException {
-		super(game, stage);
+		super(game, stage, "/fxml/start.fxml");
 
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/start.fxml"));
-		loader.setController(this);
-		root = loader.load();
 		game.data().addListener(this);
 		refresh();
 

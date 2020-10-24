@@ -1,7 +1,6 @@
 package quinzical.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -17,11 +16,7 @@ public class Leaderboard extends Page {
 	@FXML private VBox leaderList;
 
 	public Leaderboard(Game game, Stage stage) throws IOException {
-		super(game, stage);
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/rewards.fxml"));
-		loader.setController(this);
-		root = loader.load();
+		super(game, stage, "/fxml/rewards.fxml");
 	}
 
 	@Override

@@ -1,7 +1,6 @@
 package quinzical.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -19,13 +18,8 @@ public abstract class SelectPage extends Page implements GameDataListener {
 	@FXML protected Label score;
 
 	public SelectPage(Game game, Stage stage) throws IOException {
-		super(game, stage);
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/select.fxml"));
-		loader.setController(this);
-		root = loader.load();
+		super(game, stage, "/fxml/select.fxml");
 		game.data().addListener(this);
-
 		refresh();
 	}
 

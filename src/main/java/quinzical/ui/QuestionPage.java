@@ -1,10 +1,8 @@
 package quinzical.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import quinzical.Game;
@@ -32,13 +30,9 @@ public abstract class QuestionPage extends Page {
 	@FXML protected Label prompt;
 
 	public QuestionPage(Game game, Stage stage, Festival festival, SelectPage selectPage) throws IOException {
-		super(game, stage);
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/question-page.fxml"));
-		loader.setController(this);
-		root = loader.load();
+		super(game, stage, "/fxml/question-page.fxml");
+		
 		this.festival = festival;
-
 		dialog = new ResultDialog(game, stage, selectPage, festival);
 	}
 

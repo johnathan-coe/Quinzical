@@ -1,11 +1,8 @@
 package quinzical.ui;
 
 import javafx.fxml.FXML;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.Slider;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.GameData;
@@ -21,11 +18,7 @@ public class SettingsPage extends Page implements GameDataListener {
 	@FXML private Label speedLabel;
 
 	public SettingsPage(Game game, Stage stage) throws IOException {
-		super(game, stage);
-
-		FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/settings.fxml"));
-		loader.setController(this);
-		root = loader.load();
+		super(game, stage, "/fxml/settings.fxml");
 
 		game.data().addListener(this);
 		refresh();

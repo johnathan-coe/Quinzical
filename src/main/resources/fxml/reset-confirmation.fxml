@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<VBox alignment="CENTER_LEFT" prefHeight="389.0" prefWidth="700.0" style="-fx-background-color: linear-gradient(to bottom right, #6E6AEA, #B93423);" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER_LEFT" prefHeight="389.0" prefWidth="700.0" styleClass="background" stylesheets="@../css/ui.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefWidth="100.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;">
+      <VBox prefWidth="100.0" styleClass="body">
          <children>
             <Label style="-fx-text-fill: white;" text="Are you sure you want to reset?">
                <font>
@@ -23,7 +23,7 @@
             </Label>
             <HBox prefWidth="200.0" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#onConfirm" prefHeight="33.0" prefWidth="118.0" style="-fx-background-color: white;" text="Yes, I'm sure" wrapText="true">
+                  <Button mnemonicParsing="false" onAction="#onConfirm" prefHeight="33.0" prefWidth="118.0" styleClass="inverted-button" text="Yes, I'm sure" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -31,7 +31,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#onCancel" prefHeight="33.0" prefWidth="139.0" style="-fx-background-color: white;" text="No, let's go back" wrapText="true">
+                  <Button mnemonicParsing="false" onAction="#onCancel" prefHeight="33.0" prefWidth="139.0" styleClass="inverted-button" text="No, let's go back" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -39,7 +39,7 @@
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#helpPressed" prefHeight="33.0" style="-fx-background-color: transparent; -fx-text-fill: white;" text="Help" wrapText="true">
+                  <Button mnemonicParsing="false" onAction="#helpPressed" prefHeight="33.0" styleClass="normal-button" text="Help" wrapText="true">
                      <font>
                         <Font size="14.0" />
                      </font>

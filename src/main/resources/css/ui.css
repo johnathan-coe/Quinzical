@@ -1,0 +1,40 @@
+/*
+    The gradient background of the app
+ */
+.background {
+    -fx-background-color:  linear-gradient(to bottom right, #6E6AEA, #B93423);
+}
+
+.body {
+    -fx-background-color: #38383d;
+    -fx-background-radius: 10;
+}
+
+/*
+    A normal button with white text and no background
+ */
+.normal-button {
+    -fx-text-fill: white;
+    -fx-background-color: none;
+}
+
+/*
+    A button with black text and white background
+ */
+.inverted-button {
+    -fx-background-color: white;
+}
+
+/**
+    Turns a button blue
+ */
+.normal-button.primary {
+    -fx-background-color: #0060df;
+}
+
+/**
+    Turns a button red
+ */
+.normal-button.danger {
+    -fx-background-color: #ff0039;
+}

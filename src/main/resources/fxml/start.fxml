@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="600.0" style="-fx-background-color: linear-gradient(to bottom right, #6E6AEA, #B93423);;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="735.0" prefWidth="600.0" styleClass="background" stylesheets="@../css/ui.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;">
+      <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="body">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
@@ -30,32 +30,32 @@
             </VBox>
             <VBox maxHeight="400.0" prefHeight="200.0" prefWidth="600.0" spacing="10.0" VBox.vgrow="NEVER">
                <children>
-                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#playPressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Play">
+                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#playPressed" styleClass="normal-button" text="Play">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="practiceButton" mnemonicParsing="false" onAction="#practicePressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Practice">
+                  <Button fx:id="practiceButton" mnemonicParsing="false" onAction="#practicePressed" styleClass="normal-button" text="Practice">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="practiceButton1" mnemonicParsing="false" onAction="#leaderboardPressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Leaderboard">
+                  <Button fx:id="practiceButton1" mnemonicParsing="false" onAction="#leaderboardPressed" styleClass="normal-button" text="Leaderboard">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Reset">
+                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPressed" styleClass="normal-button" text="Reset">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#settingsPressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Settings">
+                  <Button mnemonicParsing="false" onAction="#settingsPressed" styleClass="normal-button" text="Settings">
                      <font>
                         <Font size="20.0" />
                      </font>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#helpPressed" style="-fx-background-color: none; -fx-text-fill: white;" text="Help">
+                  <Button mnemonicParsing="false" onAction="#helpPressed" styleClass="normal-button" text="Help">
                      <font>
                         <Font size="20.0" />
                      </font>

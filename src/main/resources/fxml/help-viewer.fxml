@@ -5,9 +5,9 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.web.WebView?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" style="-fx-background-color: linear-gradient(to bottom right, #6E6AEA, #B93423);;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" styleClass="background" stylesheets="@../css/ui.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <HBox style="-fx-background-color: #38383d; -fx-background-radius: 10;">
+      <HBox styleClass="body">
          <children>
             <WebView fx:id="view" prefHeight="500.0" prefWidth="875.0" />
          </children>

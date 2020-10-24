@@ -6,9 +6,9 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<Pane prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<Pane prefWidth="200.0" stylesheets="@../css/ui.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
-      <VBox alignment="TOP_CENTER" prefWidth="200.0" style="-fx-background-color: #38383d; -fx-background-radius: 10;">
+      <VBox alignment="TOP_CENTER" prefWidth="200.0" styleClass="body">
          <children>
             <Label fx:id="category_name" style="-fx-background-color: #38383daa; -fx-text-fill: white; -fx-padding: 5;" text="QUESTION">
                <font>

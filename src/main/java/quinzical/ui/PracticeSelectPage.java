@@ -30,6 +30,8 @@ public class PracticeSelectPage extends SelectPage {
 		
 		// Alter the default text
 		header.setText("Select a category");
+		score.setText("Click on any category for a random question...");
+		score.setStyle("-fx-text-fill: white; -fx-font-size: 15;");
 	}
 	
 	/**

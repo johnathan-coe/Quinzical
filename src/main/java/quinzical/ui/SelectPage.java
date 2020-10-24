@@ -2,7 +2,6 @@ package quinzical.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
@@ -46,8 +45,6 @@ public abstract class SelectPage extends Page implements GameDataListener {
 	@Override
 	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
 		if (event == GameData.GameDataChangedEvent.LOADED) { // Only refresh if a whole new game has been loaded
-			// Set the score
-			score.setText("$" + game.data().score());
 			// Populate the categories
 			refresh();
 		}

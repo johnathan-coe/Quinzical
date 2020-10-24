@@ -9,7 +9,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import quinzical.Game;
 
-public class Page {
+public abstract class Page {
     protected Game game;
     protected Parent root;
     private Stage stage;

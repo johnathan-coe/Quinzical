@@ -1,6 +1,7 @@
 package quinzical;
 
 import javafx.application.Application;
+import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import quinzical.data.GameData;
 import quinzical.festival.Festival;
@@ -30,6 +31,11 @@ public class Game extends Application {
 
 	@Override
 	public void start(Stage stage) throws Exception {
+		// Load the font(s)
+		if (Font.loadFont(getClass().getResourceAsStream("/fonts/TurretRoad-Regular.ttf"), 25) == null) {
+			System.err.println("Fonts failed to load");
+		}
+
 		data = GameData.load();
 
 		festival = new Festival(this);

@@ -47,7 +47,13 @@ public class MainSelectPage extends SelectPage {
 		container.getChildren().addAll(cards);
 
 		Category internationalCategory = game.data().internationalCategory();
-		if (internationalCategory != null) {
+		int completedCount = 0;
+		for (Category category: game.data().categories()) {
+			if (category.isCompleted()) {
+				completedCount++;
+			}
+		}
+		if (internationalCategory != null && completedCount >= 2) {
 			try {
 				Card internationalCard = new CategoryCard(internationalCategory, game);
 				Pane pane = internationalCard.pane();

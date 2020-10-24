@@ -31,7 +31,9 @@ public class MainCategorySelectPage extends SelectPage {
 		this.mainSelectPage = mainSelectPage;
 
 		Button randomButton = new Button("Random");
-		bottomBar.getButtons().add(randomButton);
+		randomButton.getStyleClass().add("normal-button");
+		randomButton.setStyle("-fx-font-size: 16px");
+		bottomBar.getButtons().add(0, randomButton);
 		randomButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {

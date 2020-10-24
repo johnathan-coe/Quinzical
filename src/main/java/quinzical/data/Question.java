@@ -74,6 +74,14 @@ public class Question implements Comparable<Question> {
 		INCORRECT,
 		;
 
+		public static QuestionState parse(String text) {
+			switch (text) {
+				case "UNATTEMPTED" -> { return Question.QuestionState.UNATTEMPTED; }
+				case "CORRECT" -> { return Question.QuestionState.CORRECT; }
+				case "INCORRECT" -> { return Question.QuestionState.INCORRECT; }
+			}
+			return null;
+		}
 
 		@Override
 		public String toString() {

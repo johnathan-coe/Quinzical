@@ -15,10 +15,12 @@ public class RewardsPage extends Leaderboard {
 
 	@FXML private Label winningsLabel;
 	@FXML private Label title;
+	@FXML private Label trophyText;
 	
 	public RewardsPage(Game game, Stage stage) throws IOException {
 		super(game, stage);
 		title.setText("Game Over!");
+		trophyText.setText("Trophy Awarded");
 		this.game = game;
 	}
 

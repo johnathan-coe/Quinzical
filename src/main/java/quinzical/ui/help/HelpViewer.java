@@ -1,4 +1,4 @@
-package quinzical.ui;
+package quinzical.ui.help;
 
 import javafx.application.Platform;
 import javafx.beans.value.ChangeListener;

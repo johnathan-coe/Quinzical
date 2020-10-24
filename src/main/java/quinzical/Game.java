@@ -6,6 +6,8 @@ import javafx.stage.Stage;
 import quinzical.data.GameData;
 import quinzical.festival.Festival;
 import quinzical.ui.*;
+import quinzical.ui.main.*;
+import quinzical.ui.practice.*;
 
 /**
  * The main application class that will be run

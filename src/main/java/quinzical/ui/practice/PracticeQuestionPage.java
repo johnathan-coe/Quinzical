@@ -1,4 +1,4 @@
-package quinzical.ui;
+package quinzical.ui.practice;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -8,6 +8,7 @@ import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.Question;
 import quinzical.festival.Festival;
+import quinzical.ui.QuestionPage;
 
 import java.io.IOException;
 

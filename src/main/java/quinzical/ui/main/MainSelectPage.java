@@ -1,4 +1,4 @@
-package quinzical.ui;
+package quinzical.ui.main;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -6,6 +6,7 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.Category;
+import quinzical.ui.*;
 
 import java.io.IOException;
 import java.util.ArrayList;

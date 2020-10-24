@@ -58,3 +58,25 @@
 .header.incorrect {
     -fx-text-fill: #ee2121;
 }
+
+/**
+    Scrollbar Styling
+ */
+
+.scroll-bar:horizontal {
+    -fx-background-color: #38383d;
+    -fx-background-radius: 10;
+}
+
+.increment-button, .decrement-button {
+    -fx-background-color: transparent;
+    -fx-font-size: 20px;
+}
+
+.scroll-bar:horizontal .track {
+    -fx-background-color: #38383d;
+}
+
+.scroll-bar:horizontal .thumb {
+    -fx-background-color: white;
+}

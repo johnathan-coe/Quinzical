@@ -17,7 +17,7 @@
          <children>
             <VBox prefWidth="100.0" styleClass="body">
                <children>
-                  <Label fx:id="header" style="-fx-text-fill: white;" text="Select a Question from a Category">
+                  <Label fx:id="header" styleClass="header" text="Select a Question from a Category">
                      <font>
                         <Font size="25.0" />
                      </font>

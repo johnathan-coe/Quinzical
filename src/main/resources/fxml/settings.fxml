@@ -17,7 +17,7 @@
    <children>
       <VBox prefWidth="100.0" styleClass="body">
          <children>
-            <Label style="-fx-text-fill: white;" text="Settings">
+            <Label styleClass="header" text="Settings">
                <font>
                   <Font size="25.0" />
                </font>

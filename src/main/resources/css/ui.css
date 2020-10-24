@@ -38,3 +38,22 @@
 .normal-button.danger {
     -fx-background-color: #ff0039;
 }
+
+.header {
+    -fx-text-fill: white;
+    -fx-font-size: 25px;
+}
+
+/**
+    Turns a header green
+ */
+.header.correct {
+    -fx-text-fill: #35f523;
+}
+
+/**
+    Turns a header red
+ */
+.header.incorrect {
+    -fx-text-fill: #ee2121;
+}

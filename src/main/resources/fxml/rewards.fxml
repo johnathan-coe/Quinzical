@@ -12,7 +12,7 @@
    <children>
       <VBox prefWidth="100.0" styleClass="body">
          <children>
-            <Label fx:id="title" style="-fx-text-fill: white;" text="Leaderboard">
+            <Label fx:id="title" styleClass="header" text="Leaderboard">
                <font>
                   <Font size="25.0" />
                </font>

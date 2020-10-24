@@ -22,6 +22,10 @@
                      <VBox.margin>
                         <Insets bottom="10.0" />
                      </VBox.margin>
+                     <styleClass>
+                        <String fx:value="header" />
+                        <String fx:value="correct" />
+                     </styleClass>
                   </Label>
                   <Separator opacity="0.45" prefWidth="200.0">
                      <opaqueInsets>

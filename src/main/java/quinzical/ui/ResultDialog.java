@@ -37,8 +37,9 @@ public class ResultDialog extends Page {
 		boolean correct = (q.state() == Question.QuestionState.CORRECT);
 		String message = (correct) ? "Correct!": "Incorrect!";
 		outcome.setText(message);
-		outcome.setStyle(String.format("-fx-text-fill: %s", (correct) ? "#35f523": "#ee2121"));
-		
+		outcome.getStyleClass().removeAll("correct", "incorrect");
+		outcome.getStyleClass().add((correct) ? "correct": "incorrect");
+
 		if (q.value() == 0) { // Practice questions have a value of 0
 			if (correct) { consequence.setText(""); }
 			else {

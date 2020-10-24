@@ -27,11 +27,11 @@ public class Leaderboard extends Page {
 		
 		String trophyColour;
 		if (score > 5625) {
-			trophyColour = "yellow";
+			trophyColour = "#D4AF37";
 		} else if (score > 3750) {
-			trophyColour = "grey";
+			trophyColour = "#A8A9AD";
 		} else if (score > 1875) {
-			trophyColour = "red";
+			trophyColour = "#AA7042";
 		} else {
 			trophyColour = "white";
 		}

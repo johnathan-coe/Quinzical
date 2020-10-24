@@ -11,20 +11,13 @@ import javafx.scene.web.WebView;
 import javafx.stage.Stage;
 import quinzical.Game;
 
-import org.commonmark.node.Node;
-import org.commonmark.node.Text;
 import org.commonmark.node.AbstractVisitor;
-import org.commonmark.node.Document;
-import org.commonmark.node.Heading;
 import org.commonmark.node.Image;
-import org.commonmark.parser.Parser;
-import org.commonmark.renderer.html.HtmlRenderer;
 import org.w3c.dom.NodeList;
 import org.w3c.dom.events.EventTarget;
 import org.w3c.dom.events.Event;
 
 import java.io.File;
-import java.io.FileReader;
 import java.io.IOException;
 import java.net.URL;
 
@@ -36,9 +29,8 @@ import quinzical.ui.scenes.Page;
  * Viewer for Markdown documentation from within the app
  */
 public class HelpViewer extends Page {
-	private Parser parser;
-	private HtmlRenderer renderer;
 	private String file;
+	private Markdown md;
 
 	@FXML private WebView view;
 
@@ -46,8 +38,7 @@ public class HelpViewer extends Page {
 		// Place this helpviewer page on a new stage
 		super(game, new Stage(), "/fxml/help-viewer.fxml");
 		
-		this.renderer = HtmlRenderer.builder().build();
-		this.parser = Parser.builder().build();
+		md = new Markdown();
 		
 		// When a page is loaded, ensure all links render markdown
 		view.getEngine().getLoadWorker().stateProperty().addListener(new loadListener());
@@ -64,46 +55,10 @@ public class HelpViewer extends Page {
 		
 		super.show();
 		showStage();		
-		
-		// Parse entire document
-		Node document;
-		try { document = parser.parseReader(new FileReader(file)); } 
-		catch (Exception e) { e.printStackTrace(); return;	}
-		
-		// Go through nodes
-		Node n = document.getFirstChild();
-		while (n != null) {
-			// Break when we hit a heading with the desired text
-			if ((n instanceof Heading) && ((Text) n.getFirstChild()).getLiteral().equals(heading)) {
-				break;
-			}
-			n = n.getNext();
-		}
-		
-		// Excerpt we're interested in
-		Document excerpt = new Document();
-		
-		// If we couldn't find a heading
-		if (n == null) {
-			excerpt.appendChild(new Text("Error! Help not found."));
-		} else {
-			// Add nodes until end of document
-			while (n != null) {
-				Node curr = n;
-				n = n.getNext();
-				excerpt.appendChild(curr);
-				
-				// Break at the next heading
-				if (n instanceof Heading) { break; }
-			}
-		}
-		
-		// Update paths for images
-		excerpt.accept(new ImagePathVisitor());
-					
-		// Render the excerpt
-		String rendered = renderer.render(excerpt);
 
+		// Render to HTML
+		String rendered = md.render(file, heading);
+		
 		// Load into webview
 		view.getEngine().loadContent(rendered);
 		
@@ -151,18 +106,5 @@ public class HelpViewer extends Page {
 				 }
 			}
 		}
-	}
-	
-	// Visits all images and corrects their path
-	private class ImagePathVisitor extends AbstractVisitor {
-	    @Override
-	    public void visit(Image img) {
-	    	// Correct path
-	        File f = new File("wiki/docs/" + img.getDestination());
-	        img.setDestination(f.toURI().toString());
-	        
-	        // Descend into children
-	        visitChildren(img);
-	    }
 	}
 }

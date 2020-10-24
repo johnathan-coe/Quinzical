@@ -22,23 +22,38 @@ public class MainSelectPage extends SelectPage {
 	protected void refresh() {
 		// Set the score
 		score.setText("$" + game.data().score());
-				
+		
+		// Shallow clone the category list
+		List<Category> categories = new ArrayList<Category>(game.data().categories());
+		
+		// Count the number of completed categories
+		int completedCount = 0;
+		for (Category category: categories) {
+			completedCount += category.isCompleted() ? 1 : 0;
+		}
+		
+		// Add the international category if appropriate
+		Category internationalCategory = game.data().internationalCategory();
+		if (internationalCategory != null && completedCount >= 2) {
+			categories.add(internationalCategory);
+		}
+		
 		List<Pane> cards = new ArrayList<>();
-		List<Pane> completed = new ArrayList<>(); // Put the completed panes at the end
-		for (Category category: game.data().categories()) {
+		List<Pane> completed = new ArrayList<>();
+		
+		// Place a card for each category on the scene
+		for (Category category: categories) {
 			try {
+				// Create a card
 				CategoryCard card = new CategoryCard(category, game);
-				if (category.isCompleted()) {
-					completed.add(card.pane());
-				} else {
-					cards.add(card.pane());
-				}
+				// Place in the appropriate section
+				(category.isCompleted() ? completed : cards).add(card.pane());
 			} catch (IOException e) {
 				System.err.println(e.toString());
 			}
 		}
 
-		container.getChildren().clear();
+		// If the "incomplete" section is empty
 		if (cards.size() == 0) {
 			Label label = new Label(
 					"There doesn't seem to be any categories here!\n"
@@ -47,25 +62,9 @@ public class MainSelectPage extends SelectPage {
 			);
 			container.getChildren().add(label);
 		}
+		
+		container.getChildren().clear();
 		container.getChildren().addAll(cards);
-
-		Category internationalCategory = game.data().internationalCategory();
-		int completedCount = 0;
-		for (Category category: game.data().categories()) {
-			if (category.isCompleted()) {
-				completedCount++;
-			}
-		}
-		if (internationalCategory != null && completedCount >= 2) {
-			try {
-				Card internationalCard = new CategoryCard(internationalCategory, game);
-				Pane pane = internationalCard.pane();
-				container.getChildren().add(pane);
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
 		container.getChildren().addAll(completed);
 	}
 

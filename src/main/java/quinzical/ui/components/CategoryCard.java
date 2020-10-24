@@ -1,4 +1,4 @@
-package quinzical.ui;
+package quinzical.ui.components;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

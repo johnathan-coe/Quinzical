@@ -1,4 +1,4 @@
-package quinzical.ui;
+package quinzical.ui.components;
 
 import java.io.IOException;
 import java.net.URL;

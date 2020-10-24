@@ -1,4 +1,4 @@
-package quinzical.ui.main;
+package quinzical.ui.scenes.main;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
@@ -7,7 +7,7 @@ import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.Question;
 import quinzical.festival.Festival;
-import quinzical.ui.QuestionPage;
+import quinzical.ui.scenes.QuestionPage;
 
 import java.io.IOException;
 import java.util.Timer;

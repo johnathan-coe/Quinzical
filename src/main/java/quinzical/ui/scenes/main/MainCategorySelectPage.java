@@ -1,4 +1,4 @@
-package quinzical.ui.main;
+package quinzical.ui.scenes.main;
 
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -14,8 +14,8 @@ import quinzical.data.Category;
 import quinzical.data.CategoryParser;
 import quinzical.data.GameData;
 import quinzical.data.Question;
-import quinzical.ui.Card;
-import quinzical.ui.SelectPage;
+import quinzical.ui.components.Card;
+import quinzical.ui.scenes.SelectPage;
 
 import java.io.IOException;
 import java.util.*;

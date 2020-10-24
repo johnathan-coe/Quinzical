@@ -1,4 +1,4 @@
-package quinzical.ui;
+package quinzical.ui.scenes;
 
 import javafx.fxml.FXML;
 import javafx.scene.control.*;

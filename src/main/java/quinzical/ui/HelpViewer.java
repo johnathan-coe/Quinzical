@@ -30,6 +30,8 @@ import java.net.URL;
 
 import org.apache.commons.text.WordUtils;
 
+import quinzical.ui.scenes.Page;
+
 /**
  * Viewer for Markdown documentation from within the app
  */

@@ -1,4 +1,4 @@
-package quinzical.ui.practice;
+package quinzical.ui.scenes.practice;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,8 +17,8 @@ import quinzical.Game;
 import quinzical.data.Category;
 import quinzical.data.CategoryParser;
 import quinzical.data.Question;
-import quinzical.ui.Card;
-import quinzical.ui.SelectPage;
+import quinzical.ui.components.Card;
+import quinzical.ui.scenes.SelectPage;
 
 public class PracticeSelectPage extends SelectPage {
 	private CategoryParser parser;

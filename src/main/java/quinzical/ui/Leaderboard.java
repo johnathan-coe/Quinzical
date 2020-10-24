@@ -21,7 +21,7 @@ public class Leaderboard extends Page {
 
 	@Override
 	public void show() {
-		winningsLabel.setText(String.format("Earnings: $%d", game.data().score()));
+		winningsLabel.setText(String.format("$%d", game.data().score()));
 		
 		// Clear old scores
 		leaderList.getChildren().clear();

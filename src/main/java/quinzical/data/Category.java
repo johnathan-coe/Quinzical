@@ -1,39 +1,33 @@
 package quinzical.data;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * A data class that holds all the questions in their category
  */
 public class Category {
 	private String name;
-	private Map<Integer, Question> questions = new HashMap<>();
+	private List<Question> questions = new ArrayList<Question>();
 
 	public Category(String name) {
 		this.name = name;
 	}
 
+	public String name() { return name; }
+	
+	public List<Question> questions() { return questions; }
+	
 	public void addQuestion(Question question) {
-		questions.put(question.value(), question);
+		questions.add(question);
 	}
 
-	public String name() { return name; }
-
-	public List<Question> questions() { return new ArrayList<>(questions.values()); }
-
-	public Question getQuestion(int value) { return questions.get(value); }
-
 	public void addQuestions(List<Question> questions) {
-		for (Question q: questions) {
-			addQuestion(q);
-		}
+		this.questions.addAll(questions);
 	}
 
 	public boolean isCompleted() {
-		for (Question question: questions()) {
+		for (Question question: questions) {
 			if (!question.isCompleted()) {
 				return false;
 			}

@@ -1,7 +1,10 @@
 package quinzical.ui;
 
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonBar;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.Pane;
@@ -16,14 +19,36 @@ import java.io.IOException;
 import java.util.*;
 
 public class MainCategorySelectPage extends SelectPage {
+	private final Set<SelectCard> cards_ = new HashSet<>();
 	private Set<SelectCard> selected = new HashSet<>();
 	private final MainSelectPage mainSelectPage;
 
 	@FXML private Label header;
+	@FXML private ButtonBar bottomBar;
 
 	public MainCategorySelectPage(Game game, Stage stage, MainSelectPage mainSelectPage) throws IOException {
 		super(game, stage);
 		this.mainSelectPage = mainSelectPage;
+
+		Button randomButton = new Button("Random");
+		bottomBar.getButtons().add(randomButton);
+		randomButton.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Set<SelectCard> unselectedCards = new HashSet<>(cards_);
+				unselectedCards.removeAll(selected);
+				List<SelectCard> unselected = new ArrayList<>(unselectedCards);
+
+				while (5 - selected.size() > 0) {
+					int index = (int)(Math.random() * unselected.size());
+					SelectCard card = unselected.get(index);
+					select(card);
+					unselected.remove(card);
+				}
+
+				showMainSelectPage();
+			}
+		});
 	}
 
 	/**
@@ -33,7 +58,12 @@ public class MainCategorySelectPage extends SelectPage {
 	 */
 	@Override
 	protected void refresh() {
+		if (cards_ == null) {
+			return;
+		}
+
 		container.getChildren().clear();
+		cards_.clear();
 
 		CategoryParser parser = this.game.data().parser();
 		if (parser == null) {
@@ -45,6 +75,7 @@ public class MainCategorySelectPage extends SelectPage {
 				SelectCard card = new SelectCard(cat);
 				Pane pane = card.pane();
 				container.getChildren().add(pane);
+				cards_.add(card);
 				pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent mouseEvent) {
@@ -53,34 +84,42 @@ public class MainCategorySelectPage extends SelectPage {
 							selected.remove(card);
 							refreshHeader();
 						} else if (selected.size() < 5) {
-							card.setSelected(true);
-							selected.add(card);
+							select(card);
 							refreshHeader();
 							if (selected.size() == 5) {
-								for (SelectCard card: selected) {
-									String title = card.getTitle();
-									Map<String, String[]> categoryMap = game.data().parser().getCategory(title);
-									Category category = new Category(title);
-									List<Map.Entry<String, String[]>> entryList = new ArrayList<>(categoryMap.entrySet());
-									for (int i = 0; i < 5; i++) {
-										Map.Entry<String, String[]> entry = entryList.get((int) (Math.random() * entryList.size()));
-										Question question = new Question((i+1) * 100, entry.getValue()[0], entry.getKey(), entry.getValue()[1], Question.QuestionState.UNATTEMPTED);
-										category.addQuestion(question);
-										entryList.remove(entry);
-									}
-									game.data().categories().add(category);
-								}
-								mainSelectPage.show();
+								showMainSelectPage();
 							}
 						}
 					}
 				});
 			} catch (IOException e) {
-				System.err.println(e);
+				e.printStackTrace();
 			}
 		}
 
 		refreshHeader();
+	}
+
+	private void select(SelectCard card) {
+		card.setSelected(true);
+		selected.add(card);
+	}
+
+	private void showMainSelectPage() {
+		for (SelectCard card: selected) {
+			String title = card.getTitle();
+			Map<String, String[]> categoryMap = game.data().parser().getCategory(title);
+			Category category = new Category(title);
+			List<Map.Entry<String, String[]>> entryList = new ArrayList<>(categoryMap.entrySet());
+			for (int i = 0; i < 5; i++) {
+				Map.Entry<String, String[]> entry = entryList.get((int) (Math.random() * entryList.size()));
+				Question question = new Question((i+1) * 100, entry.getValue()[0], entry.getKey(), entry.getValue()[1], Question.QuestionState.UNATTEMPTED);
+				category.addQuestion(question);
+				entryList.remove(entry);
+			}
+			game.data().categories().add(category);
+		}
+		mainSelectPage.show();
 	}
 
 	private void refreshHeader() {

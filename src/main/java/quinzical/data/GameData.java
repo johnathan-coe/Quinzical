@@ -94,13 +94,9 @@ public class GameData {
 					JsonReader reader = new JsonReader(file);
 					newDataTemp.score = reader.score();
 					List<String> categories = reader.categories();
-					Category internationalCategory = null;
 					for (String c: categories) {
 						Category category = new Category(c);
-						for (String question: reader.getAvailableQuestions(c)) {
-							Question q = reader.getQuestion(c, question);
-							category.addQuestion(q);
-						}
+						category.addQuestions(reader.questions(c));
 						if (c.equals("International")) { // The international category doesn't go with the others
 							newDataTemp.internationalCategory = category;
 							continue;
@@ -362,45 +358,31 @@ public class GameData {
 		}
 
 		/**
-		 * Gets all the questions of the provided category in the save file
-		 *
-		 * Note: All values are denoted by their score.
-		 *
-		 * e.g. ["100", "200", "300"]
+		 * Get all the questions of a specified category
 		 */
-		public List<String> getAvailableQuestions(String category) throws IOException {
-			return executeFilter(".categories[($CATEGORY)] | keys[]", new String[]{ "-r", "--arg", "CATEGORY", category });
-		}
-
-		/**
-		 * Get a question form the save file by providing the category it belongs to and how much it's worth
-		 */
-		public Question getQuestion(String category, String value) throws IOException {
-			List<String> lines = executeFilter(".categories[($CATEGORY)][$VALUE] | (.question, .prompt, .answer, .completed)", new String[]{
-				"-r",
-				"--arg", "CATEGORY", category,
-				"--arg", "VALUE", value
+		public List<Question> questions(String category) throws IOException {
+			List<String> stringList = executeFilter(".categories[($CATEGORY)][] | .value, .question, .prompt, .answer, .completed", new String[]{
+					"-r",
+					"--arg", "CATEGORY", category,
 			});
-
-			Question.QuestionState state = Question.QuestionState.UNATTEMPTED;
-			switch (lines.get(3)) {
-				case "UNATTEMPTED" -> state = Question.QuestionState.UNATTEMPTED;
-				case "CORRECT" -> state = Question.QuestionState.CORRECT;
-				case "INCORRECT" -> state = Question.QuestionState.INCORRECT;
-				default -> {
-					System.err.printf("Could not parse question state `%s`%n", lines.get(3));
-					System.exit(1);
+			List<Question> questionList = new ArrayList<>();
+			int i = 0;
+			while (i < stringList.size()) {
+				int value = Integer.parseInt(stringList.get(i));
+				String questionText = stringList.get(i+1);
+				String prompt = stringList.get(i+2);
+				String answer = stringList.get(i+3);
+				Question.QuestionState completed = Question.QuestionState.parse(stringList.get(i+4));
+				if (completed == null) {
+					System.err.printf("Cannot parse `%s` into a QuestionState.%n", stringList.get(i+3));
+					continue;
 				}
+				questionList.add(new Question(value, prompt, questionText, answer, completed));
+				i += 5;
 			}
-
-			return new Question(
-				Integer.parseInt(value),
-				lines.get(1),
-				lines.get(0),
-				lines.get(2),
-				state
-			);
+			return questionList;
 		}
+
 	}
 
 	/**
@@ -423,7 +405,7 @@ public class GameData {
 		 * Write an empty category into the save file
 		 */
 		public void writeCategory(String categoryName) throws IOException {
-			write(".categories += {($CATEGORY_NAME): {}}", new String[]{
+			write(".categories += {($CATEGORY_NAME): []}", new String[]{
 					"--arg", "CATEGORY_NAME", categoryName
 			});
 		}
@@ -432,13 +414,14 @@ public class GameData {
 		 * Write a question into the category provided
 		 */
 		public void writeQuestion(String categoryName, Question question) throws IOException {
-			write(".categories[$CATEGORY_NAME] += { ($VALUE): { \"question\": $QUESTION, \"prompt\": $PROMPT, \"answer\": $ANSWER, \"completed\": $COMPLETED }}", new String[]{
+			write(".categories[$CATEGORY_NAME] += [ { \"question\": $QUESTION, \"prompt\": $PROMPT, \"answer\": $ANSWER, \"completed\": $COMPLETED, \"value\": $VALUE } ]", new String[]{
 					"--arg", "CATEGORY_NAME", categoryName,
 					"--arg", "VALUE", Integer.toString(question.value()),
 					"--arg", "QUESTION", question.question(),
 					"--arg", "PROMPT", question.prompt(),
 					"--arg", "ANSWER", question.answer(),
 					"--arg", "COMPLETED", question.state().toString(),
+					"--arg", "VALUE", Integer.toString(question.value()),
 			});
 		}
 	}

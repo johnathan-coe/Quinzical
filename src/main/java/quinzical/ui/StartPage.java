@@ -29,8 +29,6 @@ public class StartPage extends Page implements GameDataListener {
 		refresh();
 
 		resetConfirmation = new ResetConfirmationPage(stage, game, this);
-
-		stage.setScene(new Scene(root));
 	}
 
 	@FXML public void playPressed() {

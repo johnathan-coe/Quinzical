@@ -5,7 +5,6 @@ import javafx.scene.text.Font;
 import javafx.stage.Stage;
 import quinzical.data.GameData;
 import quinzical.festival.Festival;
-import quinzical.ui.*;
 import quinzical.ui.help.HelpViewer;
 import quinzical.ui.scenes.*;
 import quinzical.ui.scenes.meta.*;

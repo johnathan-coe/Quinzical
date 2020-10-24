@@ -14,6 +14,7 @@ import java.io.IOException;
 public class Leaderboard extends Page {
 	@FXML private Label winningsLabel;
 	@FXML private VBox leaderList;
+	@FXML private Label trophy;
 
 	public Leaderboard(Game game, Stage stage) throws IOException {
 		super(game, stage, "/fxml/rewards.fxml");
@@ -21,16 +22,30 @@ public class Leaderboard extends Page {
 
 	@Override
 	public void show() {
-		winningsLabel.setText(String.format("$%d", game.data().score()));
+		int score = game.data().score();
+		winningsLabel.setText(String.format("$%d", score));
+		
+		String trophyColour;
+		if (score > 5625) {
+			trophyColour = "yellow";
+		} else if (score > 3750) {
+			trophyColour = "grey";
+		} else if (score > 1875) {
+			trophyColour = "red";
+		} else {
+			trophyColour = "white";
+		}
+		
+		trophy.setStyle("-fx-text-fill: " + trophyColour + ";");
 		
 		// Clear old scores
 		leaderList.getChildren().clear();
 		
 		// Populate with new ones
 		for (int i : game.data().leaders().leaders()) {
-			Label score = new Label("$" + Integer.toString(i));
-			score.setStyle("-fx-text-fill: white;");
-			leaderList.getChildren().add(score);
+			Label scoreLabel = new Label("$" + Integer.toString(i));
+			scoreLabel.setStyle("-fx-text-fill: white;");
+			leaderList.getChildren().add(scoreLabel);
 		}
 		
 		super.show();

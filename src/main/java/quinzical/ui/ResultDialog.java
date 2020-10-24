@@ -9,6 +9,8 @@ import quinzical.festival.Festival;
 
 import java.io.IOException;
 
+import static org.apache.commons.lang3.StringUtils.capitalize;
+
 /**
  * The screen that users see once they've answered a question
  *
@@ -37,13 +39,13 @@ public class ResultDialog extends Page {
 		if (q.value() == 0) { // Practice questions have a value of 0
 			if (correct) { consequence.setText(""); }
 			else {
-				consequence.setText(capitalise(q.question()) + "\n\n" +
-									"The correct answer was: " + capitalise(q.answer()));
+				consequence.setText(capitalize(q.question()) + "\n\n" +
+									"The correct answer was: " + capitalize(q.answer()));
 			}
 		} else {
 			consequence.setText((correct) ? 
 					String.format("You've earned $%d!", q.value())
-					: String.format("The correct answer was '%s'.", capitalise(q.answer())));
+					: String.format("The correct answer was '%s'.", capitalize(q.answer())));
 		}
 		
 		festival.say(message);
@@ -53,13 +55,5 @@ public class ResultDialog extends Page {
 
 	@FXML public void okPressed() {
 		selectPage.show();
-	}
-	
-	/**
-	 * Capitalise the first letter in a string
-	 */
-	protected String capitalise(String input) {
-		return input.substring(0, 1).toUpperCase() +
-				input.substring(1);
 	}
 }

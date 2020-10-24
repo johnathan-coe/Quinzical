@@ -12,6 +12,8 @@ import quinzical.festival.Festival;
 import java.io.IOException;
 import java.net.URL;
 
+import static org.apache.commons.lang3.StringUtils.capitalize;
+
 /**
  * The page that asks the user the question
  *
@@ -54,23 +56,12 @@ public abstract class QuestionPage extends Page {
 		
 		// Now deal with question
 		this.question = question;
-		questionText.setText(capitalise(question.question()));
-		prompt.setText(capitalise(question.prompt()));
+		questionText.setText(capitalize(question.question()));
+		prompt.setText(capitalize(question.prompt()));
 		guess.setText("");
 		festival.say(question.question());
 
 		super.show();
-	}
-
-	/**
-	 * Capitalise the first letter in a string
-	 */
-	private String capitalise(String input) {
-		if (input.isBlank()) { // No need to capitalise if the string is blank
-			return input;
-		}
-		return input.substring(0, 1).toUpperCase() +
-				input.substring(1);
 	}
 	
 	@FXML public abstract void answerSubmitted();

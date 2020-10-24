@@ -44,7 +44,7 @@ public class Game extends Application {
 		practiceSelectPage = new PracticeSelectPage(this, stage);
 		questionPage = new MainQuestionPage(this, stage, festival);
 		practiceQuestionPage = new PracticeQuestionPage(this, stage, festival);
-		helpViewer = new HelpViewer(this, stage);
+		helpViewer = new HelpViewer(this);
 		rewardsPage = new RewardsPage(this, stage);
 		settingsPage = new SettingsPage(this, stage);
 		leaderboard = new Leaderboard(this, stage);

@@ -20,6 +20,9 @@ public class MainSelectPage extends SelectPage {
 	}
 
 	protected void refresh() {
+		// Set the score
+		score.setText("$" + game.data().score());
+				
 		List<Pane> cards = new ArrayList<>();
 		List<Pane> completed = new ArrayList<>(); // Put the completed panes at the end
 		for (Category category: game.data().categories()) {

@@ -2,7 +2,7 @@ package quinzical.ui;
 
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import quinzical.Game;
@@ -15,8 +15,8 @@ import java.io.IOException;
  * The screen that users use to select a category and question
  */
 public abstract class SelectPage extends Page implements GameDataListener {
-	
 	@FXML protected Pane container;
+	@FXML protected Label score;
 
 	public SelectPage(Game game, Stage stage) throws IOException {
 		super(game, stage);
@@ -45,6 +45,7 @@ public abstract class SelectPage extends Page implements GameDataListener {
 	@Override
 	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
 		if (event == GameData.GameDataChangedEvent.LOADED) { // Only refresh if a whole new game has been loaded
+			// Populate the categories
 			refresh();
 		}
 	}

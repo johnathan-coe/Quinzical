@@ -15,11 +15,16 @@
    <children>
       <VBox prefWidth="100.0" spacing="20.0">
          <children>
-            <VBox prefWidth="100.0" styleClass="body">
+            <VBox prefWidth="100.0" spacing="5.0" styleClass="body">
                <children>
                   <Label fx:id="header" styleClass="header" text="Select a Question from a Category">
                      <font>
                         <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label fx:id="score" text="\$???" textFill="#e3b50e">
+                     <font>
+                        <Font size="20.0" />
                      </font>
                   </Label>
                </children>

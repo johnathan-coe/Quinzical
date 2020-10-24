@@ -15,6 +15,7 @@ import java.util.TimerTask;
 public class MainQuestionPage extends QuestionPage {
 	private Timer timer;
 	private final static int TIME_LIMIT = 30; // 30 seconds
+	private int remaining;
 
 	public MainQuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		super(game, stage, festival, game.selectPage());
@@ -28,8 +29,16 @@ public class MainQuestionPage extends QuestionPage {
 		boolean correct = question.check(guess.getText());
 		
 		question.setState((correct)? Question.QuestionState.CORRECT: Question.QuestionState.INCORRECT);
-		int score = game.data().score() + (question.value() * ((correct)? 1: 0));
+		
+		// Calculate reward
+		int reward = (getRewardNow() * ((correct) ? 1: 0));
+		
+		// Add to score
+		int score = game.data().score() + reward;
 		game.data().setScore(score);
+		
+		// Update on board
+		question.setValue(reward);
 		showDialog();
 	}
 
@@ -37,6 +46,7 @@ public class MainQuestionPage extends QuestionPage {
 	@Override
 	public void dontKnowPressed() {
 		question.setState(Question.QuestionState.INCORRECT);
+		question.setValue(0);
 		showDialog();
 	}
 
@@ -45,18 +55,23 @@ public class MainQuestionPage extends QuestionPage {
 		timer.cancel();
 	}
 
+	// Get current reward based on timer value
+	private int getRewardNow() {
+		return (int) (question.value() * (float) remaining / TIME_LIMIT);
+	}
+	
 	@Override
 	public void show(Question question, String cat) {
 		super.show(question, cat);
 		question.setState(Question.QuestionState.INCORRECT);
 
+		remaining = TIME_LIMIT;
+		
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
-			int n = TIME_LIMIT;
-
 			@Override
 			public void run() {
-				if (n <= 0) {
+				if (remaining <= 0) {
 					Platform.runLater(new Task<Void>() {
 						@Override
 						protected Void call() {
@@ -68,12 +83,12 @@ public class MainQuestionPage extends QuestionPage {
 					Platform.runLater(new Task<Void>() {
 						@Override
 						protected Void call() {
-							timerLabel.setText(String.format("⏱ %ds", n));
+							timerLabel.setText(String.format("⏱ %ds - $%d", remaining, getRewardNow()));
 							return null;
 						}
 					});
 				}
-				n--;
+				remaining--;
 			}
 		}, 0, 1000);
 	}

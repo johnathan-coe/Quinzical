@@ -12,7 +12,6 @@ import quinzical.data.Category;
 import quinzical.data.Question;
 
 import java.io.IOException;
-import java.util.Collections;
 import java.util.List;
 
 /**
@@ -26,7 +25,6 @@ public class CategoryCard extends Card {
 		
 		// Sort questions by value
 		List<Question> qs = category.questions();
-		Collections.sort(qs);
 
 		boolean firstButton = true;
 		for (Question q : qs) {

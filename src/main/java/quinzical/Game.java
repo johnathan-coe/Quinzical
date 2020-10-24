@@ -7,6 +7,7 @@ import quinzical.data.GameData;
 import quinzical.festival.Festival;
 import quinzical.ui.*;
 import quinzical.ui.scenes.*;
+import quinzical.ui.scenes.meta.*;
 import quinzical.ui.scenes.main.*;
 import quinzical.ui.scenes.practice.*;
 

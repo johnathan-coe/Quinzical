@@ -4,7 +4,7 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 import quinzical.Game;
-import quinzical.ui.scenes.Leaderboard;
+import quinzical.ui.scenes.meta.Leaderboard;
 
 import java.io.IOException;
 

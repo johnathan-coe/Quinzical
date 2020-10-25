@@ -14,7 +14,7 @@ public class Leaderboard {
 	
 	public static Leaderboard loadBlocking() throws IOException {
 		Leaderboard l = new Leaderboard();
-		File file = new File("./leaders.json");
+		File file = new File("./storage/leaders.json");
 
 		if (!file.isFile()) {
 			return l;
@@ -35,7 +35,7 @@ public class Leaderboard {
 	public void save() throws IOException {
 		JsonWriter writer = new JsonWriter();
 		writer.writeLeaders(leaders);
-		writer.saveToFile("leaders.json");
+		writer.saveToFile("./storage/leaders.json");
 	}
 
 	/**

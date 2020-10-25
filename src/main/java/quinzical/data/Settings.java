@@ -9,7 +9,7 @@ public class Settings {
 
 	public static Settings loadBlocking() throws IOException {
 		Settings settings = new Settings();
-		File file = new File("./settings.json");
+		File file = new File("./storage/settings.json");
 
 		if (!file.isFile()) {
 			return settings;
@@ -25,7 +25,7 @@ public class Settings {
 	public void save() throws IOException {
 		JsonWriter writer = new JsonWriter();
 		writer.writeSpeed(festivalSpeed);
-		writer.saveToFile("settings.json");
+		writer.saveToFile("./storage/settings.json");
 	}
 
 	public float speed() { return festivalSpeed; }

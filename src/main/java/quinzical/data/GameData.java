@@ -59,7 +59,7 @@ public class GameData {
 		new Thread(new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
-				File file = new File("save.json");
+				File file = new File("./storage/save.json");
 
 				Thread settingsThread = new Thread(new Runnable() {
 					@Override
@@ -198,6 +198,9 @@ public class GameData {
 	 */
 	public void save() throws IOException {
 		System.out.println("Saving...");
+		
+		// Ensure save directory exists
+		new File("./storage/").mkdir();
 
 		new Thread(new Runnable() { // Save the settings in another file - do this concurrently
 			@Override
@@ -225,7 +228,7 @@ public class GameData {
 				writer.writeQuestion(category.name(), q);
 			}
 		}
-		writer.saveToFile("save.json");
+		writer.saveToFile("./storage/save.json");
 		System.out.println("Saved to `save.json`!");
 	}
 

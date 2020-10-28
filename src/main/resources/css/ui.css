@@ -49,14 +49,14 @@
     Turns a header green
  */
 .header.correct {
-    -fx-text-fill: #35f523;
+    -fx-text-fill: #12bc00;
 }
 
 /**
     Turns a header red
  */
 .header.incorrect {
-    -fx-text-fill: #ee2121;
+    -fx-text-fill: #ff0039;
 }
 
 /**

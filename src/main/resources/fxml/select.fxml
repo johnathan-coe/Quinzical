@@ -6,6 +6,7 @@
 <?import javafx.scene.control.ButtonBar?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.TilePane?>
 <?import javafx.scene.layout.VBox?>
@@ -22,11 +23,22 @@
                         <Font size="25.0" />
                      </font>
                   </Label>
-                  <Label fx:id="score" text="\$???" textFill="#e3b50e">
-                     <font>
-                        <Font size="20.0" />
-                     </font>
-                  </Label>
+                  <BorderPane>
+                     <left>
+                        <Label fx:id="score" text="\$???" textFill="#e3b50e" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </left>
+                     <right>
+                        <Label fx:id="trophy" text="🏆" textFill="WHITE" BorderPane.alignment="CENTER">
+                           <font>
+                              <Font size="20.0" />
+                           </font>
+                        </Label>
+                     </right>
+                  </BorderPane>
                </children>
                <padding>
                   <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />

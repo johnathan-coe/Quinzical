@@ -3,6 +3,7 @@ package quinzical.ui.scenes;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.GameData;
@@ -16,6 +17,7 @@ import java.io.IOException;
 public abstract class SelectPage extends Page implements GameDataListener {
 	@FXML protected Pane container;
 	@FXML protected Label score;
+	@FXML protected Label trophy;
 
 	public SelectPage(Game game, Stage stage) throws IOException {
 		super(game, stage, "/fxml/select.fxml");
@@ -26,6 +28,10 @@ public abstract class SelectPage extends Page implements GameDataListener {
 	@Override
 	public void show() {
 		refresh();
+		// Set the trophy colour in the header
+		String trophyColour = quinzical.data.Leaderboard.trophyColour(game.data().score());
+		trophy.setTextFill(Paint.valueOf(trophyColour));
+		
 		super.show();
 	}
 

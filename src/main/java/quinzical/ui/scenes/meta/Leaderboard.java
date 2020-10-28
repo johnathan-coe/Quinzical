@@ -26,16 +26,7 @@ public class Leaderboard extends Page {
 		int score = game.data().score();
 		winningsLabel.setText(String.format("$%d", score));
 		
-		String trophyColour;
-		if (score > 5625) {
-			trophyColour = "#D4AF37";
-		} else if (score > 3750) {
-			trophyColour = "#A8A9AD";
-		} else if (score > 1875) {
-			trophyColour = "#AA7042";
-		} else {
-			trophyColour = "white";
-		}
+		String trophyColour = quinzical.data.Leaderboard.trophyColour(score);
 		
 		trophy.setStyle("-fx-text-fill: " + trophyColour + ";");
 		

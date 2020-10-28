@@ -12,6 +12,21 @@ public class Leaderboard {
 		leaders = new ArrayList<Integer>();
 	}
 	
+	public static String trophyColour(int score) {
+		String col;
+		if (score > 5625) {
+			col = "#D4AF37";
+		} else if (score > 3750) {
+			col = "#A8A9AD";
+		} else if (score > 1875) {
+			col = "#AA7042";
+		} else {
+			col = "white";
+		}
+		
+		return col;
+	}
+	
 	public static Leaderboard loadBlocking() throws IOException {
 		Leaderboard l = new Leaderboard();
 		File file = new File("./storage/leaders.json");

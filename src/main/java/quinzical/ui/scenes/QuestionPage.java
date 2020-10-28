@@ -1,5 +1,8 @@
 package quinzical.ui.scenes;
 
+import javafx.concurrent.Task;
+import javafx.concurrent.WorkerStateEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
@@ -60,10 +63,20 @@ public abstract class QuestionPage extends Page {
 		questionText.setText(capitalize(question.question()));
 		prompt.setText(capitalize(question.prompt()));
 		guess.setText("");
-		festival.say(question.question());
+		Task<Boolean> task = festival.say(question.question());
+		EventHandler<WorkerStateEvent> eventHandler = new EventHandler<>() {
+			@Override
+			public void handle(WorkerStateEvent event) {
+				finishedSpeaking();
+			}
+		};
+		task.setOnSucceeded(eventHandler);
+		task.setOnCancelled(eventHandler);
 
 		super.show();
 	}
+
+	protected void finishedSpeaking() {	}
 	
 	@FXML public abstract void answerSubmitted();
 

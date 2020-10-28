@@ -32,6 +32,8 @@ public abstract class SelectPage extends Page implements GameDataListener {
 		String trophyColour = quinzical.data.Leaderboard.trophyColour(game.data().score());
 		trophy.setTextFill(Paint.valueOf(trophyColour));
 		
+		trophy.setText(quinzical.data.Leaderboard.progressMessage(game.data().score()));
+		
 		super.show();
 	}
 

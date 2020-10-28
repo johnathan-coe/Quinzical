@@ -14,17 +14,32 @@ public class Leaderboard {
 	
 	public static String trophyColour(int score) {
 		String col;
-		if (score > 5625) {
+		if (score >= 5625) {
 			col = "#D4AF37";
-		} else if (score > 3750) {
+		} else if (score >= 3750) {
 			col = "#A8A9AD";
-		} else if (score > 1875) {
+		} else if (score >= 1875) {
 			col = "#AA7042";
 		} else {
 			col = "white";
 		}
 		
 		return col;
+	}
+	
+	public static String progressMessage(int score) {
+		String distString = "";
+		
+		if (score > 5625) {
+		} else if (score >= 3750) {
+			distString = Integer.toString(5625-score);
+		} else if (score >= 1875) {
+			distString = Integer.toString(3750-score);
+		} else {
+			distString = Integer.toString(1875-score);
+		}
+		
+		return "-$" + distString + "  🏆";
 	}
 	
 	public static Leaderboard loadBlocking() throws IOException {

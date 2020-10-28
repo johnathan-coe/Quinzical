@@ -50,8 +50,8 @@ public class CategoryCard extends Card {
 				// Attempted questions get a label
 				Label label = new Label(Integer.toString(q.value()));
 				
-				String bg = (q.state() == Question.QuestionState.CORRECT)? "#30e60b" : "#ff0039";
-				String fg = (q.state() == Question.QuestionState.CORRECT)? "#38383d" : "#ffffff";
+				String bg = (q.state() == Question.QuestionState.CORRECT)? "#12bc00" : "#ff0039";
+				String fg = "#ffffff";
 				
 				label.setTextFill(Color.web(fg));
 				label.setPrefWidth(50);

@@ -30,6 +30,7 @@ public abstract class QuestionPage extends Page {
 	@FXML protected TextField guess;
 	@FXML protected Label timerLabel;
 	@FXML protected Label prompt;
+	@FXML protected Label attemptCounter;
 
 	public QuestionPage(Game game, Stage stage, Festival festival, SelectPage selectPage) throws IOException {
 		super(game, stage, "/fxml/question-page.fxml");

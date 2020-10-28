@@ -2,12 +2,15 @@ package quinzical.ui.scenes.main;
 
 import javafx.application.Platform;
 import javafx.concurrent.Task;
+import javafx.geometry.Insets;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import quinzical.Game;
 import quinzical.data.Question;
 import quinzical.festival.Festival;
 import quinzical.ui.scenes.QuestionPage;
+
+import static org.apache.commons.lang3.StringUtils.capitalize;
 
 import java.io.IOException;
 import java.util.Timer;
@@ -20,9 +23,11 @@ public class MainQuestionPage extends QuestionPage {
 
 	public MainQuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		super(game, stage, festival, game.selectPage());
-
+		
 		// Remove the question text
-		((VBox) super.practiceContainer.getParent()).getChildren().remove(super.practiceContainer);
+		((VBox) super.attemptCounter.getParent()).getChildren().remove(super.attemptCounter);
+		
+		super.questionText.setPadding(new Insets(0, 0, 10, 0));
 	}
 
 	@Override
@@ -64,6 +69,11 @@ public class MainQuestionPage extends QuestionPage {
 	@Override
 	public void show(Question question, String cat) {
 		super.show(question, cat);
+		
+		// Show category instead of question
+		questionText.setText(capitalize(cat));
+		
+		// Set to incorrect initially so exiting the application will mark it as incorrect
 		question.setState(Question.QuestionState.INCORRECT);
 
 		remaining = TIME_LIMIT;

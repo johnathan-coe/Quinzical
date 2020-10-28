@@ -21,7 +21,6 @@ public class PracticeQuestionPage extends QuestionPage {
 	static final int maxGuesses = 3;
 	private int guesses;
 	@FXML Button dontKnowButton;
-	@FXML Label attemptCounter;
 	
 	public PracticeQuestionPage(Game game, Stage stage, Festival festival) throws IOException {
 		super(game, stage, festival, game.practiceSelectPage());

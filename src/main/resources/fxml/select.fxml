@@ -25,7 +25,7 @@
                   </Label>
                   <BorderPane>
                      <left>
-                        <Label fx:id="score" text="\$???" textFill="#e3b50e" BorderPane.alignment="CENTER">
+                        <Label fx:id="score" text="\$???" textFill="#ffe900" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="20.0" />
                            </font>

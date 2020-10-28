@@ -18,7 +18,7 @@
                         <Font size="80.0" />
                      </font>
                   </Label>
-                  <Label fx:id="currentScoreLabel" text="You currently have $???" textFill="#e3b50e" VBox.vgrow="NEVER">
+                  <Label fx:id="currentScoreLabel" text="You currently have $???" textFill="#ffe900" VBox.vgrow="NEVER">
                      <font>
                         <Font size="20.0" />
                      </font>

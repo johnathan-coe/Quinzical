@@ -3,10 +3,12 @@ package quinzical.ui.components;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.geometry.Pos;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
+import javafx.scene.text.TextAlignment;
 import quinzical.Game;
 import quinzical.data.Category;
 import quinzical.data.Question;
@@ -41,6 +43,7 @@ public class CategoryCard extends Card {
 					}
 				});
 				
+				button.setPrefWidth(50);
 				button.setStyle("-fx-font-size: 15; -fx-background-color: white;");
 				questions.getChildren().add(button);
 			} else {
@@ -51,6 +54,8 @@ public class CategoryCard extends Card {
 				String fg = (q.state() == Question.QuestionState.CORRECT)? "#38383d" : "#ffffff";
 				
 				label.setTextFill(Color.web(fg));
+				label.setPrefWidth(50);
+				label.setAlignment(Pos.CENTER);
 				label.setStyle("-fx-font-size: 15;" +
 							   "-fx-background-color: " + bg + "ff;" +
 						   	"-fx-padding: 5 10; -fx-background-radius: 5;");

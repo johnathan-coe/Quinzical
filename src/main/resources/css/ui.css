@@ -65,7 +65,7 @@
 
 .scroll-bar:horizontal {
     -fx-background-color: #38383d;
-    -fx-background-radius: 10;
+    -fx-background-radius: 5;
 }
 
 .increment-button, .decrement-button {

@@ -62,7 +62,7 @@
                <children>
                   <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="timerLabel" text="⏱ 30s" textFill="RED">
+                        <Label fx:id="timerLabel" text="⏱ 30s" textFill="#ff0039">
                            <font>
                               <Font size="20.0" />
                            </font>

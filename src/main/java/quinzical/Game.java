@@ -61,7 +61,6 @@ public class Game extends Application {
 	@Override
 	public void stop() throws Exception {
 		data.save();
-		festival.destroy();
 	}
 
 	public GameData data() { return data; }

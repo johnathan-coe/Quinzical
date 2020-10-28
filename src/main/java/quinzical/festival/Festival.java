@@ -1,21 +1,21 @@
 package quinzical.festival;
 
+import javafx.concurrent.Task;
 import quinzical.Game;
-import quinzical.data.GameData;
-import quinzical.data.GameDataListener;
 import quinzical.data.Settings;
 
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 
 /**
  * An object that keeps a Festival process open and pipes in different text to say
  */
-public class Festival implements GameDataListener {
+public class Festival {
+	private final Game game;
+	private final ProcessBuilder processBuilder;
 	private Process process;
+	private Task<Boolean> task;
+	private String voice;
 	private BufferedWriter writer;
-	private Game game;
 
 	/**
 	 * Auckland New Zealand Female Voice
@@ -26,17 +26,43 @@ public class Festival implements GameDataListener {
 	 */
 	public static String AKL_NZ_JDT_DIPHONE = "akl_nz_jdt_diphone";
 
-	public Festival(Game game) throws IOException {
-		process = new ProcessBuilder("festival", "--pipe").start();
-		writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
+	public Festival(Game game) {
+		processBuilder = new ProcessBuilder("festival", "--pipe");
 		this.game = game;
-		game.data().addListener(this);
 
 		setVoice(AKL_NZ_JDT_DIPHONE);
 	}
 
-	public void say(String text) {
-		command(String.format("(SayText \"%s\")", text.replace("\"", "")));
+	public Task<Boolean> say(String text) {
+		try {
+			destroy();
+			process = processBuilder.start();
+			writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
+			if (voice != null) {
+				command(String.format("(voice_%s)", voice));
+			}
+			command(String.format("(Parameter.set 'Duration_Stretch (/ 1 %f))", game.data().settings().speed()));
+			command(String.format("(SayText \"%s\")", text.replace("\"", "")));
+			writer.close();
+			writer = null;
+			task = new Task<>() {
+				@Override
+				protected Boolean call() {
+					try {
+						process.getInputStream().readAllBytes();
+						return !isCancelled();
+					} catch (IOException e) {
+						e.printStackTrace();
+					}
+					return null;
+				}
+			};
+			new Thread(task).start();
+			return task;
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return null;
 	}
 
 	/**
@@ -50,7 +76,6 @@ public class Festival implements GameDataListener {
 		Settings settings = game.data().settings();
 		if (speed == settings.speed()) { return; }
 		settings.setSpeed(speed);
-		command(String.format("(Parameter.set 'Duration_Stretch (/ 1 %f))", speed));
 	}
 
 	/**
@@ -61,30 +86,23 @@ public class Festival implements GameDataListener {
 	 * If the voice does not exist, the previous voice will remain being used.
 	 */
 	public void setVoice(String voice) {
-		command(String.format("(voice_%s)", voice));
+		this.voice = voice;
 	}
 
-	private void command(String cmd) {
-		try {
-			writer.write(cmd);
-			writer.flush();
-		} catch (IOException e) {
-			System.err.println("Could not use festival: " + e.toString());
+	private void command(String cmd) throws IOException {
+		writer.write(cmd);
+		writer.flush();
+	}
+
+	private void destroy() throws IOException {
+		if (task != null) {
+			task.cancel(false);
 		}
-	}
-
-	public void destroy() throws IOException {
-		writer.close();
-		process.destroy();
-	}
-
-	@Override
-	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
-		if (event == GameData.GameDataChangedEvent.LOADED) {
-			Settings settings = game.data().settings();
-			if (settings.speed() != 1) {
-				command(String.format("(Parameter.set 'Duration_Stretch (/ 1 %f))", settings.speed()));
-			}
+		if (writer != null) {
+			writer.close();
+		}
+		if (process != null) {
+			process.destroy();
 		}
 	}
 }

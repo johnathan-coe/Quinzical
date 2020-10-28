@@ -56,18 +56,8 @@ public class MainQuestionPage extends QuestionPage {
 		timer.cancel();
 	}
 
-	// Get current reward based on timer value
-	private int getRewardNow() {
-		return (int) (question.value() * (float) remaining / TIME_LIMIT);
-	}
-	
 	@Override
-	public void show(Question question, String cat) {
-		super.show(question, cat);
-		question.setState(Question.QuestionState.INCORRECT);
-
-		remaining = TIME_LIMIT;
-		
+	protected void finishedSpeaking() {
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
@@ -84,7 +74,7 @@ public class MainQuestionPage extends QuestionPage {
 					Platform.runLater(new Task<Void>() {
 						@Override
 						protected Void call() {
-							timerLabel.setText(String.format("⏱ %ds - $%d", remaining, getRewardNow()));
+							refreshTimerLabel();
 							return null;
 						}
 					});
@@ -92,5 +82,23 @@ public class MainQuestionPage extends QuestionPage {
 				remaining--;
 			}
 		}, 0, 1000);
+	}
+
+	// Get current reward based on timer value
+	private int getRewardNow() {
+		return (int) (question.value() * (float) remaining / TIME_LIMIT);
+	}
+
+	@Override
+	public void show(Question question, String cat) {
+		super.show(question, cat);
+		question.setState(Question.QuestionState.INCORRECT);
+
+		remaining = TIME_LIMIT;
+		refreshTimerLabel();
+	}
+
+	private void refreshTimerLabel() {
+		timerLabel.setText(String.format("⏱ %ds - $%d", remaining, getRewardNow()));
 	}
 }

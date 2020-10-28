@@ -3,6 +3,8 @@ package quinzical.ui.components;
 import java.io.IOException;
 import java.net.URL;
 
+import javafx.scene.shape.Rectangle;
+
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Label;
@@ -38,6 +40,12 @@ public class Card {
 		}
 		
 		questions.setStyle(styleString + "-fx-background-size: cover;");
+	
+		// Round background image
+		Rectangle clip = new Rectangle (200, 220);
+        clip.setArcWidth(20);
+        clip.setArcHeight(20);
+		questions.setClip(clip);
 	}
 	
 	public Pane pane() {

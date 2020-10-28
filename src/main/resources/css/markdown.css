@@ -3,3 +3,8 @@ body {
 	background:  #38383d;
 	color: white;
 }
+
+a {
+   color: #0060df;
+   text-decoration: none;
+}

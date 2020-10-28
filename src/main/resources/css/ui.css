@@ -2,7 +2,7 @@
     The gradient background of the app
  */
 .background {
-    -fx-background-color:  linear-gradient(to bottom right, #6E6AEA, #B93423);
+    -fx-background-color: linear-gradient(to bottom, #ff512f, #dd2476);;
 }
 
 .body {

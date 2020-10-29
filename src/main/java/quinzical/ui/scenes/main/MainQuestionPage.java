@@ -108,6 +108,6 @@ public class MainQuestionPage extends QuestionPage {
 	}
 
 	private void refreshTimerLabel() {
-		timerLabel.setText(String.format("⏱ %ds - $%d", remaining, getRewardNow()));
+		timerLabel.setText(String.format("祥 %ds - $%d", remaining, getRewardNow()));
 	}
 }

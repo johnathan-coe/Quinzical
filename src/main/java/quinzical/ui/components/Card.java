@@ -42,7 +42,7 @@ public class Card {
 		questions.setStyle(styleString + "-fx-background-size: cover;");
 	
 		// Round background image
-		Rectangle clip = new Rectangle (200, 220);
+		Rectangle clip = new Rectangle (200, 230);
         clip.setArcWidth(20);
         clip.setArcHeight(20);
 		questions.setClip(clip);

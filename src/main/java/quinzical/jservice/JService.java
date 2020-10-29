@@ -81,7 +81,10 @@ public class JService {
 
 	private static boolean checkValues(List<String> response, int index) {
 		for (int i = 0; i < 3; i++) {
-			if (response.get(index + i).equals("null") || response.get(i).isBlank()) {
+			String resp = response.get(index + i);
+			if (resp.equals("null") || resp.isBlank() || resp.matches("</?[A-Z|a-z]+>")) {
+				// Reject all values that are empty or have html tags in them
+				System.out.println("Rejected: " + resp);
 				return false;
 			}
 		}

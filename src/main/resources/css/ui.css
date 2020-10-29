@@ -10,12 +10,17 @@
     -fx-background-radius: 10;
 }
 
+.text {
+    -fx-font-family: "Poppins Regular Nerd Font Complete";
+}
+
 /*
     A normal button with white text and no background
  */
 .normal-button {
     -fx-text-fill: white;
     -fx-background-color: none;
+    -fx-font-family: "Poppins Regular Nerd Font Complete";
 }
 
 /*
@@ -23,6 +28,7 @@
  */
 .inverted-button {
     -fx-background-color: white;
+    -fx-font-family: "Poppins Regular Nerd Font Complete";
 }
 
 /**
@@ -39,10 +45,35 @@
     -fx-background-color: #ff0039;
 }
 
+/**
+    The buttons on the start menu
+ */
+.start-menu-button {
+    -fx-font-size: 20px;
+}
+
+/**
+    Medium sized buttons
+ */
+.medium-button {
+    -fx-font-size: 16px;
+}
+
+/**
+    The text header for the card
+ */
+.card-header {
+    -fx-font-size: 20px;
+    -fx-font-family: "Poppins Regular Nerd Font Complete";
+    -fx-background-color: #38383daa;
+    -fx-text-fill: white;
+    -fx-padding: 5;
+}
+
 .header {
     -fx-text-fill: white;
     -fx-font-size: 25px;
-    -fx-font-family: "Turret Road Regular";
+    -fx-font-family: "Poppins Regular Nerd Font Complete";
 }
 
 /**

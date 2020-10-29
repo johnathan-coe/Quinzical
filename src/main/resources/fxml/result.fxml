@@ -32,7 +32,7 @@
                         <Insets bottom="15.0" />
                      </opaqueInsets>
                   </Separator>
-                  <Label fx:id="consequence" style="-fx-text-fill: white;" text="You've earned $???!" wrapText="true">
+                  <Label fx:id="consequence" style="-fx-text-fill: white;" styleClass="text" text="You've earned $???!" wrapText="true">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -57,6 +57,7 @@
                      <styleClass>
                         <String fx:value="normal-button" />
                         <String fx:value="primary" />
+                        <String fx:value="medium-button" />
                      </styleClass>
                   </Button>
                </children>

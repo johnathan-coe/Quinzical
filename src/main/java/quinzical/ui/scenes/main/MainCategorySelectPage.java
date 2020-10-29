@@ -34,7 +34,7 @@ public class MainCategorySelectPage extends SelectPage {
 
 
 		// Alter the default text
-		score.setText("Choose 5 categories or press the random button to randomly select some.");
+		score.setText("Choose 5 categories or randomly select some.");
 		score.setStyle("-fx-text-fill: white; -fx-font-size: 15;");
 
 		Button randomButton = new Button("Random");

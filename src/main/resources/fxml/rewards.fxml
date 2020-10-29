@@ -34,12 +34,12 @@
                   <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="trophy" text="🏆" textFill="WHITE" GridPane.rowIndex="1">
+                  <Label fx:id="trophy" styleClass="text" text="🏆" textFill="WHITE" GridPane.rowIndex="1">
                      <font>
                         <Font size="70.0" />
                      </font>
                   </Label>
-                  <Label fx:id="trophyText" text="Current Standing" textFill="WHITE">
+                  <Label fx:id="trophyText" styleClass="text" text="Current Standing" textFill="WHITE">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -47,7 +47,7 @@
                         <Insets bottom="5.0" />
                      </padding>
                   </Label>
-                  <Label text="Top Scores" textFill="WHITE" GridPane.columnIndex="1">
+                  <Label styleClass="text" text="Top Scores" textFill="WHITE" GridPane.columnIndex="1">
                      <font>
                         <Font size="16.0" />
                      </font>
@@ -56,7 +56,7 @@
                      </padding>
                   </Label>
                   <VBox fx:id="leaderList" alignment="TOP_CENTER" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                  <Label fx:id="winningsLabel" text="\$???" textAlignment="CENTER" textFill="#e3b50e" GridPane.rowIndex="2">
+                  <Label fx:id="winningsLabel" styleClass="text" text="\$???" textAlignment="CENTER" textFill="#e3b50e" GridPane.rowIndex="2">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -75,6 +75,7 @@
                      <styleClass>
                         <String fx:value="normal-button" />
                         <String fx:value="primary" />
+                        <String fx:value="medium-button" />
                      </styleClass>
                   </Button>
                </children>

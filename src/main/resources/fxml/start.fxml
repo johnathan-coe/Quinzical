@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
@@ -7,18 +8,18 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="810.0" prefWidth="600.0" styleClass="background" stylesheets="@../css/ui.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
+<StackPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="600.0" styleClass="background" stylesheets="@../css/ui.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1">
    <children>
       <VBox prefHeight="200.0" prefWidth="100.0" spacing="10.0" styleClass="body">
          <children>
             <VBox prefHeight="200.0" prefWidth="100.0" VBox.vgrow="ALWAYS">
                <children>
-                  <Label alignment="CENTER" style="-fx-background-color: #38383daa; -fx-text-fill: white; -fx-padding: 10;" text="Quinzical" textAlignment="CENTER" wrapText="true">
+                  <Label alignment="CENTER" style="-fx-background-color: #38383daa; -fx-text-fill: white; -fx-padding: 10;" styleClass="text" text="Quinzical" textAlignment="CENTER" wrapText="true">
                      <font>
                         <Font size="80.0" />
                      </font>
                   </Label>
-                  <Label fx:id="currentScoreLabel" text="You currently have $???" textFill="#ffe900" VBox.vgrow="NEVER">
+                  <Label fx:id="currentScoreLabel" styleClass="text" text="You currently have $???" textFill="#ffe900" VBox.vgrow="NEVER">
                      <font>
                         <Font size="20.0" />
                      </font>
@@ -30,35 +31,59 @@
             </VBox>
             <VBox maxHeight="400.0" prefHeight="200.0" prefWidth="600.0" spacing="10.0" VBox.vgrow="NEVER">
                <children>
-                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#playPressed" styleClass="normal-button" text="Play">
+                  <Button fx:id="playButton" mnemonicParsing="false" onAction="#playPressed" text="Play">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="start-menu-button" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="practiceButton" mnemonicParsing="false" onAction="#practicePressed" styleClass="normal-button" text="Practice">
+                  <Button fx:id="practiceButton" mnemonicParsing="false" onAction="#practicePressed" text="Practice">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="start-menu-button" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="practiceButton1" mnemonicParsing="false" onAction="#leaderboardPressed" styleClass="normal-button" text="Leaderboard">
+                  <Button fx:id="practiceButton1" mnemonicParsing="false" onAction="#leaderboardPressed" text="Leaderboard">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="start-menu-button" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPressed" styleClass="normal-button" text="Reset">
+                  <Button fx:id="resetButton" mnemonicParsing="false" onAction="#resetPressed" text="Reset">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="start-menu-button" />
+                     </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#settingsPressed" styleClass="normal-button" text="Settings">
+                  <Button mnemonicParsing="false" onAction="#settingsPressed" text="Settings">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="start-menu-button" />
+                     </styleClass>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#helpPressed" styleClass="normal-button" text="Help">
+                  <Button mnemonicParsing="false" onAction="#helpPressed" text="Help">
                      <font>
                         <Font size="20.0" />
                      </font>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="start-menu-button" />
+                     </styleClass>
                   </Button>
                </children>
                <VBox.margin>

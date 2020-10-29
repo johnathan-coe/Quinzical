@@ -36,7 +36,7 @@ public class Game extends Application {
 	@Override
 	public void start(Stage stage) throws Exception {
 		// Load the font(s)
-		if (Font.loadFont(getClass().getResourceAsStream("/fonts/TurretRoad-Regular.ttf"), 25) == null) {
+		if (Font.loadFont(getClass().getResourceAsStream("/fonts/Poppins Regular Nerd Font Complete.ttf"), 25) == null) {
 			System.err.println("Fonts failed to load");
 		}
 

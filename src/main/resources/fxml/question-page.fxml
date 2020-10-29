@@ -24,7 +24,7 @@
                         <Insets />
                      </VBox.margin>
                   </Label>
-                  <Label fx:id="attemptCounter" maxWidth="Infinity" style="-fx-text-fill: white;" text="Attempt 1/?">
+                  <Label fx:id="attemptCounter" maxWidth="Infinity" style="-fx-text-fill: white;" styleClass="text" text="Attempt 1/?">
                      <font>
                         <Font size="14.0" />
                      </font>
@@ -39,7 +39,7 @@
                   </Separator>
                </children>
             </VBox>
-            <Label fx:id="prompt" text="What is" textFill="WHITE">
+            <Label fx:id="prompt" styleClass="text" text="What is" textFill="WHITE">
                <font>
                   <Font size="16.0" />
                </font>
@@ -52,7 +52,7 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <TextField fx:id="guess" maxWidth="Infinity" onAction="#answerSubmitted" promptText="Answer..." style="-fx-background-color: #4a4a4f; -fx-text-fill: white;" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="guess" maxWidth="Infinity" onAction="#answerSubmitted" promptText="Answer..." style="-fx-background-color: #4a4a4f; -fx-text-fill: white;" styleClass="text" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
                      </font></TextField>
@@ -62,28 +62,36 @@
                <children>
                   <HBox alignment="CENTER_LEFT" HBox.hgrow="ALWAYS">
                      <children>
-                        <Label fx:id="timerLabel" text="⏱ 30s" textFill="#ff0039">
+                        <Label fx:id="timerLabel" styleClass="text" text="⏱ 30s" textFill="#ff0039">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#playCue" prefHeight="31.0" styleClass="normal-button" text="Replay">
+                  <Button mnemonicParsing="false" onAction="#playCue" prefHeight="31.0" text="Replay">
                      <font>
                         <Font size="15.0" />
                      </font>
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="medium-button" />
+                     </styleClass>
                   </Button>
-                  <Button fx:id="dontKnowButton" mnemonicParsing="false" onAction="#dontKnowPressed" prefWidth="132.0" styleClass="inverted-button" text="Don't Know">
+                  <Button fx:id="dontKnowButton" mnemonicParsing="false" onAction="#dontKnowPressed" prefWidth="132.0" text="Don't Know">
                      <font>
                         <Font size="15.0" />
                      </font>
                      <padding>
                         <Insets bottom="8.0" left="8.0" right="8.0" top="8.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="inverted-button" />
+                        <String fx:value="medium-button" />
+                     </styleClass>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#answerSubmitted" prefWidth="100.0" text="Answer">
                      <font>
@@ -95,6 +103,7 @@
                      <styleClass>
                         <String fx:value="normal-button" />
                         <String fx:value="primary" />
+                        <String fx:value="medium-button" />
                      </styleClass>
                   </Button>
                </children>

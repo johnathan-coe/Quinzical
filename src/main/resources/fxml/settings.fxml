@@ -40,7 +40,7 @@
                 <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
               </rowConstraints>
                <children>
-                  <Label fx:id="speedLabel" style="-fx-text-fill: white;" text="Set Speed">
+                  <Label fx:id="speedLabel" style="-fx-text-fill: white;" styleClass="text" text="Set Speed">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -49,7 +49,7 @@
                      </GridPane.margin>
                   </Label>
                   <Slider fx:id="speedSlider" blockIncrement="1.0" majorTickUnit="1.0" max="4.0" min="0.5" onMouseDragReleased="#speedSelected" onMouseReleased="#speedSelected" showTickLabels="true" value="1.0" GridPane.hgrow="ALWAYS" GridPane.rowIndex="1" />
-                  <Label fx:id="speedValueLabel" style="-fx-text-fill: white;" text="?x" GridPane.columnIndex="1" GridPane.vgrow="NEVER">
+                  <Label fx:id="speedValueLabel" style="-fx-text-fill: white;" styleClass="text" text="?x" GridPane.columnIndex="1" GridPane.vgrow="NEVER">
                      <font>
                         <Font size="15.0" />
                      </font>
@@ -57,25 +57,33 @@
                         <Insets bottom="10.0" left="10.0" />
                      </GridPane.margin>
                   </Label>
-                  <Button mnemonicParsing="false" onAction="#speedDefaultPressed" style="-fx-background-color: white;" styleClass="inverted-button" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="1">
+                  <Button mnemonicParsing="false" onAction="#speedDefaultPressed" style="-fx-background-color: white;" text="Reset" GridPane.columnIndex="1" GridPane.rowIndex="1">
                      <font>
                         <Font size="14.0" />
                      </font>
                      <GridPane.margin>
                         <Insets left="10.0" />
                      </GridPane.margin>
+                     <styleClass>
+                        <String fx:value="inverted-button" />
+                        <String fx:value="medium-button" />
+                     </styleClass>
                   </Button>
                </children>
             </GridPane>
             <HBox alignment="TOP_RIGHT" spacing="10.0">
                <children>
-                  <Button mnemonicParsing="false" onAction="#helpPressed" prefHeight="34.0" prefWidth="87.0" styleClass="normal-button" text="Help">
+                  <Button mnemonicParsing="false" onAction="#helpPressed" prefHeight="34.0" prefWidth="87.0" text="Help">
                      <font>
                         <Font size="15.0" />
                      </font>
                      <padding>
                         <Insets bottom="8.0" top="8.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="medium-button" />
+                     </styleClass>
                   </Button>
                   <Button mnemonicParsing="false" onAction="#backButtonPressed" prefHeight="34.0" prefWidth="87.0" text="Save">
                      <font>
@@ -90,6 +98,7 @@
                      <styleClass>
                         <String fx:value="normal-button" />
                         <String fx:value="primary" />
+                        <String fx:value="medium-button" />
                      </styleClass>
                   </Button>
                </children>

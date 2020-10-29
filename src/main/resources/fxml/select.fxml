@@ -25,14 +25,14 @@
                   </Label>
                   <BorderPane>
                      <left>
-                        <Label fx:id="score" text="\$???" textFill="#ffe900" BorderPane.alignment="CENTER">
+                        <Label fx:id="score" styleClass="text" text="\$???" textFill="#ffe900" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="20.0" />
                            </font>
                         </Label>
                      </left>
                      <right>
-                        <Label fx:id="trophy" text="🏆" textFill="WHITE" BorderPane.alignment="CENTER">
+                        <Label fx:id="trophy" styleClass="text" text="🏆" textFill="WHITE" BorderPane.alignment="CENTER">
                            <font>
                               <Font size="20.0" />
                            </font>
@@ -54,13 +54,17 @@
             </ScrollPane>
             <ButtonBar fx:id="bottomBar" prefHeight="40.0" prefWidth="200.0" styleClass="body">
               <buttons>
-                  <Button mnemonicParsing="false" onAction="#helpPressed" styleClass="normal-button" text="Help">
+                  <Button mnemonicParsing="false" onAction="#helpPressed" text="Help">
                      <font>
                         <Font size="16.0" />
                      </font>
                      <padding>
                         <Insets bottom="8.0" top="8.0" />
                      </padding>
+                     <styleClass>
+                        <String fx:value="normal-button" />
+                        <String fx:value="medium-button" />
+                     </styleClass>
                   </Button>
                 <Button mnemonicParsing="false" onAction="#backPressed" text="Back">
                      <font>
@@ -72,6 +76,7 @@
                      <styleClass>
                         <String fx:value="normal-button" />
                         <String fx:value="danger" />
+                        <String fx:value="medium-button" />
                      </styleClass></Button>
               </buttons>
                <padding>

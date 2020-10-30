@@ -39,7 +39,7 @@ public class Leaderboard {
 			distString = Integer.toString(1875-score);
 		}
 		
-		return "-$" + distString + "  🏆";
+		return "-$" + distString + "  ";
 	}
 	
 	public static Leaderboard loadBlocking() throws IOException {

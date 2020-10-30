@@ -69,7 +69,7 @@
                         </Label>
                      </children>
                   </HBox>
-                  <Button mnemonicParsing="false" onAction="#playCue" prefHeight="31.0" text="Replay">
+                  <Button mnemonicParsing="false" onAction="#playCue" prefHeight="31.0" text="">
                      <font>
                         <Font size="15.0" />
                      </font>

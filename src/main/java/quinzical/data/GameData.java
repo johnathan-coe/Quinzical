@@ -162,27 +162,6 @@ public class GameData {
 		});
 		jserviceThread.start();
 
-		// Load the categories
-		//		List<String> categories = new ArrayList<>(parser.categories());
-//		for (int j = 0; j < 5; j++) {
-//			int categoryIndex = (int)(categories.size() * Math.random());
-//			String categoryName = categories.get(categoryIndex);
-//			Category category = new Category(categoryName);
-//			Map<String, String[]> questionSet = parser.getCategory(categoryName);
-//			List<String> questions = new ArrayList<>(questionSet.keySet());
-//			for (int i = 100; i <= 500; i += 100) {
-//				int index = (int) (Math.random() * questionSet.size());
-//				String question = questions.get(index);
-//
-//				String prompt = questionSet.get(question)[0];
-//				String answer = questionSet.get(question)[1];
-//				category.addQuestion(new Question(i, prompt, question, answer, Question.QuestionState.UNATTEMPTED));
-//				questionSet.remove(question);
-//				questions.remove(question);
-//			}
-//			newData.categories().add(category);
-//			categories.remove(categoryIndex);
-//		}
 		newData.categoryParser = CategoryParser.loadBlocking();
 
 		jserviceThread.join();

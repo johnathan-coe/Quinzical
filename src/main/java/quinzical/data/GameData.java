@@ -156,7 +156,7 @@ public class GameData {
 				try {
 					category[0] = JService.load();
 				} catch (Exception e) {
-					e.printStackTrace();
+					System.err.println("Accessing the JService API. Check your connection to the internet.");
 				}
 			}
 		});
@@ -240,7 +240,7 @@ public class GameData {
 				}
 			}
 		}
-		return internationalCategory.isCompleted();
+		return internationalCategory == null || internationalCategory.isCompleted();
 	}
 
 	/**

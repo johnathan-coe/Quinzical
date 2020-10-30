@@ -56,24 +56,32 @@ public class CategoryParser {
 			System.err.println("The categories folder does not exist!");
 		}
 		for (File file: directory.listFiles()) {
-			Scanner scanner = new Scanner(file);
 			// Category name from filename
 			String categoryName = file.getName().split("\\.")[0];
-			Map<String, String[]> category = new HashMap<>();
-			while (scanner.hasNextLine()) {
-				String line = scanner.nextLine();
-				String[] lineSplit = line.split("\\|");
-				
-				// question | prompt | answer
-				String question = lineSplit[0].strip();
-				String prompt = lineSplit[1].strip();
-				String answer = lineSplit[2].strip();
-				
-				category.put(question, new String[] {prompt, answer});
+			if (categoryName.equals("International")) { // Skip the international backup category
+				continue;
 			}
+			Map<String, String[]> category = loadCategoryBlocking(file);
 			parser.categories.put(categoryName, category);
 		}
 		return parser;
+	}
+
+	public static Map<String, String[]> loadCategoryBlocking(File file) throws FileNotFoundException {
+		Scanner scanner = new Scanner(file);
+		Map<String, String[]> category = new HashMap<>();
+		while (scanner.hasNextLine()) {
+			String line = scanner.nextLine();
+			String[] lineSplit = line.split("\\|");
+
+			// question | prompt | answer
+			String question = lineSplit[0].strip();
+			String prompt = lineSplit[1].strip();
+			String answer = lineSplit[2].strip();
+
+			category.put(question, new String[] {prompt, answer});
+		}
+		return category;
 	}
 
 	public void removeCategory(String categoryName) { categories.remove(categoryName); }

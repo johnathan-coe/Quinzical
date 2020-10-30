@@ -157,6 +157,15 @@ public class GameData {
 					category[0] = JService.load();
 				} catch (Exception e) {
 					System.err.println("Accessing the JService API. Check your connection to the internet.");
+					System.err.println("Defaulting to local backup international category file...");
+					try {
+						File file = new File("categories/International");
+						Map<String, String[]> parsedMap = CategoryParser.loadCategoryBlocking(file);
+						category[0] = Category.fromMapWithRandomValues("International", parsedMap);
+					} catch (FileNotFoundException fileNotFoundException) {
+						fileNotFoundException.printStackTrace();
+						category[0] = null;
+					}
 				}
 			}
 		});

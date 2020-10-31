@@ -16,6 +16,9 @@ import java.io.IOException;
 import java.util.Timer;
 import java.util.TimerTask;
 
+/**
+ * Displays a question in the main game.
+ */
 public class MainQuestionPage extends QuestionPage {
 	private Timer timer;
 	private final static int TIME_LIMIT = 30; // 30 seconds
@@ -30,6 +33,11 @@ public class MainQuestionPage extends QuestionPage {
 		super.questionText.setPadding(new Insets(0, 0, 10, 0));
 	}
 
+	/**
+	 * When the answer is submitted, check its validity and
+	 * update the user's score. Additionally, show a dialog
+	 * with the outcome.
+	 */
 	@Override
 	public void answerSubmitted() {
 		boolean correct = question.check(guess.getText());
@@ -48,7 +56,11 @@ public class MainQuestionPage extends QuestionPage {
 		showDialog();
 	}
 
-
+	/**
+	 * When the don't know button is pressed,
+	 * set its status to incorrect and the reward to 0.
+	 * Additionally, show a dialog with the outcome.
+	 */
 	@Override
 	public void dontKnowPressed() {
 		question.setState(Question.QuestionState.INCORRECT);
@@ -56,16 +68,24 @@ public class MainQuestionPage extends QuestionPage {
 		showDialog();
 	}
 
+	/**
+	 * Show a dialog with the outcome
+	 */
 	private void showDialog() {
 		dialog.show(question);
 		timer.cancel();
 	}
 
+	/**
+	 * When the TTS has finished, start a
+	 * count down timer.
+	 */
 	protected void finishedSpeaking() {
 		timer = new Timer();
 		timer.scheduleAtFixedRate(new TimerTask() {
 			@Override
 			public void run() {
+				// If we're out of time
 				if (remaining <= 0) {
 					Platform.runLater(new Task<Void>() {
 						@Override
@@ -75,6 +95,7 @@ public class MainQuestionPage extends QuestionPage {
 						}
 					});
 				} else {
+					// Refresh label
 					Platform.runLater(new Task<Void>() {
 						@Override
 						protected Void call() {
@@ -83,16 +104,24 @@ public class MainQuestionPage extends QuestionPage {
 						}
 					});
 				}
+				
+				// Count down
 				remaining--;
 			}
 		}, 0, 1000);
 	}
 
-	// Get current reward based on timer value
+	/**
+	 * Get current reward based on timer value
+	 * @return Reward at this moment
+	 */
 	private int getRewardNow() {
 		return (int) (question.value() * (float) remaining / TIME_LIMIT);
 	}
 
+	/**
+	 * When this page is shown, populate the window
+	 */
 	@Override
 	public void show(Question question, String cat) {
 		super.show(question, cat);
@@ -107,6 +136,9 @@ public class MainQuestionPage extends QuestionPage {
 		refreshTimerLabel();
 	}
 
+	/**
+	 * Refresh the timer label with the current time left
+	 */
 	private void refreshTimerLabel() {
 		timerLabel.setText(String.format("祥 %ds - $%d", remaining, getRewardNow()));
 	}

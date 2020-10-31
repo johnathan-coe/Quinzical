@@ -13,6 +13,9 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Board in the main game for question selection
+ */
 public class MainSelectPage extends SelectPage {
 	private final MainCategorySelectPage categorySelectPage;
 
@@ -21,6 +24,9 @@ public class MainSelectPage extends SelectPage {
 		categorySelectPage = new MainCategorySelectPage(game, stage, this);
 	}
 
+	/**
+	 * Refresh the game board with the current state
+	 */
 	protected void refresh() {
 		// Set the score
 		score.setText("$" + game.data().score());
@@ -70,6 +76,9 @@ public class MainSelectPage extends SelectPage {
 		container.getChildren().addAll(completed);
 	}
 
+	/**
+	 * Open a help prompt for this screen
+	 */
 	@FXML
 	private void helpPressed() {
 		game.helpViewer().show("./wiki/docs/usage.md", "Main Game");
@@ -77,14 +86,18 @@ public class MainSelectPage extends SelectPage {
 	
 	@Override
 	public void show() {
+		// If there are no categories, show the selection page
 		if (game.data().categories().isEmpty()) {
 			categorySelectPage.show();
 			return;
 		}
+		
+		// If the game is finished
 		if (game.data().isAllDone()) {
 			game.rewardsPage().show();
 			return;
 		}
+		
 		super.show();
 	}
 

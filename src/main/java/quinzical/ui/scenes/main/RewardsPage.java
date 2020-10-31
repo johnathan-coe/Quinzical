@@ -20,17 +20,23 @@ public class RewardsPage extends Leaderboard {
 	
 	public RewardsPage(Game game, Stage stage) throws IOException {
 		super(game, stage);
+		
+		// Edit default Label values from the Leaderboard
 		title.setText("Game Over!");
 		trophyText.setText("Trophy Awarded");
 		this.game = game;
 	}
 
+	/**
+	 * Show the leaderboard, adding our score.
+	 */
 	@Override
 	public void show() {
 		// Add score to the leaderboard
 		game.data().leaders().add(game.data().score());
 		super.show();
 		
+		// Adjust winnings label from the leaderboard text
 		winningsLabel.setText(String.format("You've earned $%d", game.data().score()));
 		
 		// Reset the game

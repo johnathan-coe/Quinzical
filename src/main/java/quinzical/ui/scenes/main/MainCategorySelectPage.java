@@ -20,6 +20,9 @@ import quinzical.ui.scenes.SelectPage;
 import java.io.IOException;
 import java.util.*;
 
+/**
+ * The page that allows the user to select categories for the main game
+ */
 public class MainCategorySelectPage extends SelectPage {
 	private final Set<SelectCard> cards_ = new HashSet<>();
 	private Set<SelectCard> selected = new HashSet<>();
@@ -32,15 +35,17 @@ public class MainCategorySelectPage extends SelectPage {
 		super(game, stage);
 		this.mainSelectPage = mainSelectPage;
 
-
-		// Alter the default text
+		// Alter and style the default text for the main game
 		score.setText("Choose 5 categories or randomly select some.");
 		score.setStyle("-fx-text-fill: white; -fx-font-size: 15;");
 
+		// Add a "random" button that selects the remaining categories for the user 
 		Button randomButton = new Button("Random");
 		randomButton.getStyleClass().add("normal-button");
 		randomButton.setStyle("-fx-font-size: 16px");
 		bottomBar.getButtons().add(0, randomButton);
+		
+		// When it's clicked
 		randomButton.setOnAction(new EventHandler<ActionEvent>() {
 			@Override
 			public void handle(ActionEvent event) {
@@ -48,6 +53,7 @@ public class MainCategorySelectPage extends SelectPage {
 				unselectedCards.removeAll(selected);
 				List<SelectCard> unselected = new ArrayList<>(unselectedCards);
 
+				// Select and add a random category until we have 5
 				while (5 - selected.size() > 0) {
 					int index = (int)(Math.random() * unselected.size());
 					SelectCard card = unselected.get(index);
@@ -71,6 +77,7 @@ public class MainCategorySelectPage extends SelectPage {
 			return;
 		}
 
+		// Clear old data
 		container.getChildren().clear();
 		cards_.clear();
 
@@ -81,10 +88,13 @@ public class MainCategorySelectPage extends SelectPage {
 
 		for (String cat: parser.categories()) {
 			try {
+				// Create a card for each category
 				SelectCard card = new SelectCard(cat);
 				Pane pane = card.pane();
 				container.getChildren().add(pane);
 				cards_.add(card);
+				
+				// When the card is clicked, toggle its selection
 				pane.setOnMouseClicked(new EventHandler<MouseEvent>() {
 					@Override
 					public void handle(MouseEvent mouseEvent) {
@@ -95,6 +105,7 @@ public class MainCategorySelectPage extends SelectPage {
 						} else if (selected.size() < 5) {
 							select(card);
 							refreshHeader();
+							// When we've selected 5 categories
 							if (selected.size() == 5) {
 								showMainSelectPage();
 							}
@@ -109,28 +120,46 @@ public class MainCategorySelectPage extends SelectPage {
 		refreshHeader();
 	}
 
+	/**
+	 * Function to select a card
+	 * @param card
+	 */
 	private void select(SelectCard card) {
 		card.setSelected(true);
 		selected.add(card);
 	}
 
+	/**
+	 * Show main page, loading in selected categories
+	 */
 	private void showMainSelectPage() {
+		// For each selected card
 		for (SelectCard card: selected) {
 			String title = card.getTitle();
+			
 			Map<String, String[]> categoryMap = game.data().parser().getCategory(title);
-			Category category = new Category(title);
 			List<Map.Entry<String, String[]>> entryList = new ArrayList<>(categoryMap.entrySet());
+			
+			// Build category
+			Category category = new Category(title);
 			for (int i = 0; i < 5; i++) {
+				// Pick a random question
 				Map.Entry<String, String[]> entry = entryList.get((int) (Math.random() * entryList.size()));
+				// Assign a random value adn build a Question
 				Question question = new Question((i+1) * 100, entry.getValue()[0], entry.getKey(), entry.getValue()[1], Question.QuestionState.UNATTEMPTED);
 				category.addQuestion(question);
+				
 				entryList.remove(entry);
 			}
+			// Add category to game data
 			game.data().categories().add(category);
 		}
 		mainSelectPage.show();
 	}
-
+	
+	/**
+	 * Refresh header displaying selection status when necessary
+	 */
 	private void refreshHeader() {
 		header.setText(String.format("Choose 5 Categories - %d/5 Chosen", selected.size()));
 	}
@@ -139,6 +168,9 @@ public class MainCategorySelectPage extends SelectPage {
 		// TODO: 18/10/20  
 	}
 
+	/**
+	 * Card representing a selectable category.
+	 */
 	private class SelectCard extends Card {
 		private boolean selected = false;
 
@@ -150,6 +182,8 @@ public class MainCategorySelectPage extends SelectPage {
 
 		public void setSelected(boolean selected) {
 			this.selected = selected;
+			
+			// Changing background on select
 			if (selected) {
 				pane().getChildren().get(0).setStyle("-fx-background-color: green; -fx-background-radius: 10");
 			} else {
@@ -162,6 +196,9 @@ public class MainCategorySelectPage extends SelectPage {
 		}
 	}
 
+	/**
+	 * When we load a new game, set all cards to be unselected
+	 */
 	@Override
 	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
 		super.handleGameDataChanged(event);

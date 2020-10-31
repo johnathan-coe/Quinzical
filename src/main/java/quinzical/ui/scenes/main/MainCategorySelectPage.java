@@ -165,7 +165,7 @@ public class MainCategorySelectPage extends SelectPage {
 	}
 
 	@FXML private void helpPressed() {
-		// TODO: 18/10/20  
+		game.helpViewer().show("./wiki/docs/usage.md", "Main Game");
 	}
 
 	/**

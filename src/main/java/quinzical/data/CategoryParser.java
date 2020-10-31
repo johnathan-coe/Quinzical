@@ -10,7 +10,7 @@ import java.util.Scanner;
 import java.util.Set;
 
 /**
- * Parses all the category files in the categories folder
+ * Parses all the category files in the categories/ folder
  */
 public class CategoryParser {
 	private final Map<String, Map<String, String[]>> categories = new HashMap<>();
@@ -30,10 +30,12 @@ public class CategoryParser {
 		}
 	}
 
+	// Prevent object creation outside of this class
 	private CategoryParser(){}
 
 	/**
 	 * Loads the file and returns a Task - this _can_ be used in the UI thread.
+	 * @returns A Task
 	 */
 	public static Task<CategoryParser> load() {
 		Task<CategoryParser> task = new Task<>() {
@@ -47,7 +49,9 @@ public class CategoryParser {
 	}
 
 	/**
-	 * Loads the file but is *blocking* therefore it should not be used in a UI thread
+	 * Loads all categories but is *blocking* therefore it should not be used in a UI thread
+	 * 
+	 * @return CategoryParser
 	 */
 	public static CategoryParser loadBlocking() throws FileNotFoundException {
 		CategoryParser parser = new CategoryParser();
@@ -67,9 +71,19 @@ public class CategoryParser {
 		return parser;
 	}
 
+	
+	/**
+	 * Perform a blocking load of a category from a file.
+	 * 
+	 * @param file File to load category from.
+	 * @return a map of questions -> [prompt, answer]
+	 * @throws FileNotFoundException
+	 */
 	public static Map<String, String[]> loadCategoryBlocking(File file) throws FileNotFoundException {
 		Scanner scanner = new Scanner(file);
 		Map<String, String[]> category = new HashMap<>();
+		
+		// For all lines in the file, add a map entry
 		while (scanner.hasNextLine()) {
 			String line = scanner.nextLine();
 			String[] lineSplit = line.split("\\|");
@@ -84,6 +98,10 @@ public class CategoryParser {
 		return category;
 	}
 
+	/**
+	 * Remove a category
+	 * @param categoryName
+	 */
 	public void removeCategory(String categoryName) { categories.remove(categoryName); }
 
 	/**

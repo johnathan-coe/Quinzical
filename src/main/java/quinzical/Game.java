@@ -12,9 +12,9 @@ import quinzical.ui.scenes.main.*;
 import quinzical.ui.scenes.practice.*;
 
 /**
- * The main application class that will be run
- *
- * Handles the loading and saving of the game data file.
+ * Top-level Application subclass aggregating all pages in the application.
+ * 
+ * @author jej
  */
 public class Game extends Application {
 	private GameData data;
@@ -33,16 +33,27 @@ public class Game extends Application {
 		launch(args);
 	}
 
+	/**
+	 * Starts the application.
+	 * Loads game data, creates the pages and displays the
+	 * main game.
+	 * 
+	 * @param stage Main Stage
+	 */
 	@Override
 	public void start(Stage stage) throws Exception {
-		// Load the font(s)
+		// Load font from file
 		if (Font.loadFont(getClass().getResourceAsStream("/fonts/Poppins Regular Nerd Font Complete.ttf"), 25) == null) {
 			System.err.println("Fonts failed to load");
 		}
 
+		// Pull in all game data (Score, question board and leaderboard)
 		data = GameData.load();
 
+		// Start a new festival instance
 		festival = new Festival(this);
+		
+		// Initialise pages
 		startPage = new StartPage(this, stage);
 		selectPage = new MainSelectPage(this, stage);
 		practiceSelectPage = new PracticeSelectPage(this, stage);
@@ -53,35 +64,29 @@ public class Game extends Application {
 		settingsPage = new SettingsPage(this, stage);
 		leaderboard = new Leaderboard(this, stage);
 		
-
+		// Show the stage and start scene
 		startPage.show();
 		stage.show();
 	}
 
+	/**
+	 * When the application is closed, save all game data
+	 */
 	@Override
 	public void stop() throws Exception {
 		data.save();
 	}
 
+	// Getters for game scenes
 	public GameData data() { return data; }
-
 	public StartPage startPage() { return startPage; }
-
 	public SelectPage selectPage() { return selectPage; }
-	
 	public PracticeSelectPage practiceSelectPage() { return practiceSelectPage; }
-
 	public QuestionPage questionPage() { return questionPage; }
-
 	public PracticeQuestionPage practiceQuestionPage() { return practiceQuestionPage; }
-	
 	public HelpViewer helpViewer() { return helpViewer; }
-	
 	public RewardsPage rewardsPage() { return rewardsPage; }
-
 	public SettingsPage settingsPage() { return settingsPage; }
-	
 	public Leaderboard leaderboard() { return leaderboard; }
-
 	public Festival festival() { return festival; }
 }

@@ -2,8 +2,9 @@ package quinzical.data;
 
 /**
  * A data class that represents a question
+ * and its attributes.
  */
-public class Question implements Comparable<Question> {
+public class Question {
 	private int value;
 	private final String prompt;
 	private final String question;
@@ -21,7 +22,11 @@ public class Question implements Comparable<Question> {
 		this.completed = completed;
 	}
 
-	// Check if an entered answer is correct
+	/**
+	 * Check if an entered answer is correct
+	 * @param entered String to check
+	 * @return Boolean representing whether entered was valid
+	 */
 	public boolean check(String entered) {
 		String processed = entered.strip().toLowerCase();
 		
@@ -41,24 +46,23 @@ public class Question implements Comparable<Question> {
 		return false;
 	}
 
-	public int value() { return value; }
-
+	// Setters
 	public void setValue(int value) {
 		this.value = value;
 	}
 
+	// Getters
+	public int value() { return value; }
 	public String prompt() { return prompt; }
-	
 	public String question() { return question; }
-
 	public String answer() { return answer; }
-
 	public boolean isCompleted() { return completed != QuestionState.UNATTEMPTED; }
-
 	public QuestionState state() { return completed; }
-
 	public void setState(QuestionState state) { this.completed = state; }
-
+	
+	/**
+	 * Represents the state of a question.
+	 */
 	public enum QuestionState {
 		/**
 		 * The user has not yet attempted this question
@@ -91,10 +95,5 @@ public class Question implements Comparable<Question> {
 				case INCORRECT -> "INCORRECT";
 			};
 		}
-	}
-	
-	@Override
-	public int compareTo(Question q) {
-		return Integer.compare(value(), q.value());
 	}
 }

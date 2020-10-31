@@ -4,6 +4,9 @@ import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * Holds a list of leaderboard values.
+ */
 public class Leaderboard {
 	private final int MAX_LEADERS = 5;
 	private List<Integer> leaders;
@@ -12,36 +15,79 @@ public class Leaderboard {
 		leaders = new ArrayList<Integer>();
 	}
 	
-	public static String trophyColour(int score) {
-		String col;
+	// Get list of leaders
+	public List<Integer> leaders() { return leaders; }
+	
+	/**
+	 * Trophies available
+	 */
+	private enum Trophy {BRONZE, SILVER, GOLD, NONE};
+	
+	/**
+	 * Get trophy applicable to a score
+	 * @param Score
+	 * @return Trophy
+	 */
+	private static Trophy trophyFor(int score) {
 		if (score >= 5625) {
-			col = "#D4AF37";
+			return Trophy.GOLD;
 		} else if (score >= 3750) {
-			col = "#A8A9AD";
+			return Trophy.SILVER;
 		} else if (score >= 1875) {
-			col = "#AA7042";
+			return Trophy.BRONZE;
 		} else {
-			col = "white";
+			return Trophy.NONE;
 		}
-		
-		return col;
 	}
 	
+	/**
+	 * Get trophy colour from score
+	 * @param score
+	 * @return Colour string
+	 */
+	public static String trophyColour(int score) {
+		switch (trophyFor(score)) {
+			case GOLD:
+				return "#D4AF37";
+			case SILVER:
+				return "#A8A9AD";
+			case BRONZE:
+				return "#AA7042";
+			default:
+				return "white";
+		}
+	}
+	
+	/**
+	 * Get a progress message for a score
+	 * @param score
+	 * @return A progress string
+	 */
 	public static String progressMessage(int score) {
 		String distString = "";
 		
-		if (score > 5625) {
-		} else if (score >= 3750) {
-			distString = Integer.toString(5625-score);
-		} else if (score >= 1875) {
-			distString = Integer.toString(3750-score);
-		} else {
-			distString = Integer.toString(1875-score);
+		switch (trophyFor(score)) {
+			case GOLD:
+				distString = Integer.toString(7500-score);
+				break;
+			case SILVER:
+				distString = Integer.toString(5625-score);
+				break;
+			case BRONZE:
+				distString = Integer.toString(3750-score);
+				break;
+			default:
+				distString = Integer.toString(1875-score);
 		}
-		
+
 		return "-$" + distString + "  ";
 	}
 	
+	/**
+	 * Load the leaderboard from file
+	 * @return A leaderboard
+	 * @throws IOException
+	 */
 	public static Leaderboard loadBlocking() throws IOException {
 		Leaderboard l = new Leaderboard();
 		File file = new File("./storage/leaders.json");
@@ -56,8 +102,6 @@ public class Leaderboard {
 
 		return l;
 	}
-
-	public List<Integer> leaders() { return leaders; }
 	
 	/**
 	 * Called on game exit
@@ -84,6 +128,9 @@ public class Leaderboard {
 		leaders = leaders.subList(0, leaders.size() < MAX_LEADERS ? leaders.size() : MAX_LEADERS); 
 	}
 
+	/**
+	 * A reader that pulls data from the JSON
+	 */
 	private static class JsonReader extends quinzical.json.JsonReader {
 		/**
 		 * Create a new JsonReader that reads the given file
@@ -102,6 +149,9 @@ public class Leaderboard {
 		}
 	}
 
+	/**
+	 * Writer tha puts the leaderboard into the file.
+	 */
 	private static class JsonWriter extends quinzical.json.JsonWriter {
 		/**
 		 * Create a new writer

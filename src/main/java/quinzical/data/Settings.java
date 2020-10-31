@@ -2,11 +2,21 @@ package quinzical.data;
 
 import java.io.*;
 
+/**
+ * Settings data for the game
+ * 
+ * This currently only includes the speech speed.
+ */
 public class Settings {
 	private float festivalSpeed = 1;
 
 	private Settings() {}
 
+	/**
+	 * Blocking load from settings file
+	 * @return Settings object
+	 * @throws IOException
+	 */
 	public static Settings loadBlocking() throws IOException {
 		Settings settings = new Settings();
 		File file = new File("./storage/settings.json");
@@ -22,16 +32,23 @@ public class Settings {
 		return settings;
 	}
 
+	/**
+	 * Save current data to file
+	 * @throws IOException
+	 */
 	public void save() throws IOException {
 		JsonWriter writer = new JsonWriter();
 		writer.writeSpeed(festivalSpeed);
 		writer.saveToFile("./storage/settings.json");
 	}
 
+	// Get and set the current speed for TTS
 	public float speed() { return festivalSpeed; }
-
 	public void setSpeed(float speed) { festivalSpeed = speed; }
 
+	/**
+	 * Reader that pulls settings from JSON file
+	 */
 	private static class JsonReader extends quinzical.json.JsonReader {
 		/**
 		 * Create a new JsonReader that reads the given file
@@ -49,6 +66,9 @@ public class Settings {
 		}
 	}
 
+	/**
+	 * Writer that pushes settings to JSON file
+	 */
 	private static class JsonWriter extends quinzical.json.JsonWriter {
 		/**
 		 * Create a new writer

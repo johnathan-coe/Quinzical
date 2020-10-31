@@ -4,9 +4,7 @@
 
 - Java 14
 
-## Start Program
-
-### Assuming JavaFX is installed at home
+## Start the Program
 
 Do the following in a terminal in the directory where you unzipped the files to:
 

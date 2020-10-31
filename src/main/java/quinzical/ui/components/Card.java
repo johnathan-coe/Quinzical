@@ -11,12 +11,23 @@ import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 
+/**
+ * A component that displays a title and image for a category.
+ * 
+ * Subclass this if you want to add content to the 'questions' VBox.
+ */
 public class Card {
 	private final Pane pane;
 	@FXML private Label category_name;
 	@FXML private VBox questions;
 	protected String title;
 	
+	/**
+	 * Build a card from a category name.
+	 * The image to use is resolved from the category name passed in.
+	 * @param title Title of the category
+	 * @throws IOException
+	 */
 	public Card(String title) throws IOException {
 		this.title = title;
 

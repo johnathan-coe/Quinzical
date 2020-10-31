@@ -52,10 +52,14 @@
             </Label>
             <HBox alignment="CENTER_LEFT" prefWidth="200.0" spacing="10.0" VBox.vgrow="ALWAYS">
                <children>
-                  <TextField fx:id="guess" maxWidth="Infinity" onAction="#answerSubmitted" promptText="Answer..." style="-fx-background-color: #4a4a4f; -fx-text-fill: white;" styleClass="text" HBox.hgrow="ALWAYS">
+                  <TextField fx:id="guess" maxWidth="Infinity" onAction="#answerSubmitted" promptText="Answer..." style="-fx-background-color: #4a4a4f; -fx-text-fill: white;" HBox.hgrow="ALWAYS">
                      <font>
                         <Font size="16.0" />
-                     </font></TextField>
+                     </font>
+                     <styleClass>
+                        <String fx:value="text" />
+                        <String fx:value="inputField" />
+                     </styleClass></TextField>
                </children>
             </HBox>
             <HBox alignment="TOP_RIGHT" spacing="10.0">

@@ -27,25 +27,36 @@ public class JService {
 		HttpClient client = HttpClient.newBuilder().build();
 		List<Question> questionList = new ArrayList<>();
 
+		// While we don't have 5 questions
 		while (questionList.size() < 5) {
+			// Pull questions from API
 			HttpRequest request = HttpRequest.newBuilder()
 					.GET()
 					.uri(new URI(String.format("http://jservice.io/api/random?count=%d", 5-questionList.size())))
 					.build();
 			HttpResponse<String> httpResponse = client.send(request, HttpResponse.BodyHandlers.ofString());
+			
+			// Read in JSON
 			ResponseReader response = new ResponseReader(httpResponse.body());
+			
+			// Add valid questions to the list
 			questionList.addAll(response.questions());
 		}
 
-		for (int i = 0; i < questionList.size(); i++) { // Overwrite the values from JService with out own ones
+		// Overwrite the score values from JService with out own ones
+		for (int i = 0; i < questionList.size(); i++) {
 			questionList.get(i).setValue((i+1)*100);
 		}
 
+		// Build a cateegory
 		Category category = new Category("International");
 		category.addQuestions(questionList);
 		return category;
 	}
 
+	/**
+	 * Reads questions from API
+	 */
 	private static class ResponseReader extends JsonReader {
 		/**
 		 * Creates a new ResponseReader that reads from a given string
@@ -79,6 +90,12 @@ public class JService {
 		}
 	}
 
+	/**
+	 * Check if a response from the API doesn't contain HTML
+	 * @param response Reponses from the api for value, question and and answer.
+	 * @param index Question to check in response.
+	 * @return Boolean
+	 */
 	private static boolean checkValues(List<String> response, int index) {
 		for (int i = 0; i < 3; i++) {
 			String resp = response.get(index + i);

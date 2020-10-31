@@ -2,8 +2,7 @@
 
 ## Requirements
 
-- Java 11
-- [JavaFX 11.0.2](https://gluonhq.com/products/javafx/)
+- Java 14
 
 ## Start Program
 
@@ -15,14 +14,6 @@ Do the following in a terminal in the directory where you unzipped the files to:
 ./run.sh
 ```
 
-### If JavaFX is installed elsewhere
-
-Do this in the terminal instead:
-
-```bash
-JAVAFX_PATH="path/to/javafx" ./run.sh
-```
-
 ## Usage
 
-[Usage](usage.md)
+Read the [Usage](usage.md) page or click on the `Help` button in the application.

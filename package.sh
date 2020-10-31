@@ -1,6 +1,9 @@
 #!/bin/bash
 
-REQUIRES="quinzical.jar run.sh README.md src/ res/ categories/ wiki/"
+# Build the application with Maven
+./canner.sh
+
+REQUIRES="quinzical.jar run.sh README.md src/ categories/ wiki/"
 
 for R in $REQUIRES; do
   if [[ ! -e "$R" ]]; then

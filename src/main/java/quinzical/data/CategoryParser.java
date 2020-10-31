@@ -17,8 +17,6 @@ public class CategoryParser {
 
 	/**
 	 * This is a debug function to ensure that the files are being parsed correctly
-	 *
-	 * todo: Remove when being used in production
 	 */
 	public static void main(String[] args) throws FileNotFoundException {
 		CategoryParser parser = CategoryParser.loadBlocking();

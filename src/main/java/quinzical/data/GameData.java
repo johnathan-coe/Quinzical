@@ -55,17 +55,25 @@ public class GameData {
 	 * Load the GameData from a `save.json` file
 	 */
 	public static GameData load() {
+		// Return the class as a placeholder class which will be filled in later on
 		final GameData data = new GameData();
+
+		// Load the GameData in a background thread
 		new Thread(new Task<Void>() {
 			@Override
 			protected Void call() throws Exception {
+				// Open the save file
 				File file = new File("./storage/save.json");
 
+				// Load the settings and leaderboard files in another thread
+				// These are static fields and should only be loaded once in the application lifetime
 				Thread settingsThread = new Thread(new Runnable() {
 					@Override
 					public void run() {
 						try {
+							// Load the settings file
 							settings = Settings.loadBlocking();
+							// Load the leaderboard file afterwards
 							leaders = Leaderboard.loadBlocking();
 						} catch (IOException e) {
 							e.printStackTrace();
@@ -75,11 +83,13 @@ public class GameData {
 				settingsThread.start();
 
 				GameData newData;
-				if (!file.isFile()) { // If the file doesn't exist, keep the default values
+				if (!file.isFile()) { // If the save file doesn't exist, use default values
 					System.out.println("No `save.json` file found, assuming fresh game...");
 					newData = freshLoadBlocking();
 				} else {
-					final GameData newDataTemp = new GameData();
+					final GameData newDataTemp = new GameData(); // Load the data into this class
+
+					// Load the category files in another thread
 					Thread categoryThread = new Thread(new Runnable() {
 						@Override
 						public void run() {
@@ -91,6 +101,8 @@ public class GameData {
 						}
 					}); // We still need to read the CategoryParser
 					categoryThread.start();
+
+					// Read the save.json file
 					JsonReader reader = new JsonReader(file);
 					newDataTemp.score = reader.score();
 					List<String> categories = reader.categories();
@@ -103,11 +115,19 @@ public class GameData {
 						}
 						newDataTemp.categories.add(category);
 					}
+
+					// Wait for the category files to be loaded
 					categoryThread.join();
+
+					// Set the newData to our temporary class
 					newData = newDataTemp;
 				}
+
+				// Wait for the thread that loads the settings and leaderboard to finish
 				settingsThread.join();
 
+				// Set all the fields of the class we made at the start with our loaded data
+				// Do this on the JavaFX ui thread
 				final GameData newData2 = newData;
 				Platform.runLater(new Task<Void>() {
 					@Override
@@ -148,14 +168,16 @@ public class GameData {
 	private static GameData freshLoadBlocking() throws IOException, InterruptedException {
 		GameData newData = new GameData();
 
-		// Load a category from the jservice api in another thread
+		// Load a category from the JService api in another thread
 		final Category[] category = new Category[]{ null };
 		Thread jserviceThread = new Thread(new Runnable() {
 			@Override
 			public void run() {
 				try {
+					// Load the data from the JService API
 					category[0] = JService.load();
 				} catch (Exception e) {
+					// Loading failed so we have to default to the local backup one
 					System.err.println("Accessing the JService API. Check your connection to the internet.");
 					System.err.println("Defaulting to local backup international category file...");
 					try {
@@ -163,6 +185,7 @@ public class GameData {
 						Map<String, String[]> parsedMap = CategoryParser.loadCategoryBlocking(file);
 						category[0] = Category.fromMapWithRandomValues("International", parsedMap);
 					} catch (FileNotFoundException fileNotFoundException) {
+						// Loading failed so we should just not have an International category
 						fileNotFoundException.printStackTrace();
 						category[0] = null;
 					}
@@ -171,11 +194,14 @@ public class GameData {
 		});
 		jserviceThread.start();
 
+		// Load the category files from disk
 		newData.categoryParser = CategoryParser.loadBlocking();
 
+		// Wait for the JService data to load and then set the category loaded as the class's internationalCategory
 		jserviceThread.join();
 		newData.internationalCategory = category[0];
 
+		// Mark the class as loaded and return it
 		newData.loaded = true;
 		return newData;
 	}
@@ -190,12 +216,15 @@ public class GameData {
 		// Ensure save directory exists
 		new File("./storage/").mkdir();
 
-		new Thread(new Runnable() { // Save the settings in another file - do this concurrently
+		// Save the settings and leaderboard in another file - do this concurrently in another thread
+		new Thread(new Runnable() {
 			@Override
 			public void run() {
 				System.out.println("Saving to `settings.json`");
 				try {
+					// Save the settings file
 					settings.save();
+					// Save the leaderboard file
 					leaders.save();
 				} catch (IOException e) {
 					e.printStackTrace();
@@ -204,6 +233,7 @@ public class GameData {
 			}
 		}).start();
 
+		// Create a JSON writer object to save the game data to a save.json file
 		JsonWriter writer = new JsonWriter(score);
 		List<Category> categories_ = categories;
 		if (internationalCategory != null) { // Save the international category as well if it exists
@@ -220,6 +250,9 @@ public class GameData {
 		System.out.println("Saved to `save.json`!");
 	}
 
+	/**
+	 * All the categories have been completed
+	 */
 	public boolean isAllDone() {
 		for (Category category: categories) {
 			for (Question question: category.questions()) {
@@ -228,6 +261,7 @@ public class GameData {
 				}
 			}
 		}
+		// If there is an international category, check if it is completed
 		return internationalCategory == null || internationalCategory.isCompleted();
 	}
 
@@ -275,12 +309,22 @@ public class GameData {
 		this.categoryParser = data.categoryParser;
 		this.loaded = data.loaded;
 		this.internationalCategory = data.internationalCategory;
-		publish(GameDataChangedEvent.LOADED);
+		publish(GameDataChangedEvent.LOADED); // Tell all the GameDataListeners that the GameData has been loaded
 	}
 
+	/**
+	 * Get the category parser used to load the categories
+	 */
 	public CategoryParser parser() { return categoryParser;	}
 
+	/**
+	 * Get the settings loaded from the settings file
+	 */
 	public Settings settings() { return settings;	}
+
+	/**
+	 * Get the leaderboard loaded from the leaderboard file
+	 */
 	public Leaderboard leaders() { return leaders;	}
 
 	/**
@@ -356,6 +400,15 @@ public class GameData {
 					"-r",
 					"--arg", "CATEGORY", category,
 			});
+
+			// stringList will contain 5n strings where n is the number of questions
+			// The fields are in the order of
+			// - value
+			// - question
+			// - prompt
+			// - answer
+			// - completed
+
 			List<Question> questionList = new ArrayList<>();
 			int i = 0;
 			while (i < stringList.size()) {
@@ -371,6 +424,7 @@ public class GameData {
 				questionList.add(new Question(value, prompt, questionText, answer, completed));
 				i += 5;
 			}
+
 			return questionList;
 		}
 

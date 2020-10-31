@@ -10,7 +10,7 @@ import quinzical.ui.scenes.Page;
 import java.io.IOException;
 
 /**
- * The page users get sent to once they've finished all the questions in the game
+ * Page displaying the urrent state of the leaderboard
  */
 public class Leaderboard extends Page {
 	@FXML private Label winningsLabel;
@@ -21,13 +21,17 @@ public class Leaderboard extends Page {
 		super(game, stage, "/fxml/rewards.fxml");
 	}
 
+	/**
+	 * Show this page based on current data
+	 */
 	@Override
 	public void show() {
+		// Update the score 
 		int score = game.data().score();
 		winningsLabel.setText(String.format("$%d", score));
 		
+		// Grab and apply the trophy colour
 		String trophyColour = quinzical.data.Leaderboard.trophyColour(score);
-		
 		trophy.setStyle("-fx-text-fill: " + trophyColour + ";");
 		
 		// Clear old scores

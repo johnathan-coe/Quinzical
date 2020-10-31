@@ -31,30 +31,24 @@ public class StartPage extends Page implements GameDataListener {
 		resetConfirmation = new ResetConfirmationPage(stage, game, this);
 	}
 
-	@FXML public void playPressed() {
-		game.selectPage().show();
-	}
+	// Redirect user to the appropriate scene on a button press
+	@FXML public void playPressed() { game.selectPage().show(); }
+	@FXML public void practicePressed() { game.practiceSelectPage().show();	}
+	@FXML public void resetPressed() { resetConfirmation.show(); }
+	@FXML public void settingsPressed() { game.settingsPage().show(); }
+	@FXML public void leaderboardPressed() { game.leaderboard().show();	}
 
-	@FXML public void practicePressed() {
-		game.practiceSelectPage().show();
-	}
-	
-	@FXML public void resetPressed() {
-		resetConfirmation.show();
-	}
-
+	/**
+	 * Display a help dialog
+	 */
 	@FXML public void helpPressed() {
 		game.helpViewer().show("./wiki/docs/usage.md", "Start Screen");
 	}
 	
-	@FXML public void settingsPressed() {
-		game.settingsPage().show();
-	}
-	
-	@FXML public void leaderboardPressed() {
-		game.leaderboard().show();
-	}
-
+	/**
+	 * Disable pages that depend on GameData until
+	 * the JSON is loaded in.
+	 */
 	public void refresh() {
 		String message;
 		if (game.data().isLoading()) {
@@ -71,6 +65,9 @@ public class StartPage extends Page implements GameDataListener {
 		currentScoreLabel.setText(message);
 	}
 
+	/**
+	 * When the game is loaded, refresh
+	 */
 	public void handleGameDataChanged(GameData.GameDataChangedEvent event) {
 		refresh();
 	}

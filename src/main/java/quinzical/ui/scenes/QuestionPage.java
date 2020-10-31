@@ -39,9 +39,16 @@ public abstract class QuestionPage extends Page {
 		super(game, stage, "/fxml/question-page.fxml");
 		
 		this.festival = festival;
+		
+		// Dialog that shows the user the result of their submission
 		dialog = new ResultDialog(game, stage, selectPage, festival);
 	}
 
+	/**
+	 * Show the question page, populating the scene with the question data
+	 * @param question Question data
+	 * @param cat The category it belongs to
+	 */
 	public void show(Question question, String cat) {
 		// Set pane background to an image
 		String imageUrl = String.format("/images/%s.jpg", cat.replace(" ", "_"));
@@ -58,12 +65,16 @@ public abstract class QuestionPage extends Page {
 		root.setStyle(styleString + "-fx-background-size: cover;");
 		
 		
-		// Now deal with question
+		// Now deal with question, populating the labels
 		this.question = question;
 		questionText.setText(capitalize(question.question()));
 		prompt.setText(capitalize(question.prompt()));
 		guess.setText("");
+		
+		// Speak the question
 		Task<Boolean> task = festival.say(question.question());
+		
+		// When the TTS finishes, notify the subclass
 		EventHandler<WorkerStateEvent> eventHandler = new EventHandler<>() {
 			@Override
 			public void handle(WorkerStateEvent event) {
@@ -73,15 +84,18 @@ public abstract class QuestionPage extends Page {
 		task.setOnSucceeded(eventHandler);
 		task.setOnCancelled(eventHandler);
 
+		// Show the scene
 		super.show();
 	}
 
+	/**
+	 *  Override this if you need to know when the TTS finishes reading the question
+	 */
 	protected void finishedSpeaking() {	}
 	
+	// Process button presses
 	@FXML public abstract void answerSubmitted();
-
 	@FXML public abstract void dontKnowPressed();
-
 	@FXML public void playCue() {
 		game.festival().say(question.question());
 	}

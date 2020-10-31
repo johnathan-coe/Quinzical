@@ -9,11 +9,21 @@ import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
 import quinzical.Game;
 
+/**
+ * Subclass this for all scenes that load a FXML file,
+ */
 public abstract class Page {
     protected Game game;
     protected Parent root;
     private Stage stage;
 
+    /**
+     * Create a scene from a FXML file
+     * @param game Toplevel game
+     * @param stage The stage to place the scene ons
+     * @param fxml The file to load
+     * @throws IOException
+     */
     public Page(Game game, Stage stage, String fxml) throws IOException {
         this.game = game;
         this.stage = stage;
@@ -28,6 +38,9 @@ public abstract class Page {
     	stage.show();
     }
     
+    /**
+     * Show the scene on the stage
+     */
     public void show() {
     	// Ensure stage has a root node in the scene graph
     	if (stage.getScene() == null) {

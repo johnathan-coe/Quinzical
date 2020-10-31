@@ -33,18 +33,30 @@ public class Festival {
 		setVoice(AKL_NZ_JDT_DIPHONE);
 	}
 
+	/**
+	 * Say a line of text using festival
+	 * @param text Text to say
+	 * @return Task that completes when the line has been said
+	 */
 	public Task<Boolean> say(String text) {
 		try {
+			// Kill the old task and spin up a new one
 			destroy();
 			process = processBuilder.start();
 			writer = new BufferedWriter(new OutputStreamWriter(process.getOutputStream()));
 			if (voice != null) {
 				command(String.format("(voice_%s)", voice));
 			}
+			
+			// Apply settings
 			command(String.format("(Parameter.set 'Duration_Stretch (/ 1 %f))", game.data().settings().speed()));
+			
+			// Say the text
 			command(String.format("(SayText \"%s\")", text.replace("\"", "")));
 			writer.close();
 			writer = null;
+			
+			// Task that completed when the line has been said
 			task = new Task<>() {
 				@Override
 				protected Boolean call() {
@@ -89,11 +101,20 @@ public class Festival {
 		this.voice = voice;
 	}
 
+	/**
+	 * Pipe command to the process
+	 * @param cmd String for the command
+	 * @throws IOException
+	 */
 	private void command(String cmd) throws IOException {
 		writer.write(cmd);
 		writer.flush();
 	}
 
+	/**
+	 * Kill the process
+	 * @throws IOException
+	 */
 	private void destroy() throws IOException {
 		if (task != null) {
 			task.cancel(false);

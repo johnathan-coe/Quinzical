@@ -48,7 +48,7 @@ public class JService {
 			questionList.get(i).setValue((i+1)*100);
 		}
 
-		// Build a cateegory
+		// Build a category
 		Category category = new Category("International");
 		category.addQuestions(questionList);
 		return category;

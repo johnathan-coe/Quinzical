@@ -27,7 +27,7 @@ Press this to change the audio settings of the game.\
 [See more about the settings page.](#settings)
 - **Help**
 Press this to see the relevant part of the user manual.
-This button can be found on most pages of the game and is very helpful if you get lost.\
+This button can be found on most pages of the game and is very helpful if you get lost.
 
 ## Main Game
 
@@ -106,6 +106,8 @@ Clicking the `Main Menu` button will take you back to the start screen and your 
 ---
 
 ## Practice Mode
+
+(Go back to the [Main Menu](#start-screen))
 
 (This section assumes you've played at least a little bit of the [main game](#main-game)).
 

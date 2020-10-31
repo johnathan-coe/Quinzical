@@ -185,7 +185,7 @@ public class MainCategorySelectPage extends SelectPage {
 			
 			// Changing background on select
 			if (selected) {
-				pane().getChildren().get(0).setStyle("-fx-background-color: green; -fx-background-radius: 10");
+				pane().getChildren().get(0).setStyle("-fx-background-color: #12bc00; -fx-background-radius: 10");
 			} else {
 				pane().getChildren().get(0).setStyle("-fx-background-color: #38383d; -fx-background-radius: 10");
 			}

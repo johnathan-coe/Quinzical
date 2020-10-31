@@ -12,6 +12,10 @@ import org.commonmark.node.Text;
 import org.commonmark.parser.Parser;
 import org.commonmark.renderer.html.HtmlRenderer;
 
+/**
+ * Utilities for rendering markdown to HTML
+ * from our documantation files.
+ */
 public class Markdown {
 	private Parser parser;
 	private HtmlRenderer renderer;

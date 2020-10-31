@@ -13,6 +13,9 @@ import javafx.concurrent.Worker;
 import javafx.concurrent.Worker.State;
 import javafx.scene.web.WebView;
 
+/**
+ * Make all links open markdown in the help window
+ */
 public class LinkPlumber implements ChangeListener<State> {
 		HelpViewer viewer;
 		WebView view;
@@ -45,12 +48,16 @@ public class LinkPlumber implements ChangeListener<State> {
 			}
 		 };
 		
+		/**
+		 * On a page load...
+		 */
 		@Override
 		public void changed(ObservableValue<? extends State> ov, State oldState, State newState) {
 			if (newState == Worker.State.SUCCEEDED) {
 				 org.w3c.dom.Document doc = view.getEngine().getDocument();
 				 NodeList links = doc.getElementsByTagName("a");
 
+				 // For all links, add the onClick
 				 for (int link = 0; link < links.getLength(); link++) {
 					((EventTarget) links.item(link)).addEventListener("click", new onClick(), false);
 				 }

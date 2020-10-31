@@ -20,6 +20,10 @@ import quinzical.data.Question;
 import quinzical.ui.components.Card;
 import quinzical.ui.scenes.SelectPage;
 
+/**
+ * Page that allows a user to select a category in the
+ * practice mode.
+ */
 public class PracticeSelectPage extends SelectPage {
 	private CategoryParser parser;
 	private Random rand;
